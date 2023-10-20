@@ -16,10 +16,28 @@ enum LogOutCompletion {
 
 class HomeViewModel: BaseViewModel {
     @Published var errorMessage: String = ""
-    @Published var workouts: [Workout] = [Workout(title: "PPL", description: "Push pull legs, best split"),
-                                          Workout(title: "PPL", description: "Push pull legs, best split"),
-                                          Workout(title: "PPL", description: "Push pull legs, best split"),
-                                          Workout(title: "PPL", description: "Push pull legs, best split")
+    @Published var myCollection: [MyCollection] = [
+        MyCollection(name: "PPL",
+                     description: "Push pull legs, best split",
+                     workoutsNb: 3),
+        MyCollection(name: "PPL",
+                     description: "Push pull legs, best split",
+                     workoutsNb: 3),
+        MyCollection(name: "PPL",
+                     description: "Push pull legs, best split",
+                     workoutsNb: 3),
+        MyCollection(name: "PPL",
+                     description: "Push pull legs, best split",
+                     workoutsNb: 3),
+        MyCollection(name: "PPL",
+                     description: "Push pull legs, best split",
+                     workoutsNb: 3),
+        MyCollection(name: "PPL",
+                     description: "Push pull legs, best split",
+                     workoutsNb: 3),
+        MyCollection(name: "PPL",
+                     description: "Push pull legs, best split",
+                     workoutsNb: 3)
     ]
     
     var userService = UserService.shared

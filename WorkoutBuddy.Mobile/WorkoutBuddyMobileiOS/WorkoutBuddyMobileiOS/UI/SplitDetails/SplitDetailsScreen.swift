@@ -12,40 +12,49 @@ struct SplitDetailsScreen: View {
     @EnvironmentObject private var navigation: Navigation
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Button {
-                navigation.pop(animated: true)
-            } label: {
-                Image(systemName: "arrowshape.backward")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-                    .foregroundColor(Color.black)
-                    .padding(.leading, 12)
-            }
+        ZStack {
+            CustomColors.background.ignoresSafeArea(.all)
             
-            Text(viewModel.workout.title)
-                .font(Font.system(size: 24))
-                .foregroundColor(Color.black)
-                .padding(.bottom, 4)
-                .padding(.top, 12)
-                .padding(.horizontal, 12)
-            
-            Text(viewModel.workout.description)
-                .font(Font.system(size: 16))
-                .foregroundColor(Color.black)
-                .padding(.horizontal, 12)
-            
-            Rectangle()
-                .frame(height: 1)
-                .frame(maxWidth: .infinity)
-                .foregroundColor(Color.gray)
-            
-            ScrollView(showsIndicators: false) {
-                ForEach(0..<3) { _ in
-                    WorkoutCardView(title: viewModel.workout.title) {
-                        navigation.push(AddProgressScreen().asDestination(), animated: true)
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(spacing: 0) {
+                    Button {
+                        navigation.pop(animated: true)
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                            .foregroundColor(Color.white)
+                            .padding(.trailing, 12)
                     }
-                }
+                    
+                    Text(viewModel.split.splitName)
+                        .font(Font.system(size: 24))
+                        .foregroundColor(Color.white)
+                    
+                    Spacer()
+                }.padding(.vertical, 16)
+                    .padding(.horizontal, 20)
+                
+                Text(viewModel.split.description)
+                    .font(Font.system(size: 16))
+                    .foregroundColor(Color.white)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 12)
+                
+                Rectangle()
+                    .frame(height: 1)
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(CustomColors.button)
+                
+                ScrollView(showsIndicators: false) {
+                    ForEach(viewModel.split.workouts, id: \.self) { workout in
+                        WorkoutCardView(title: workout.workoutName) {
+                            let vm = AddProgressViewModel(workoutId: workout.workoutId, workoutName: workout.workoutName)
+                            navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
+                        }
+                    }
+                }.padding(.vertical, 20)
+                    .padding(.horizontal, 20)
             }
         }
     }
@@ -59,21 +68,22 @@ struct WorkoutCardView: View {
         HStack(spacing: 0) {
             Text(title)
                 .font(Font.system(size: 20))
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.white)
             
             Spacer()
             
             Button {
                 addProgressHandler()
             } label: {
-                Text("+Add progress")
+                Text("+ Add progress")
                     .font(Font.system(size: 16))
-                    .foregroundColor(.white)
-                    .padding(.all, 8)
-                    .background(Color.black)
+                    .foregroundColor(CustomColors.background)
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 16)
+                    .background(CustomColors.button)
+                    .cornerRadius(6)
             }
-        }.padding(.all, 8)
-            .border(Color.black, width: 1)
-        .padding(.horizontal, 12)
+        }.padding(.all, 16)
+            .border(Color.black.opacity(0.5), width: 1)
     }
 }

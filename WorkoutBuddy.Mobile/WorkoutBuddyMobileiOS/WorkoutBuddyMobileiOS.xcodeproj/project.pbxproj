@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B7B5B182AE3170C00F4E9E1 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B172AE3170C00F4E9E1 /* Split.swift */; };
+		9B7B5B1A2AE317A300F4E9E1 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B192AE317A300F4E9E1 /* Workout.swift */; };
+		9B7B5B1D2AE3228400F4E9E1 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */; };
+		9B7B5B1F2AE322FB00F4E9E1 /* SetExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B1E2AE322FB00F4E9E1 /* SetExercise.swift */; };
+		9B7B5B212AE323A800F4E9E1 /* AddProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */; };
 		9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC22AE2F5E100123048 /* RootView.swift */; };
 		9BCFEEC72AE2F5E600123048 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC62AE2F5E600123048 /* Assets.xcassets */; };
 		9BCFEECA2AE2F5E600123048 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC92AE2F5E600123048 /* Preview Assets.xcassets */; };
@@ -14,7 +19,7 @@
 		9BCFEED42AE2F6E400123048 /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEED32AE2F6E400123048 /* UserDefaultsService.swift */; };
 		9BCFEED92AE2F77A00123048 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEED82AE2F77A00123048 /* StartViewModel.swift */; };
 		9BCFEEDB2AE2F7D900123048 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEDA2AE2F7D900123048 /* StartScreen.swift */; };
-		9BCFEEDD2AE2F7F200123048 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEDC2AE2F7F200123048 /* Workout.swift */; };
+		9BCFEEDD2AE2F7F200123048 /* MyCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEDC2AE2F7F200123048 /* MyCollection.swift */; };
 		9BCFEEE02AE2F80F00123048 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEDF2AE2F80F00123048 /* LoginViewModel.swift */; };
 		9BCFEEE22AE2F83900123048 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEE12AE2F83900123048 /* LoginScreen.swift */; };
 		9BCFEEE52AE2F87100123048 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEE42AE2F87100123048 /* HomeScreen.swift */; };
@@ -36,9 +41,15 @@
 		9BCFEF0A2AE2FC0100123048 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCFEF092AE2FC0100123048 /* FirebaseFirestoreSwift */; };
 		9BCFEF0C2AE2FC0100123048 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCFEF0B2AE2FC0100123048 /* FirebaseStorage */; };
 		9BCFEF0E2AE2FC0100123048 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 9BCFEF0D2AE2FC0100123048 /* FirebaseStorageCombine-Community */; };
+		9BCFEF102AE3007000123048 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEF0F2AE3007000123048 /* CustomColors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B7B5B172AE3170C00F4E9E1 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
+		9B7B5B192AE317A300F4E9E1 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		9B7B5B1E2AE322FB00F4E9E1 /* SetExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetExercise.swift; sourceTree = "<group>"; };
+		9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgress.swift; sourceTree = "<group>"; };
 		9BCFEEBF2AE2F5E100123048 /* WorkoutBuddyMobileiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutBuddyMobileiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCFEEC22AE2F5E100123048 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		9BCFEEC62AE2F5E600123048 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,7 +58,7 @@
 		9BCFEED32AE2F6E400123048 /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		9BCFEED82AE2F77A00123048 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		9BCFEEDA2AE2F7D900123048 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
-		9BCFEEDC2AE2F7F200123048 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		9BCFEEDC2AE2F7F200123048 /* MyCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollection.swift; sourceTree = "<group>"; };
 		9BCFEEDF2AE2F80F00123048 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		9BCFEEE12AE2F83900123048 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		9BCFEEE42AE2F87100123048 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -62,6 +73,7 @@
 		9BCFEEF92AE2F9BE00123048 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9BCFEEFB2AE2FA3E00123048 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9BCFEEFC2AE2FBB100123048 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9BCFEF0F2AE3007000123048 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,7 +148,12 @@
 		9BCFEED52AE2F71400123048 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9BCFEEDC2AE2F7F200123048 /* Workout.swift */,
+				9BCFEEDC2AE2F7F200123048 /* MyCollection.swift */,
+				9B7B5B172AE3170C00F4E9E1 /* Split.swift */,
+				9B7B5B192AE317A300F4E9E1 /* Workout.swift */,
+				9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */,
+				9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */,
+				9B7B5B1E2AE322FB00F4E9E1 /* SetExercise.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -204,6 +221,7 @@
 				9BCFEEC62AE2F5E600123048 /* Assets.xcassets */,
 				9BCFEEF32AE2F96700123048 /* Navigation.swift */,
 				9BCFEEF52AE2F98600123048 /* BaseViewModel.swift */,
+				9BCFEF0F2AE3007000123048 /* CustomColors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -294,22 +312,28 @@
 			files = (
 				9BCFEEEF2AE2F90300123048 /* AddProgressScreen.swift in Sources */,
 				9BCFEEEA2AE2F8BD00123048 /* SplitDetailsViewModel.swift in Sources */,
+				9B7B5B1A2AE317A300F4E9E1 /* Workout.swift in Sources */,
 				9BCFEED92AE2F77A00123048 /* StartViewModel.swift in Sources */,
 				9BCFEEE72AE2F88800123048 /* HomeViewModel.swift in Sources */,
 				9BCFEED42AE2F6E400123048 /* UserDefaultsService.swift in Sources */,
 				9BCFEEF62AE2F98600123048 /* BaseViewModel.swift in Sources */,
 				9BCFEEF12AE2F92000123048 /* AddProgressViewModel.swift in Sources */,
 				9BCFEEE22AE2F83900123048 /* LoginScreen.swift in Sources */,
-				9BCFEEDD2AE2F7F200123048 /* Workout.swift in Sources */,
+				9BCFEEDD2AE2F7F200123048 /* MyCollection.swift in Sources */,
+				9B7B5B212AE323A800F4E9E1 /* AddProgress.swift in Sources */,
 				9BCFEEDB2AE2F7D900123048 /* StartScreen.swift in Sources */,
 				9BCFEEE02AE2F80F00123048 /* LoginViewModel.swift in Sources */,
 				9BCFEEFA2AE2F9BE00123048 /* SceneDelegate.swift in Sources */,
 				9BCFEEE52AE2F87100123048 /* HomeScreen.swift in Sources */,
 				9BCFEEEC2AE2F8D600123048 /* SplitDetailsScreen.swift in Sources */,
+				9B7B5B182AE3170C00F4E9E1 /* Split.swift in Sources */,
 				9BCFEEF42AE2F96700123048 /* Navigation.swift in Sources */,
+				9B7B5B1D2AE3228400F4E9E1 /* Exercise.swift in Sources */,
 				9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */,
+				9BCFEF102AE3007000123048 /* CustomColors.swift in Sources */,
 				9BCFEEF82AE2F9A200123048 /* AppDelegate.swift in Sources */,
 				9BCFEED22AE2F6D100123048 /* UserService.swift in Sources */,
+				9B7B5B1F2AE322FB00F4E9E1 /* SetExercise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

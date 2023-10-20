@@ -8,9 +8,17 @@
 import Foundation
 
 class SplitDetailsViewModel: BaseViewModel {
-    @Published var workout: Workout  //todo api call
+    @Published var splitId: UUID
+    var split: Split = Split(splitName: "Push",
+                                        description: "very nice chicken and rice",
+                                        workouts: [
+                                        Workout(workoutName: "Glutes"),
+                                        Workout(workoutName: "Glutes"),
+                                        Workout(workoutName: "Glutes"),
+                                        Workout(workoutName: "Glutes")
+                                        ])
     
-    init(workout: Workout) {
-        self.workout = workout
+    init(splitId: UUID) {
+        self.splitId = splitId
     }
 }

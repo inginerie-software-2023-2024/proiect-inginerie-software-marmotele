@@ -8,6 +8,6 @@
 import Foundation
 
 struct Workout: Hashable {
-    let title: String
-    let description: String
+    var workoutId = UUID()
+    let workoutName: String
 }
