@@ -22,7 +22,7 @@ struct SplitDetailsScreen: View {
                     } label: {
                         Image(systemName: "chevron.backward")
                             .resizable()
-                            .frame(width: 16, height: 16)
+                            .frame(width: 14, height: 12)
                             .foregroundColor(Color.white)
                             .padding(.trailing, 12)
                     }

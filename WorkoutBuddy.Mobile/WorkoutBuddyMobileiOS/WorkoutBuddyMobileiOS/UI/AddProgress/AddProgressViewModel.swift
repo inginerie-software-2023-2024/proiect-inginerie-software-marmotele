@@ -28,8 +28,7 @@ class AddProgressViewModel: BaseViewModel {
     var progress: AddProgress?
     var userService = UserService.shared
     
-    
-    let workoutType = CurrentValueSubject<WorkoutType, Never>(.cardio)
+    let workoutType = CurrentValueSubject<WorkoutType, Never>(.calistenics)
     
     init(workoutId: UUID, workoutName: String) {
         self.workoutId = workoutId
