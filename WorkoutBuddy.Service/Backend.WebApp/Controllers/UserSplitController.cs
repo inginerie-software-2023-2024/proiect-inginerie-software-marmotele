@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 
-namespace WorkoutBuddy.WebApp.Controllers
+namespace Backend.WebApp.Controllers
 {
     [Authorize]
     public class UserSplitController : BaseController
@@ -24,20 +24,21 @@ namespace WorkoutBuddy.WebApp.Controllers
         {
             var idUser = CurrentUser.Id;
             var model = service.GetListOfSplits(idUser);
-            return View(model);
+            return Ok(model);
+           
         }
 
         public IActionResult ViewUserSplit(Guid id)
         {
             var model = service.GetUserSplit(id, CurrentUser.Id);
-            return View(model);
+            return Ok(model);
         }
 
         [HttpGet]
         public IActionResult AddProgress(Guid id)
         {
             var model = service.PopulateUserWorkoutModel(id);
-            return View(model);
+            return Ok(model);
         }
 
         [HttpPost]
@@ -47,7 +48,7 @@ namespace WorkoutBuddy.WebApp.Controllers
             var splitId = service.AddProgress(model, Int32.Parse(Configuration["NoOfPoints"]));
             var splitModel = service.GetUserSplit(splitId, CurrentUser.Id);
 
-            return View("ViewUserSplit", splitModel);
+            return Ok(splitModel);
         }
 
         [HttpGet]
@@ -55,7 +56,7 @@ namespace WorkoutBuddy.WebApp.Controllers
         {
             var model = service.GetHistory(id, CurrentUser.Id);
             ViewData["DatesNo"] = Int32.Parse(Configuration["NoOfDates"]);
-            return View(model);
+            return Ok(model);
         }
 
         [HttpPost]
@@ -81,14 +82,15 @@ namespace WorkoutBuddy.WebApp.Controllers
             var x = service.ComputeNoOfPages(id, CurrentUser.Id, Int32.Parse(Configuration["NoOfDates"]));
             ViewData["pagesNo"] = x - 1;
             ViewData["index"] = index;
-            return View(model);
+            return O(model);
         }
 
         [HttpPost]
         public IActionResult RemoveUserSplit(Guid id)
         {
             service.RemoveSplit(id, CurrentUser.Id);
-            return RedirectToAction("Index");
+            return Ok();
+           // return RedirectToAction("Index");
         }
     }
 }
