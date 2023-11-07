@@ -55,7 +55,6 @@ namespace Backend.WebApp.Controllers
         public IActionResult WorkoutHistory(Guid id)
         {
             var model = service.GetHistory(id, CurrentUser.Id);
-            ViewData["DatesNo"] = Int32.Parse(Configuration["NoOfDates"]);
             return Ok(model);
         }
 
@@ -80,9 +79,8 @@ namespace Backend.WebApp.Controllers
         {
             var model = service.GetProgress(id, CurrentUser.Id, index, Int32.Parse(Configuration["NoOfDates"]));
             var x = service.ComputeNoOfPages(id, CurrentUser.Id, Int32.Parse(Configuration["NoOfDates"]));
-            ViewData["pagesNo"] = x - 1;
-            ViewData["index"] = index;
-            return O(model);
+            
+            return Ok(model);
         }
 
         [HttpPost]
