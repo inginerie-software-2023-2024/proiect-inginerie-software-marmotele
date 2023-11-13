@@ -42,24 +42,42 @@ Many individuals struggle to maintain a consistent and organized approach to the
 - **Current Release:**
   - User-Friendly Interface
   - User Accounts
-  - Secured Endpoints
+  - Database Integration
 
 - **Upcoming Release:**
   - Customizable Workouts
   - Workout Tracking
-  - Database Integration
+  - Secured Endpoints
+
 
 - **Future Release:**
   - Exercise Management
   - Cross-Platform Accessibility
 
 
-
-
-### Present features/functionalities in a structured, organized form
-### Highlighting the features/functionalities already delivered, the ones planned for delivery during this course/project, the ones for the future releases (the same presentation form can be used: tabular, diagram, mindmap)
-### Define product roadmap for next and future releases
 ### Identify integration points
+
+1. **Database Integration:**
+   - Connection between the application and the database to store and retrieve user data, exercise information, and workout details.
+
+2. **Authentication System:**
+   - Integration with an authentication system to ensure secure user access and protect personal information.
+
+3. **External APIs:**
+   - Integration with external APIs for features such as exercise data, nutrition information, or fitness tracking devices.
+
+4. **Cross-Platform Integration:**
+   - Interaction points between the web version (C# using ASP.NET and Chakra UI) and the iOS mobile app to ensure data consistency and a seamless user experience.
+
+5. **Secure Endpoints:**
+   - Integration points where the application communicates with secured endpoints to ensure data privacy and protection during data transmission.
+
+6. **Third-Party Libraries/Frameworks:**
+   - Integration with third-party libraries or frameworks for functionalities such as data visualization, analytics, or UI components.
+
+
+
+
 
 ## Non-functional requirements
 ### Identified NFRs:
@@ -76,4 +94,25 @@ Many individuals struggle to maintain a consistent and organized approach to the
    - The system should handle a minimum of 10,000 concurrent users.
 
 ### SMART definition of the NFRs
+## SMART Definition of NFRs:
 
+- **Security:**
+  - Specific: Encrypt user data during transmission using SSL/TLS.
+  - Measurable: Ensure compliance with industry security standards.
+  - Achievable: Implement secure coding practices.
+  - Relevant: Protect user privacy and data integrity.
+  - Time-bound: Complete implementation within the next development sprint.
+
+- **Performance:**
+  - Specific: Achieve a page load time of 3 seconds or less.
+  - Measurable: Monitor and optimize database queries for a response time under 500 milliseconds.
+  - Achievable: Optimize code and utilize caching mechanisms.
+  - Relevant: Enhance user experience and engagement.
+  - Time-bound: Achieve the specified performance metrics within the next two sprints.
+
+- **Scalability:**
+  - Specific: Ensure the system can handle a minimum of 10,000 concurrent users.
+  - Measurable: Perform load testing to validate scalability.
+  - Achievable: Optimize server infrastructure and application architecture.
+  - Relevant: Accommodate future growth in user base.
+  - Time-bound: Complete scalability testing and optimization within the next release cycle.
