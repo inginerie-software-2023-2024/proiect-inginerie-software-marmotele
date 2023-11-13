@@ -94,7 +94,6 @@ Many individuals struggle to maintain a consistent and organized approach to the
    - The system should handle a minimum of 10,000 concurrent users.
 
 ### SMART definition of the NFRs
-## SMART Definition of NFRs:
 
 - **Security:**
   - Specific: Encrypt user data during transmission using SSL/TLS.
