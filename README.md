@@ -13,4 +13,18 @@ Cerințele din barem pentru livrabilul intermediat se gasesc [aici](https://tiny
 5. [Dragos Teleaga](https://github.com/dragosteleaga)
 
 
-   
+## Problem Statement sau Product Vision
+### Clear definition of Problem Statement/Product vision
+
+
+## Product features and functionalities
+### The list of product features and functionalities that deliver value to the stakeholders, aligned with the product vision/problem statement, presented in any form (tabular, diagram, mindmap)
+### Present features/functionalities in a structured, organized form
+### Highlighting the features/functionalities already delivered, the ones planned for delivery during this course/project, the ones for the future releases (the same presentation form can be used: tabular, diagram, mindmap)
+### Define product roadmap for next and future releases
+### Identify integration points
+
+## Non-functional requirements
+### Identify NFRs
+### SMART definition of the NFRs
+
