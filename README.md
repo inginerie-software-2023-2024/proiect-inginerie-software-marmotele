@@ -62,6 +62,18 @@ Many individuals struggle to maintain a consistent and organized approach to the
 ### Identify integration points
 
 ## Non-functional requirements
-### Identify NFRs
+### Identified NFRs:
+
+1. **Security:**
+   - User data must be encrypted during transmission.
+   - Secure endpoints should adhere to industry standards.
+
+2. **Performance:**
+   - The application should load within 3 seconds.
+   - Database queries should have a response time of less than 500 milliseconds.
+
+3. **Scalability:**
+   - The system should handle a minimum of 10,000 concurrent users.
+
 ### SMART definition of the NFRs
 
