@@ -28,13 +28,13 @@ Many individuals struggle to maintain a consistent and organized approach to the
 ### The list of product features and functionalities that deliver value to the stakeholders, aligned with the product vision/problem statement, presented in any form (tabular, diagram, mindmap)
 | **Feature/Functionality**          | **Description**                                                                                         | **Status**                  |
 |------------------------------------|---------------------------------------------------------------------------------------------------------|-----------------------------|
-| User-Friendly Interface            | Intuitive design for easy navigation and a pleasant user experience.                                      | Already Delivered           |
+| User-Friendly Interface            | Intuitive design for easy navigation and a pleasant user experience.                                      | Planned for Delivery           |
 | Customizable Workouts              | Empower users to create personalized workout routines.                                                   | Planned for Delivery        |
-| Exercise Management               | CRUD functionality for managing individual exercises.                                                  | Future Release              |
-| User Accounts                      | Secure user authentication and personalized accounts.                                                   | Already Delivered           |
+| Exercise Management               | CRUD functionality for managing individual exercises.                                                  | Planned for Delivery              |
+| User Accounts                      | Secure user authentication and personalized accounts.                                                   | Planned for Delivery           |
 | Workout Tracking                   | Automatic tracking of completed workouts with visualizations.                                            | Planned for Delivery        |
-| Secured Endpoints                  | Implementation of secure endpoints for data protection.                                                 | Already Delivered           |
-| Cross-Platform Accessibility       | Availability on web (C# using ASP.NET and Chakra UI) and iOS mobile platforms.                            | Future Release              |
+| Secured Endpoints                  | Implementation of secure endpoints for data protection.                                                 | Planned for Delivery           |
+| Cross-Platform Accessibility       | Availability on web (C# using ASP.NET and Chakra UI) and iOS mobile platforms.                            | Planned for Delivery              |
 | Database Integration               | Integration with a reliable and scalable database for data storage.                                      | Planned for Delivery        |
 
 # Product Roadmap:
