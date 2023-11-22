@@ -41,6 +41,7 @@ Many individuals struggle to maintain a consistent and organized approach to the
 
 - **Current Release:**
   - User-Friendly Interface
+  - Exercise Management
   - User Accounts
   - Database Integration
 
@@ -51,7 +52,6 @@ Many individuals struggle to maintain a consistent and organized approach to the
 
 
 - **Future Release:**
-  - Exercise Management
   - Cross-Platform Accessibility
 
 
@@ -63,13 +63,10 @@ Many individuals struggle to maintain a consistent and organized approach to the
 2. **Authentication System:**
    - Integration with an authentication system to ensure secure user access and protect personal information.
 
-3. **External APIs:**
-   - Integration with external APIs for features such as exercise data, nutrition information, or fitness tracking devices.
-
 4. **Cross-Platform Integration:**
    - Interaction points between the web version (C# using ASP.NET and Chakra UI) and the iOS mobile app to ensure data consistency and a seamless user experience.
 
-5. **Secure Endpoints:**
+5. **Secure Endpoints/Routes:**
    - Integration points where the application communicates with secured endpoints to ensure data privacy and protection during data transmission.
 
 6. **Third-Party Libraries/Frameworks:**
