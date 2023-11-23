@@ -158,6 +158,7 @@ namespace Backend.BusinessLogic.Splits
                                 .Include(s => s.Workouts)
                                     .ThenInclude(s => s.WorkoutExercises)
                                         .ThenInclude(s => s.IdexerciseNavigation)
+                                            .ThenInclude(s => s.Idgroups)
                                 .FirstOrDefaultAsync(s => s.Idsplit == id);
 
             var muscleGroups = Enum.GetValues(typeof(MuscleGroups)).Cast<MuscleGroups>()
@@ -185,12 +186,12 @@ namespace Backend.BusinessLogic.Splits
             {
                 Id = w.Idworkout,
                 WorkoutName = w.Name,
-                Exercises = w.WorkoutExercises.Select(we => we.Idexercise).ToList(),
+                Exercises = w.WorkoutExercises.Select(we => new ListItemModel<string, Guid>() { Value = we.Idexercise, Label = we.IdexerciseNavigation.Name }).ToList(),
                 SelectedMuscleGroups = w.WorkoutExercises
                         .Select(w => w.IdexerciseNavigation)
                         .SelectMany(e => e.Idgroups)
                         .Distinct()
-                        .Select(g => g.Idgroup)
+                        .Select(g => new ListItemModel<string, int>() { Label = g.Name, Value = g.Idgroup})
                         .ToList()
             }).ToList();
 
@@ -218,7 +219,7 @@ namespace Backend.BusinessLogic.Splits
                         {
                             var exercise = uow.Exercises
                                             .Get()
-                                            .FirstOrDefault(ex => ex.Idexercise == e);
+                                            .FirstOrDefault(ex => ex.Idexercise == e.Value);
 
                             if (exercise == null)
                             {
@@ -228,7 +229,7 @@ namespace Backend.BusinessLogic.Splits
                             workout.WorkoutExercises.Add(new WorkoutExercise()
                             {
                                 Idworkout = workout.Idworkout,
-                                Idexercise = e,
+                                Idexercise = e.Value,
                                 IdworkoutNavigation = workout,
                                 IdexerciseNavigation = exercise
                             });
@@ -274,13 +275,13 @@ namespace Backend.BusinessLogic.Splits
             {
                 var exercises = workout.WorkoutExercises
                         .Select(w => w.IdexerciseNavigation)
-                        .Select(e => e.Idexercise)
+                        .Select(e => new ListItemModel<string, Guid>() { Label = e.Name, Value = e.Idexercise })
                         .ToList();
                 var selectedMuscles = workout.WorkoutExercises
                         .Select(w => w.IdexerciseNavigation)
                         .SelectMany(e => e.Idgroups)
                         .Distinct()
-                        .Select(g => g.Idgroup)
+                        .Select(g => new ListItemModel<string, int>() { Label = g.Name, Value = g.Idgroup})
                         .ToList();
 
                 workouts.Add(new WorkoutModel()
@@ -362,7 +363,7 @@ namespace Backend.BusinessLogic.Splits
                             //verificam daca un exercitiu vechi mai exista in workoutul nou trimis, daca nu, il stergem
                             foreach (var we in workout.WorkoutExercises)
                             {
-                                var modelExercises = modelWorkouts.FirstOrDefault(w => w.Id == we.Idworkout).Exercises;
+                                var modelExercises = modelWorkouts.FirstOrDefault(w => w.Id == we.Idworkout).Exercises.Select(e => e.Value);
                                 if (!modelExercises.Contains(we.Idexercise))
                                 {
                                     var workoutToUpdate = we.IdworkoutNavigation;
@@ -374,12 +375,12 @@ namespace Backend.BusinessLogic.Splits
                             var exercises = workout.WorkoutExercises.Select(we => we.Idexercise).ToList();
                             foreach (var modelExercise in modelWorkout.Exercises)
                             {
-                                if (!exercises.Contains(modelExercise))
+                                if (!exercises.Contains(modelExercise.Value))
                                 {
-                                    var exercise = uow.Exercises.Get().FirstOrDefault(e => e.Idexercise == modelExercise);
+                                    var exercise = uow.Exercises.Get().FirstOrDefault(e => e.Idexercise == modelExercise.Value);
                                     var newWE = new WorkoutExercise()
                                     {
-                                        Idexercise = modelExercise,
+                                        Idexercise = modelExercise.Value,
                                         IdexerciseNavigation = exercise,
                                         Idworkout = workout.Idworkout,
                                         IdworkoutNavigation = workout
@@ -406,12 +407,12 @@ namespace Backend.BusinessLogic.Splits
                         {
                             var exercise = uow.Exercises
                                             .Get()
-                                            .Where(ex => ex.Idexercise == e)
+                                            .Where(ex => ex.Idexercise == e.Value)
                                             .First();
                             workout.WorkoutExercises.Add(new WorkoutExercise()
                             {
                                 Idworkout = workout.Idworkout,
-                                Idexercise = e,
+                                Idexercise = e.Value,
                                 IdworkoutNavigation = workout,
                                 IdexerciseNavigation = exercise
                             });

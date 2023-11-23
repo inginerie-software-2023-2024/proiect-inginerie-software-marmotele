@@ -14,6 +14,7 @@ import axios from "axios";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import AuthHeader from "../../../utils/authorizationHeaders";
+import useColors from "./useColors";
 
 interface ExerciseItem {
   value: string;
@@ -48,6 +49,7 @@ const exerciseInitialState: ExerciseInitialState = {
 };
 
 export default function InsertExercise() {
+  const colors = useColors();
   const navigate = useNavigate();
   const [exercise, setExercise] = useState(exerciseInitialState);
 
@@ -102,10 +104,10 @@ export default function InsertExercise() {
         method: "post",
         url: `https://localhost:7132/Exercises/insertExercise${querryString}`,
         data: formData,
-        // headers: {
-        //   Authorization: AuthHeader(),
-        //   "Content-Type": "multipart/form-data",
-        // },
+        headers: {
+          Authorization: AuthHeader(),
+          "Content-Type": "multipart/form-data",
+        },
       });
       navigate("/exercises");
     } catch (err) {
@@ -115,7 +117,7 @@ export default function InsertExercise() {
 
   return (
     <Flex
-      minH={"100vh"}
+        mt={20}
       align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
@@ -123,14 +125,14 @@ export default function InsertExercise() {
       <Stack
         spacing={4}
         w={"full"}
-        maxW={"md"}
+        maxW={"2xl"}
         bg={useColorModeValue("white", "gray.700")}
         rounded={"xl"}
         boxShadow={"lg"}
         p={6}
-        my={12}
+        my={2}
       >
-        <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
+        <Heading lineHeight={1.1} mb={2} fontSize={{ base: "2xl", sm: "3xl" }}>
           Insert Exercise
         </Heading>
         <FormControl isRequired>
@@ -154,16 +156,16 @@ export default function InsertExercise() {
             _placeholder={{ color: "gray.500" }}
           />
         </FormControl>
-        <FormControl>
-          <FormLabel>Exercise Types</FormLabel>
+        <FormControl color="black">
+          <FormLabel color="white">Exercise Types</FormLabel>
           <Select
             value={exercise.selectedType}
             onChange={(e) => setExercise({ ...exercise, selectedType: e! })}
             options={exercise.exerciseTypes}
           />
         </FormControl>
-        <FormControl isRequired>
-          <FormLabel>Muscle groups</FormLabel>
+        <FormControl color="black" isRequired>
+          <FormLabel color="white">Muscle groups</FormLabel>
           <Select
             value={exercise.selectedMuscleGroups}
             onChange={(e) => {
@@ -189,6 +191,7 @@ export default function InsertExercise() {
                     : undefined,
               });
             }}
+            py={1}
             placeholder="description"
             _placeholder={{ color: "gray.500" }}
             type="file"
@@ -197,12 +200,9 @@ export default function InsertExercise() {
         </FormControl>
         <Stack spacing={6} direction={["column", "row"]}>
           <Button
-            bg={"blue.400"}
-            color={"white"}
+            colorScheme={colors.primaryScheme}
+            color={"black"}
             w="full"
-            _hover={{
-              bg: "blue.500",
-            }}
             onClick={submitHandler}
           >
             Submit

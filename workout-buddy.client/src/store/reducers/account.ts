@@ -41,7 +41,9 @@ const accountSlice = createSlice({
         roles: [],
       };
     },
-    getUser() {},
+    setUser(state, action) {
+      state.username = action.payload.username
+    },
   },
 });
 

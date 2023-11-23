@@ -59,17 +59,21 @@ export default function Exercise({
 
   return (
     <GridItem w="100%">
-      <Center py={12}>
+      <Center py={12} h={"full"}>
         <Box
           role={"group"}
           p={6}
           maxW={"330px"}
           w={"full"}
+          h={"full"}
           bg={useColorModeValue("white", "gray.800")}
-          boxShadow={"2xl"}
+          boxShadow={useColorModeValue("2xl", "sm")}
           rounded={"lg"}
           pos={"relative"}
           zIndex={1}
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
         >
           <Box
             rounded={"lg"}

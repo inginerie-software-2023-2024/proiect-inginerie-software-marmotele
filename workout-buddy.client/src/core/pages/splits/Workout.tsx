@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   FormControl,
   FormLabel,
@@ -8,7 +8,7 @@ import {
   useColorModeValue,
   Box,
 } from "@chakra-ui/react";
-import Select, { MultiValue } from "react-select";
+import Select from "react-select";
 import axios from "axios";
 import { CloseIcon } from "@chakra-ui/icons";
 import { ISplit } from "./InsertSpit";
@@ -24,28 +24,36 @@ interface IWorkoutProps {
 const Workout = (props: IWorkoutProps) => {
   const [exercises, setExercises] = useState([]);
 
-  const muscleGroupsChangeHandler = async (e: any) => {
-    let queryString = "?";
-    let indexOfMuscles = 0;
+  useEffect(() => {
+    const getData = async () => {
+      let queryString = "?";
+      let indexOfMuscles = 0;
 
-    for (let elem of e) {
-      queryString = `${queryString}[${indexOfMuscles}]=${elem.value}&`;
-      indexOfMuscles++;
+      for (let elem of props.split.workouts[props.index].selectedMuscleGroups) {
+        queryString = `${queryString}[${indexOfMuscles}]=${elem.value}&`;
+        indexOfMuscles++;
+      }
+      const {data} = await axios({
+        method: "get",
+        url: `https://localhost:7132/Exercises/getExercisesByMuscleGroups${queryString}`,
+        headers: {
+          Authorization: AuthHeader(),
+        },
+      });
+
+      setExercises(data);
     }
-    const { data } = await axios({
-      method: "get",
-      url: `https://localhost:7132/Exercises/getExercisesByMuscleGroups${queryString}`,
-      headers: {
-        Authorization: AuthHeader(),
-      },
-    });
-    setExercises(data);
+    getData()
+  }, [props.split.workouts[props.index].selectedMuscleGroups])
 
+  const muscleGroupsChangeHandler = async (e: any) => {
     const workouts = props.split.workouts;
+
     workouts[props.index] = {
       ...props.split.workouts[props.index],
       selectedMuscleGroups: e,
     };
+
     props.setSplit({ ...props.split, workouts });
   };
 
@@ -59,9 +67,7 @@ const Workout = (props: IWorkoutProps) => {
   };
 
   const changeExercisesHandler = (
-    e: MultiValue<{
-      value: string;
-    }>
+    e: any
   ) => {
     const workouts = props.split.workouts;
     workouts[props.index] = {
@@ -79,17 +85,17 @@ const Workout = (props: IWorkoutProps) => {
     };
     props.setSplit({ ...props.split, workouts });
   };
+  console.log(props.split)
 
   return (
     <Stack
       spacing={4}
       w={"full"}
-      maxW={"md"}
-      bg={useColorModeValue("white", "gray.700")}
+      bg={useColorModeValue("white", "darkPallette.accent.500")}
       rounded={"xl"}
       boxShadow={"lg"}
       p={6}
-      my={12}
+      my={2}
     >
       <Box display="flex" justifyContent="space-between">
         <Heading lineHeight={1.1} fontSize={{ base: "lg", sm: "md" }}>
@@ -103,17 +109,19 @@ const Workout = (props: IWorkoutProps) => {
       <FormControl isRequired>
         <FormLabel> Workout Name</FormLabel>
         <Input
+            color={"black"}
           value={props.split.workouts[props.index].workoutName}
           id="workoutName"
           onChange={changeNameHandler}
           placeholder="name"
           _placeholder={{ color: "gray.500" }}
+          bg={"white"}
           type="text"
         />
       </FormControl>
 
-      <FormControl isRequired>
-        <FormLabel>Muscle groups</FormLabel>
+      <FormControl color="black" isRequired>
+        <FormLabel color="white">Muscle groups</FormLabel>
         <Select
           value={props.split.workouts[props.index].selectedMuscleGroups}
           id="selectedMuscleGroups"
@@ -122,8 +130,8 @@ const Workout = (props: IWorkoutProps) => {
           options={props.split.musclesGroups}
         />
       </FormControl>
-      <FormControl isRequired>
-        <FormLabel>Exercises</FormLabel>
+      <FormControl color="black" isRequired>
+        <FormLabel color="white">Exercises</FormLabel>
         <Select
           value={props.split.workouts[props.index].exercises}
           id="exercises"

@@ -8,21 +8,21 @@ import {
   HStack,
   Stack,
   Text,
-  useColorModeValue,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useColors from "./colors";
 
 interface ISplitCardProps {
   split: any;
 }
 
 export default function SplitCard({ split }: ISplitCardProps) {
+  const colors = useColors();
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
-    var roles = sessionStorage.getItem("roles");
+    const roles = sessionStorage.getItem("roles");
     if (roles) {
       setIsAdmin(roles.includes("Admin"));
     }
@@ -58,17 +58,17 @@ export default function SplitCard({ split }: ISplitCardProps) {
     <Center py={6}>
       <Stack
         borderWidth="1px"
-        borderRadius="3xl"
-        w={{ sm: "100%", md: "65rem" }}
+        borderRadius={{ sm: "3xl" }}
+        width={"100%"}
         height={{ sm: "476px", md: "20rem" }}
         direction={{ base: "column", md: "row" }}
-        bg={useColorModeValue("white", "gray.900")}
+        bg={colors.cardColor}
         boxShadow={"2xl"}
         spacing={8}
       >
         <Flex
           flex={1}
-          borderLeftRadius="3xl"
+          borderLeftRadius={{ md: "3xl", base: "none" }}
           bgColor={"#393E46"}
           alignItems="center"
           justifyContent="center"
@@ -85,8 +85,8 @@ export default function SplitCard({ split }: ISplitCardProps) {
           pt={2}
         >
           <HStack>
-            <Heading fontSize={"2xl"} fontFamily={"body"}>
-              Rating: {split.rating} <StarIcon color="yellow" />
+            <Heading display="flex" lineHeight="30px" alignItems="center" fontSize={"2xl"} fontFamily={"body"}>
+              Rating: {split.rating} <StarIcon ml={1} color="yellow" />
             </Heading>
           </HStack>
 
@@ -95,19 +95,20 @@ export default function SplitCard({ split }: ISplitCardProps) {
           </Text>
           <Text
             textAlign={"center"}
-            color={useColorModeValue("gray.700", "gray.400")}
+            color={colors.descriptionText}
             px={3}
           >
             {split.description}
           </Text>
           <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
             <Text>Workouts: </Text>
+            <Flex flexWrap="wrap">
             {split.workouts.map((w: any, index: number) => {
               return (
                 <Badge
                   px={2}
                   py={1}
-                  bg={useColorModeValue("gray.50", "gray.800")}
+                  bg={colors.badgeBg}
                   fontWeight={"400"}
                   key={index}
                 >
@@ -115,6 +116,7 @@ export default function SplitCard({ split }: ISplitCardProps) {
                 </Badge>
               );
             })}
+            </Flex>
           </Stack>
 
           <Stack

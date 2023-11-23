@@ -38,7 +38,6 @@ export default function Register() {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    console.log(registerModel);
     const res = await axios({
       method: "post",
       url: "https://localhost:7132/UserAccount/register",

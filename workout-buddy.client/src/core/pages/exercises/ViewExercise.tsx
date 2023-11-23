@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getURLID } from "../../../utils/URLUtils";
 import axios from "axios";
 import {
@@ -17,8 +17,11 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import AuthHeader from "../../../utils/authorizationHeaders";
+import useColors from "./useColors";
+import BackButton from "../../components/BackButton";
 
 export default function ViewExercise() {
+  const colors = useColors();
   const [exercise, setExercises] = useState<any>({ muscleGroups: [] });
   useEffect(() => {
     const id = getURLID(window.location.href);
@@ -39,10 +42,11 @@ export default function ViewExercise() {
   }, []);
   return (
     <Container maxW={"7xl"}>
+      <BackButton />
       <SimpleGrid
         columns={{ base: 1, lg: 2 }}
         spacing={{ base: 8, md: 10 }}
-        py={{ base: 18, md: 24 }}
+        py={{ base: 2, md: 8 }}
       >
         <Flex>
           <Image
@@ -94,7 +98,7 @@ export default function ViewExercise() {
             <Box>
               <Text
                 fontSize={{ base: "16px", lg: "18px" }}
-                color={useColorModeValue("yellow.500", "yellow.300")}
+                color={colors.accentColor}
                 fontWeight={"500"}
                 textTransform={"uppercase"}
                 mb={"4"}

@@ -8,13 +8,15 @@ import {
   Stack,
   useColorModeValue,
   Textarea,
-  Checkbox,
+  Checkbox, Grid,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Workout from "./Workout";
 import AuthHeader from "../../../utils/authorizationHeaders";
+import useColors from "./colors";
+import {FaPlus} from "react-icons/all";
 
 export interface ISplit {
   splitId: string;
@@ -63,11 +65,12 @@ const workoutInitialState: IWorkout = {
 };
 
 export default function InsertSplit() {
+  const colors = useColors();
   const navigate = useNavigate();
   const [split, setSplit] = useState(splitInitialState);
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
+    const params = new URLSearchParams(window.location.search);
     const id = params?.get("id");
 
     const getSplit = async () => {
@@ -123,10 +126,10 @@ export default function InsertSplit() {
         method: "post",
         url: `https://localhost:7132/Split/insertSplit${querryString}`,
         data: formData,
-        //   headers: {
-        //     Authorization: AuthHeader(),
-        //     "Content-Type": "multipart/form-data"
-        //   },
+          headers: {
+            Authorization: AuthHeader(),
+            "Content-Type": "multipart/form-data"
+          },
       });
       navigate("/splits");
     } catch (err) {
@@ -136,7 +139,6 @@ export default function InsertSplit() {
 
   return (
     <Flex
-      minH={"100vh"}
       align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
@@ -144,7 +146,7 @@ export default function InsertSplit() {
       <Stack
         spacing={4}
         w={"full"}
-        maxW={"md"}
+        maxW={"7xl"}
         bg={useColorModeValue("white", "gray.700")}
         rounded={"xl"}
         boxShadow={"lg"}
@@ -175,6 +177,9 @@ export default function InsertSplit() {
             _placeholder={{ color: "gray.500" }}
           />
         </FormControl>
+
+
+        <Grid templateColumns={{ md: "repeat(3,1fr);", base: "repeat(1, 1fr);"}} gap={8} minHeight="200px">
         {split.workouts &&
           split.workouts.map((w, index) => {
             if (!w.isDeleted) {
@@ -189,18 +194,18 @@ export default function InsertSplit() {
               );
             }
           })}
+          <FormControl m={"auto"}>
+            <Flex justifyContent="center">
+              <Button onClick={newWorkoutHandler}><FaPlus />Add new workout</Button>
+            </Flex>
+          </FormControl>
+        </Grid>
 
-        <FormControl>
-          <Flex justifyContent="center">
-            <Button onClick={newWorkoutHandler}>Add new workout</Button>
-          </Flex>
-        </FormControl>
         <FormControl>
           <Checkbox
             checked={split.isPrivate}
             onChange={(e) => {
-              console.log(e.target.value);
-              //   setSplit({ ...split, isPrivate: e.target.value });
+                setSplit({ ...split, isPrivate: e.target.checked });
             }}
           >
             Is private?{" "}
@@ -208,12 +213,10 @@ export default function InsertSplit() {
         </FormControl>
         <Stack spacing={6} direction={["column", "row"]}>
           <Button
-            bg={"blue.400"}
+              colorScheme={colors.primaryScheme}
             color={"white"}
             w="full"
-            _hover={{
-              bg: "blue.500",
-            }}
+
             onClick={submitHandler}
           >
             Submit
