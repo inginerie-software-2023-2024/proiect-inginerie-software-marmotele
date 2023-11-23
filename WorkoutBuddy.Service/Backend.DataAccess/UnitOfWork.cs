@@ -46,8 +46,8 @@ namespace Backend.DataAccess
         private IRepository<UserExercise> userExercises;
         public IRepository<UserExercise> UserExercises => userExercises ?? (userExercises = new BaseRepository<UserExercise>(Context));
 
-        private IRepository<UserExercisePr> userExerciseprs;
-        public IRepository<UserExercisePr> UserExerciseprs => userExerciseprs ?? (userExerciseprs = new BaseRepository<UserExercisePr>(Context));
+        private IRepository<UserExercisePr> userExercisePrs;
+        public IRepository<UserExercisePr> UserExercisePrs => userExercisePrs ?? (userExercisePrs = new BaseRepository<UserExercisePr>(Context));
 
         private IRepository<UserExerciseSet> userExerciseSets;
         public IRepository<UserExerciseSet> UserExerciseSets => userExerciseSets ?? (userExerciseSets = new BaseRepository<UserExerciseSet>(Context));
@@ -68,7 +68,10 @@ namespace Backend.DataAccess
         public IRepository<Workout> Workouts => workouts ?? (workouts = new BaseRepository<Workout>(Context));
 
         private IRepository<WorkoutExercise> workoutExercises;
+
         public IRepository<WorkoutExercise> WorkoutExercises => workoutExercises ?? (workoutExercises = new BaseRepository<WorkoutExercise>(Context));
+
+    
 
         public void SaveChanges()
         {
