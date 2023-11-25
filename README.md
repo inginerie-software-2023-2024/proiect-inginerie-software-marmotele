@@ -18,24 +18,26 @@ Cerințele din barem pentru livrabilul intermediat se gasesc [aici](https://tiny
 
 ## Problem Statement:
 
-Many individuals struggle to maintain a consistent and organized approach to their gym workouts. Keeping track of exercises, creating custom workout routines, and ensuring data security are common challenges faced by fitness enthusiasts. Existing solutions often lack user-friendly interfaces and comprehensive features, leaving a gap in the market for a robust and intuitive application.
+Many individuals struggle to maintain a consistent and organized approach to their gym workouts. Keeping track of exercises, creating custom workout routines, and ensuring data security are common challenges faced by fitness enthusiasts. Existing solutions often lack proper guidance for novice fitness hobbyist that most of the time are overwhelmed with all the fitness information and become confused when it comes to creating a lean and enjoyable path in their fitness journey.
 
 ## Product Vision:
 
-**Workout Buddy** aims to revolutionize the way individuals plan, track, and optimize their gym workouts. This all-in-one fitness application is designed to empower users to create, customize, and execute their fitness routines seamlessly. The vision for the product includes:
+**Workout Buddy** aims to revolutionize the way individuals plan, track, and optimize their gym workouts. This all-in-one fitness application is designed to empower users to create, customize, and execute their fitness routines seamlessly. This product incorporates features that are easy to follow and understand. The vision for the product includes:
 
 ## Product features and functionalities
 ### The list of product features and functionalities that deliver value to the stakeholders, aligned with the product vision/problem statement, presented in any form (tabular, diagram, mindmap)
 | **Feature/Functionality**          | **Description**                                                                                         | **Status**                  |
 |------------------------------------|---------------------------------------------------------------------------------------------------------|-----------------------------|
-| User-Friendly Interface            | Intuitive design for easy navigation and a pleasant user experience.                                      | Planned for Delivery           |
+| User-Friendly Interface            | Intuitive design for easy navigation and a pleasant user experience.                                      | Delivered on 25th November           |
 | Customizable Workouts              | Empower users to create personalized workout routines.                                                   | Planned for Delivery        |
-| Exercise Management               | CRUD functionality for managing individual exercises.                                                  | Planned for Delivery              |
-| User Accounts                      | Secure user authentication and personalized accounts.                                                   | Planned for Delivery           |
+| Exercise Management               | CRUD functionality for managing individual exercises.                                                  | Delivered on 25th November              |
+| User Accounts                      | Secure user authentication and personalized accounts.                                                   | Delivered on 25th November           |
 | Workout Tracking                   | Automatic tracking of completed workouts with visualizations.                                            | Planned for Delivery        |
-| Secured Endpoints                  | Implementation of secure endpoints for data protection.                                                 | Planned for Delivery           |
+| Secured Endpoints                  | Implementation of secure endpoints for data protection.                                                 | Delivered on 25th November           |
 | Cross-Platform Accessibility       | Availability on web (C# using ASP.NET and Chakra UI) and iOS mobile platforms.                            | Planned for Delivery              |
-| Database Integration               | Integration with a reliable and scalable database for data storage.                                      | Planned for Delivery        |
+| Database Integration               | Integration with a reliable and scalable database for data storage.                                      | Delivered on 25th November        |
+| Calorie Calculator                 | A service that is capable of calculating the intake calories need by a person based on some parameters   | Delivered on 25th November         |
+| Product deployment                 | Making sure the application is deployed so that it can be used world-wide both on mobile and web          | Planned for Delivery             |
 
 # Product Roadmap:
 
@@ -44,30 +46,35 @@ Many individuals struggle to maintain a consistent and organized approach to the
   - Exercise Management
   - User Accounts
   - Database Integration
+  - Secured Endpoints
+  - Calorie Calculator
 
 - **Upcoming Release:**
   - Customizable Workouts
   - Workout Tracking
-  - Secured Endpoints
+  - Cross-Platform Accessibility - iOS mobile application
 
 
 - **Future Release:**
-  - Cross-Platform Accessibility
-
+  - Product deployment
 
 ### Identify integration points
 
-1. **Database Integration:**
-   - Connection between the application and the database to store and retrieve user data, exercise information, and workout details.
+1. **Internal Systems:**
+   - React App: The React application serves as the user interface and interacts with the REST API to fetch and display data to users.
+   - ASP.NET Core REST API: The API, implemented in ASP.NET Core, acts as the middleware between the React app and the MySQL database. It handles requests from the React app, processes business logic, and communicates with the database.
+   - MySQL Database: The MySQL database is utilized by the ASP.NET Core API. It stores and retrieves data requested by the React app through the API. Entity Framework is used for data access and management.
 
-2. **Authentication System:**
-   - Integration with an authentication system to ensure secure user access and protect personal information.
+2. **External Systems:**
+   - Firebase: The MySQL database is seeded to Firebase, an external platform for data storage. This integration provides a backup or an alternative data source, and it may be used for various purposes, such as analytics or mobile application data retrieval.
 
-4. **Cross-Platform Integration:**
-   - Interaction points between the web version (C# using ASP.NET and Chakra UI) and the iOS mobile app to ensure data consistency and a seamless user experience.
+4. **Data Sources:**
+   - MySQL Database: The primary data source for the application, where data is stored and managed. The database is accessed and manipulated by the ASP.NET Core API to fulfill requests from the React app.
+   - Firebase Database: Data from the MySQL database is seeded into Firebase, creating an additional data source. This integration may serve purposes beyond the primary data storage, such as providing data to the iOS mobile application.
 
-5. **Secure Endpoints/Routes:**
-   - Integration points where the application communicates with secured endpoints to ensure data privacy and protection during data transmission.
+5. **Other Integration Points:**
+   - Entity Framework: The ASP.NET Core API utilizes Entity Framework for seamless communication with the MySQL database. It abstracts the underlying database operations and allows for a more object-oriented approach to data access.
+   - iOS Mobile Application: The Firebase data store is used by an iOS mobile application developed by the same team. This application retrieves data stored in Firebase, providing a mobile interface for users to access information from the shared database.
 
 6. **Third-Party Libraries/Frameworks:**
    - Integration with third-party libraries or frameworks for functionalities such as data visualization, analytics, or UI components.
@@ -80,35 +87,21 @@ Many individuals struggle to maintain a consistent and organized approach to the
 ### Identified NFRs:
 
 1. **Security:**
-   - User data must be encrypted during transmission.
    - Secure endpoints should adhere to industry standards.
+   - Give permission to access certain routes based on credentials
+   - Access data/endpoints based on the personal set of user claims
 
 2. **Performance:**
-   - The application should load within 3 seconds.
+   - The application should compile and load its bundles and files within 3 seconds.
    - Database queries should have a response time of less than 500 milliseconds.
+   - The application should run smoothly in a way that the client should not be waiting more than 2 seconds for a page to load
 
 3. **Scalability:**
    - The system should handle a minimum of 10,000 concurrent users.
 
-### SMART definition of the NFRs
+4. **Integrity:**
+   - All numbers and calculations should be considered with an accuracy of 2 decimals
+   - The text displayed should be translated in Romanian or English based on user preferences
 
-- **Security:**
-  - Specific: Encrypt user data during transmission using SSL/TLS.
-  - Measurable: Ensure compliance with industry security standards.
-  - Achievable: Implement secure coding practices.
-  - Relevant: Protect user privacy and data integrity.
-  - Time-bound: Complete implementation within the next development sprint.
-
-- **Performance:**
-  - Specific: Achieve a page load time of 3 seconds or less.
-  - Measurable: Monitor and optimize database queries for a response time under 500 milliseconds.
-  - Achievable: Optimize code and utilize caching mechanisms.
-  - Relevant: Enhance user experience and engagement.
-  - Time-bound: Achieve the specified performance metrics within the next two sprints.
-
-- **Scalability:**
-  - Specific: Ensure the system can handle a minimum of 10,000 concurrent users.
-  - Measurable: Perform load testing to validate scalability.
-  - Achievable: Optimize server infrastructure and application architecture.
-  - Relevant: Accommodate future growth in user base.
-  - Time-bound: Complete scalability testing and optimization within the next release cycle.
+5. **Availability:**
+   - The application will be avaialable wherever you want to use it by installing the mobile version of it
