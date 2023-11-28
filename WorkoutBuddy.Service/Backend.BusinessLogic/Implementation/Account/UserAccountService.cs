@@ -29,6 +29,27 @@ namespace Backend.BusinessLogic.Account
             EditUserProfileValidator = new EditUserProfileValidator(UnitOfWork);
         }
 
+        public async Task<double> GetCurrentWeight(Guid userId)
+        {
+            var user = await UnitOfWork.Users.Get()
+                .Include(u => u.UserWeightHistories)
+                .FirstOrDefaultAsync(u => u.Iduser == userId);
+
+            if(user == null)
+            {
+                throw new NotFoundErrorException();
+            }
+
+            var lastWeight = user.UserWeightHistories.OrderBy(us => us.WeighingDate).LastOrDefault();
+
+            if (lastWeight == null)
+            {
+                throw new NotFoundErrorException();
+            }
+
+            return lastWeight.Weight;
+        }
+
         public async Task<CurrentUserDto> Login(LoginModel model)
         {
             var user = await UnitOfWork.Users

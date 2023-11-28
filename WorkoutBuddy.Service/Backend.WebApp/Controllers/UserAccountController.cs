@@ -144,6 +144,12 @@ namespace Backend.WebApp.Controllers
             return token;
         }
 
+        [HttpGet("getCurrentWeight")]
+        public async Task<IActionResult> GetCurrentWeight()
+        {
+            return Ok(await _service.GetCurrentWeight(CurrentUser.Id));
+        }
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
