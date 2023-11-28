@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import FirebaseAuth
 
 enum WorkoutType {
     case cardio
@@ -18,7 +17,7 @@ enum WorkoutType {
 class AddProgressViewModel: BaseViewModel {
     @Published var workoutId: UUID
     @Published var workoutName: String
-    @Published var selectedDate = Date.now
+    @Published var selectedDate = Date()
     @Published var nbOfSets: String = ""
     @Published var nbOfReps: String = ""
     @Published var weight: String = ""
@@ -45,8 +44,8 @@ class AddProgressViewModel: BaseViewModel {
     }
     
     func initializeProgress() {
-        if let user {
-            self.progress = AddProgress(userId: UUID(uuidString: user.uid) ?? UUID(),
+        if let user = self.user {
+            self.progress = AddProgress(userId: user.token,
                                         workoutId: workoutId,
                                         date: selectedDate,
                                         Exercises: [

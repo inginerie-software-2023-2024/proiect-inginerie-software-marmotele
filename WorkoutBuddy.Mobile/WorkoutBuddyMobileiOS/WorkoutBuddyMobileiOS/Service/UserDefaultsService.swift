@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum UserDefaultsKeys {
+    static let hasOnboardingCompleted = "onboardingIsOver"
+}
+
 class UserDefaultsService {
     static let shared = UserDefaultsService()
     
@@ -14,6 +18,14 @@ class UserDefaultsService {
     
     private init() {
         defaults = UserDefaults.standard
+    }
+    
+    func setOnboarding(onboardingIsOver: Bool) {
+        defaults.set(onboardingIsOver, forKey: UserDefaultsKeys.hasOnboardingCompleted)
+    }
+    
+    func getOnboardingStatus() -> Bool {
+        defaults.bool(forKey: UserDefaultsKeys.hasOnboardingCompleted)
     }
 }
 

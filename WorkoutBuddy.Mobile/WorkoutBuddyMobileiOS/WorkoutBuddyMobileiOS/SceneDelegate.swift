@@ -9,8 +9,13 @@ import UIKit
 import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    private var navigation: Navigation!
     var window: UIWindow?
+    
+    private var navigation = Navigation(
+        root: LaunchscreenRepresentable()
+            .ignoresSafeArea()
+            .asDestination()
+    )
         
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         

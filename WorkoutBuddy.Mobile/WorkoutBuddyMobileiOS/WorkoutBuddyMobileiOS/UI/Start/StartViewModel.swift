@@ -14,4 +14,9 @@ class StartViewModel: BaseViewModel {
     func isLoggedIn() -> Bool {
         return userService.isLoggedIn
     }
+    
+    func getOnboardingStatus() -> Bool {
+        return userDefaultsService.getOnboardingStatus()
+    }
+
 }

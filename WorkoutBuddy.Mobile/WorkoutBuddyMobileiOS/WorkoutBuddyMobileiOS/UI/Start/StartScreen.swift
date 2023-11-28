@@ -15,7 +15,11 @@ struct StartScreen: View {
         if viewModel.isLoggedIn() {
             HomeScreen()
         } else {
-            LoginScreen()
+            if viewModel.getOnboardingStatus() {
+                LoginScreen()
+            } else {
+                OnBoardingScreen()
+            }
         }
     }
 }

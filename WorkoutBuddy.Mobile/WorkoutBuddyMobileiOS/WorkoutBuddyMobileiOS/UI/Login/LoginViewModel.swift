@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import FirebaseAuth
 
 enum LoginCompletion {
     case login

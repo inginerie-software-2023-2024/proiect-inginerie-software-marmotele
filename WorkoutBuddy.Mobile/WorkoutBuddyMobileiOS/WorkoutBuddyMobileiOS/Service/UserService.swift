@@ -6,40 +6,42 @@
 //
 
 import Foundation
-import FirebaseAuth
-import Firebase
 import Combine
 
-class UserService: ObservableObject {
-    lazy var isLoggedIn: Bool = user.value != nil
+class UserService: BaseViewModel {
+    @Published var isLoggedIn: Bool = false
     private var userDefaultsService = UserDefaultsService.shared
     static let shared = UserService()
-    var user = CurrentValueSubject<User?, Never>(Auth.auth().currentUser)
+    var user = CurrentValueSubject<User?, Never>(nil)
+    private var userAPI = UserAPI()
     
-    private init() { }
+    private override init() { }
 
     func login(email: String, password: String) -> Future<User, Error> {
         Future { promise in
-            Auth.auth().signIn(withEmail: email, password: password) { result, error in
-                if let error = error {
-                    promise(.failure(error))
-                } else if let user = result?.user {
+            self.userAPI.login(email: email, password: password)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .failure(let error):
+                        promise(.failure(error))
+                    case .finished:
+                        break
+                    }
+                }, receiveValue: { user in
                     self.user.value = user
+                    self.isLoggedIn = true
                     promise(.success(user))
-                }
-            }
+                })
+                .store(in: &self.bag)
         }
     }
     
     func logOut() -> Future<User?, Error> {
         Future { promise in
-            do {
-                try Auth.auth().signOut()
-                self.user.value = nil
-                promise(.success(self.user.value))
-            } catch let error {
-                promise(.failure(error))
-            }
+            self.user.value = nil
+            self.isLoggedIn = false
+            promise(.success(self.user.value))
         }
     }
 }
+

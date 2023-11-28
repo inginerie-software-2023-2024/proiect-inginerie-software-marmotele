@@ -9,7 +9,7 @@ import Foundation
 
 struct AddProgress {
     var splitId = UUID()
-    var userId = UUID()
+    let userId: String
     var workoutId = UUID()
     let date: Date
     let Exercises: [Exercise]?
