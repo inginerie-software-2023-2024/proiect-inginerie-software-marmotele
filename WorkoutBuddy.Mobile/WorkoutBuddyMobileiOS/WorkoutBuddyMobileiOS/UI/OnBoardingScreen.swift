@@ -13,25 +13,26 @@ struct OnBoardingScreen: View {
     
     var body: some View {
         ZStack {
-            CustomColors.background.ignoresSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading, spacing: 0) {
                 Group {
                     Text("Workout")
                         .font(.system(size: 28))
-                        .foregroundColor(CustomColors.button)
+                        .foregroundColor(CustomColors.myNude)
                         
                     + Text("Buddy")
                         .bold()
                         .font(.system(size: 28))
-                        .foregroundColor(CustomColors.button)
+                        .foregroundColor(CustomColors.myNude)
                 }.multilineTextAlignment(.leading)
                 .padding(.bottom, 16)
                     .padding(.horizontal, 24)
                 
                 Text("Be healthy with WorkoutBuddy")
                     .bold()
-                    .font(.system(size: 24))
+                    .font(.system(size: 26))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.leading)
                     .padding(.bottom, 16)
@@ -60,9 +61,9 @@ struct OnBoardingScreen: View {
                                 .bold()
                                 .font(.system(size:14))
                                 .padding(.all, 12)
-                                .foregroundColor(.white)
+                                .foregroundColor(.black)
                                 .frame(maxWidth: .infinity)
-                                .background(CustomColors.button)
+                                .background(CustomColors.myNude)
                                 .padding(.horizontal, 24)
                             
                         }.padding(.bottom, 14)
@@ -75,7 +76,7 @@ struct OnBoardingScreen: View {
                                 .bold()
                                 .font(.system(size:14))
                                 .padding(.all, 12)
-                                .foregroundColor(CustomColors.background)
+                                .foregroundColor(Color.black)
                                 .frame(maxWidth: .infinity)
                                 .background(Color.white)
                                 .padding(.horizontal, 24)

@@ -13,7 +13,8 @@ struct SplitDetailsScreen: View {
     
     var body: some View {
         ZStack {
-            CustomColors.background.ignoresSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading, spacing: 0) {
                 HStack(spacing: 0) {
@@ -44,7 +45,7 @@ struct SplitDetailsScreen: View {
                 Rectangle()
                     .frame(height: 1)
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(CustomColors.button)
+                    .foregroundColor(CustomColors.myNude)
                 
                 ScrollView(showsIndicators: false) {
                     ForEach(viewModel.split.workouts, id: \.self) { workout in
@@ -77,13 +78,13 @@ struct WorkoutCardView: View {
             } label: {
                 Text("+ Add progress")
                     .font(Font.system(size: 16))
-                    .foregroundColor(CustomColors.background)
+                    .foregroundColor(CustomColors.myDarkGray)
                     .padding(.vertical, 8)
                     .padding(.horizontal, 16)
-                    .background(CustomColors.button)
+                    .background(CustomColors.myNude)
                     .cornerRadius(6)
             }
         }.padding(.all, 16)
-            .border(Color.black.opacity(0.5), width: 1)
+            .border(CustomColors.myGreen, width: 1)
     }
 }

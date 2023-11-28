@@ -11,9 +11,13 @@ struct LoginScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel = LoginViewModel()
     
+    @FocusState private var isEmailFocused: Bool
+    @FocusState private var isPasswordFocused: Bool
+    
     var body: some View {
         ZStack {
-            CustomColors.background.ignoresSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
                 
@@ -28,36 +32,49 @@ struct LoginScreen: View {
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Email address")
                             .font(.system(size: 14))
-                            .foregroundColor(.white)
+                            .foregroundColor(CustomColors.myNude)
                             .padding(.bottom, 16)
                         HStack {
                             Image(systemName: "person")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 14)
-                                .foregroundColor(.white)
+                                .foregroundColor(CustomColors.myNude)
                             
                             TextField("", text: $viewModel.email)
-                                .textFieldStyle(.plain)
+                                .foregroundColor(CustomColors.myNude)
+                                .font(.system(size: 12))
+                                .placeholder(when: viewModel.email.isEmpty) {
+                                    Text("Enter your email")
+                                        .foregroundColor(CustomColors.myNude)
+                                        .font(.system(size: 12))
+                                }
                             
                             Spacer()
-                        }
+                        }.padding(.all, 12)
+                            .focused($isEmailFocused)
+                            .border(isEmailFocused ? CustomColors.myNude : .white, width: 2)
+                            .cornerRadius(4)
                     }.padding(.bottom, 28)
                     
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Password")
                             .font(.system(size: 14))
-                            .foregroundColor(.white)
+                            .foregroundColor(CustomColors.myNude)
                             .padding(.bottom, 8)
                         HStack {
                             Image(systemName: "lock")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 14)
-                                .foregroundColor(Color.white)
+                                .foregroundColor(CustomColors.myNude)
                             
-                            SecureTextFieldWithReveal(text: $viewModel.password, color: .white)
-                        }
+                            SecureTextFieldWithReveal(text: $viewModel.password,
+                                                      color: CustomColors.myNude)
+                        }.padding(.all, 12)
+                            .focused($isPasswordFocused)
+                            .border(isPasswordFocused ? CustomColors.myNude : .white , width: 2)
+                            .cornerRadius(4)
                     }.padding(.bottom, 28)
                     
                     Button {
@@ -66,7 +83,7 @@ struct LoginScreen: View {
                         Text("Sign in")
                             .frame(height: 40)
                             .frame(maxWidth: .infinity)
-                            .background(CustomColors.button)
+                            .background(CustomColors.myNude)
                             .cornerRadius(4)
                             .foregroundColor(CustomColors.background)
                         
@@ -82,13 +99,13 @@ struct LoginScreen: View {
                     
                     if !viewModel.errorMessage.isEmpty {
                         Text("\(viewModel.errorMessage)")
-                            .foregroundColor(.red)
+                            .foregroundColor(CustomColors.myError)
                             .font(.system(size: 12))
                             .padding(.vertical, 8)
                     }
                 }.padding(.all, 36)
-                .border(CustomColors.button, width: 4)
-                    .cornerRadius(8)
+                    .border(.white, width: 2)
+                    .cornerRadius(4)
                     
             }
             .padding(.horizontal, 20)
@@ -106,13 +123,21 @@ struct SecureTextFieldWithReveal: View {
     var body: some View {
         ZStack(alignment: .trailing) {
             TextField("", text: $text)
+                .foregroundColor(CustomColors.myNude)
+                .font(.system(size: 12))
                 .textContentType(.password)
                 .focused($focus1)
                 .opacity(showPassword ? 1 : 0)
+                .placeholder(when: text.isEmpty) {
+                    Text("Enter your password")
+                        .foregroundColor(CustomColors.myNude)
+                        .font(.system(size: 12))
+                }
             SecureField("", text: $text)
                 .textContentType(.password)
                 .focused($focus2)
                 .opacity(showPassword ? 0 : 1)
+                .foregroundColor(CustomColors.myNude)
             Button(action: {
                 showPassword.toggle()
                 if showPassword { focus1 = true } else { focus2 = true }
@@ -124,3 +149,4 @@ struct SecureTextFieldWithReveal: View {
         }
     }
 }
+

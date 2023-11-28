@@ -14,10 +14,13 @@
 		9B2C81EF2B160A5300719BE3 /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C81EE2B160A5300719BE3 /* OnBoardingScreen.swift */; };
 		9B2C81F62B16103900719BE3 /* LaunchscreenRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C81F52B16103800719BE3 /* LaunchscreenRepresentable.swift */; };
 		9B2C81F82B16105000719BE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B2C81F72B16105000719BE3 /* LaunchScreen.storyboard */; };
+		9B2C81FC2B1670AE00719BE3 /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C81FB2B1670AE00719BE3 /* View+Ext.swift */; };
+		9B2C81FE2B167BE000719BE3 /* SplitListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C81FD2B167BE000719BE3 /* SplitListAPI.swift */; };
+		9B2C82002B167C6400719BE3 /* SplitListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C81FF2B167C6400719BE3 /* SplitListService.swift */; };
+		9B2C82032B167E8F00719BE3 /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = 9B2C82022B167E8F00719BE3 /* netfox */; };
 		9B7B5B182AE3170C00F4E9E1 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B172AE3170C00F4E9E1 /* Split.swift */; };
 		9B7B5B1A2AE317A300F4E9E1 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B192AE317A300F4E9E1 /* Workout.swift */; };
 		9B7B5B1D2AE3228400F4E9E1 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */; };
-		9B7B5B1F2AE322FB00F4E9E1 /* SetExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B1E2AE322FB00F4E9E1 /* SetExercise.swift */; };
 		9B7B5B212AE323A800F4E9E1 /* AddProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */; };
 		9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC22AE2F5E100123048 /* RootView.swift */; };
 		9BCFEEC72AE2F5E600123048 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC62AE2F5E600123048 /* Assets.xcassets */; };
@@ -58,10 +61,12 @@
 		9B2C81EE2B160A5300719BE3 /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
 		9B2C81F52B16103800719BE3 /* LaunchscreenRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchscreenRepresentable.swift; sourceTree = "<group>"; };
 		9B2C81F72B16105000719BE3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9B2C81FB2B1670AE00719BE3 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		9B2C81FD2B167BE000719BE3 /* SplitListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitListAPI.swift; sourceTree = "<group>"; };
+		9B2C81FF2B167C6400719BE3 /* SplitListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitListService.swift; sourceTree = "<group>"; };
 		9B7B5B172AE3170C00F4E9E1 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
 		9B7B5B192AE317A300F4E9E1 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
-		9B7B5B1E2AE322FB00F4E9E1 /* SetExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetExercise.swift; sourceTree = "<group>"; };
 		9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgress.swift; sourceTree = "<group>"; };
 		9BCFEEBF2AE2F5E100123048 /* WorkoutBuddyMobileiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutBuddyMobileiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCFEEC22AE2F5E100123048 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -94,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B2C82032B167E8F00719BE3 /* netfox in Frameworks */,
 				9B2C81E82B15E64C00719BE3 /* SwiftyJSON in Frameworks */,
 				9BCFEF042AE2FC0100123048 /* FirebaseDatabaseSwift in Frameworks */,
 				9BCFEF062AE2FC0100123048 /* FirebaseFirestore in Frameworks */,
@@ -113,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				9B2C81E42B15E5C100719BE3 /* UserAPI.swift */,
+				9B2C81FD2B167BE000719BE3 /* SplitListAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -182,6 +189,7 @@
 			children = (
 				9BCFEED12AE2F6D100123048 /* UserService.swift */,
 				9BCFEED32AE2F6E400123048 /* UserDefaultsService.swift */,
+				9B2C81FF2B167C6400719BE3 /* SplitListService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -194,7 +202,6 @@
 				9B7B5B192AE317A300F4E9E1 /* Workout.swift */,
 				9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */,
 				9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */,
-				9B7B5B1E2AE322FB00F4E9E1 /* SetExercise.swift */,
 				9B2C81E92B15E67C00719BE3 /* User.swift */,
 			);
 			path = Model;
@@ -266,6 +273,7 @@
 				9BCFEEF32AE2F96700123048 /* Navigation.swift */,
 				9BCFEEF52AE2F98600123048 /* BaseViewModel.swift */,
 				9BCFEF0F2AE3007000123048 /* CustomColors.swift */,
+				9B2C81FB2B1670AE00719BE3 /* View+Ext.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -296,6 +304,7 @@
 				9BCFEF0B2AE2FC0100123048 /* FirebaseStorage */,
 				9BCFEF0D2AE2FC0100123048 /* FirebaseStorageCombine-Community */,
 				9B2C81E72B15E64C00719BE3 /* SwiftyJSON */,
+				9B2C82022B167E8F00719BE3 /* netfox */,
 			);
 			productName = WorkoutBuddyMobileiOS;
 			productReference = 9BCFEEBF2AE2F5E100123048 /* WorkoutBuddyMobileiOS.app */;
@@ -328,6 +337,7 @@
 			packageReferences = (
 				9BCFEEFE2AE2FC0100123048 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				9B2C81E62B15E64C00719BE3 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				9B2C82012B167E8F00719BE3 /* XCRemoteSwiftPackageReference "netfox" */,
 			);
 			productRefGroup = 9BCFEEC02AE2F5E100123048 /* Products */;
 			projectDirPath = "";
@@ -359,6 +369,7 @@
 			files = (
 				9B2C81ED2B160A4300719BE3 /* OnBoardingViewModel.swift in Sources */,
 				9B2C81EA2B15E67C00719BE3 /* User.swift in Sources */,
+				9B2C81FC2B1670AE00719BE3 /* View+Ext.swift in Sources */,
 				9BCFEEEF2AE2F90300123048 /* AddProgressScreen.swift in Sources */,
 				9BCFEEEA2AE2F8BD00123048 /* SplitDetailsViewModel.swift in Sources */,
 				9B7B5B1A2AE317A300F4E9E1 /* Workout.swift in Sources */,
@@ -377,15 +388,16 @@
 				9BCFEEE52AE2F87100123048 /* HomeScreen.swift in Sources */,
 				9BCFEEEC2AE2F8D600123048 /* SplitDetailsScreen.swift in Sources */,
 				9B7B5B182AE3170C00F4E9E1 /* Split.swift in Sources */,
+				9B2C81FE2B167BE000719BE3 /* SplitListAPI.swift in Sources */,
 				9BCFEEF42AE2F96700123048 /* Navigation.swift in Sources */,
 				9B2C81EF2B160A5300719BE3 /* OnBoardingScreen.swift in Sources */,
 				9B7B5B1D2AE3228400F4E9E1 /* Exercise.swift in Sources */,
 				9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */,
 				9BCFEF102AE3007000123048 /* CustomColors.swift in Sources */,
+				9B2C82002B167C6400719BE3 /* SplitListService.swift in Sources */,
 				9BCFEEF82AE2F9A200123048 /* AppDelegate.swift in Sources */,
 				9BCFEED22AE2F6D100123048 /* UserService.swift in Sources */,
 				9B2C81E52B15E5C100719BE3 /* UserAPI.swift in Sources */,
-				9B7B5B1F2AE322FB00F4E9E1 /* SetExercise.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +610,14 @@
 				minimumVersion = 17.0.5;
 			};
 		};
+		9B2C82012B167E8F00719BE3 /* XCRemoteSwiftPackageReference "netfox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kasketis/netfox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.21.0;
+			};
+		};
 		9BCFEEFE2AE2FC0100123048 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -613,6 +633,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9B2C81E62B15E64C00719BE3 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		9B2C82022B167E8F00719BE3 /* netfox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B2C82012B167E8F00719BE3 /* XCRemoteSwiftPackageReference "netfox" */;
+			productName = netfox;
 		};
 		9BCFEEFF2AE2FC0100123048 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

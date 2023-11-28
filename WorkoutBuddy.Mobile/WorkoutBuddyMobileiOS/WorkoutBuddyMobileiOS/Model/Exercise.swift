@@ -14,3 +14,10 @@ struct Exercise {
     let exerciseType: Int?
     let sets: [SetExercise]
 }
+
+struct SetExercise {
+    let reps: Int?
+    let weight: Double?
+    let duration: Int?
+    let distance: Double?
+}

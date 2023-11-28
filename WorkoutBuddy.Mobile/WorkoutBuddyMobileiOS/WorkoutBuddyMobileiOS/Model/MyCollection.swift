@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct MyCollection: Hashable {
-    var splitId = UUID()
+struct MyCollection: Hashable, Decodable {
+    let splitId: String
     let name: String
     let description: String
     let workoutsNb: Int

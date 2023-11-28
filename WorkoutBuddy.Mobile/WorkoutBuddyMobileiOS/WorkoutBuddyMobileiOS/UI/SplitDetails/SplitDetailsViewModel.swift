@@ -8,7 +8,7 @@
 import Foundation
 
 class SplitDetailsViewModel: BaseViewModel {
-    @Published var splitId: UUID
+    @Published var splitId: String
     var split: Split = Split(splitName: "Push",
                                         description: "very nice chicken and rice",
                                         workouts: [
@@ -18,7 +18,7 @@ class SplitDetailsViewModel: BaseViewModel {
                                         Workout(workoutName: "Glutes")
                                         ])
     
-    init(splitId: UUID) {
+    init(splitId: String) {
         self.splitId = splitId
     }
 }

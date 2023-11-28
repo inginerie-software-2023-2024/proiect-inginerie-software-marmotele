@@ -9,14 +9,17 @@ import Foundation
 import Combine
 
 class UserService: BaseViewModel {
-    @Published var isLoggedIn: Bool = false
+    @Published var isLoggedIn: Bool
     private var userDefaultsService = UserDefaultsService.shared
     static let shared = UserService()
     var user = CurrentValueSubject<User?, Never>(nil)
+   
     private var userAPI = UserAPI()
     
-    private override init() { }
-
+    private override init() {
+        self.isLoggedIn = user.value != nil
+    }
+    
     func login(email: String, password: String) -> Future<User, Error> {
         Future { promise in
             self.userAPI.login(email: email, password: password)
