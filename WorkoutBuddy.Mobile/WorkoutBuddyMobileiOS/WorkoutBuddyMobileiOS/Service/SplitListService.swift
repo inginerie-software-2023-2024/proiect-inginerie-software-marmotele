@@ -15,9 +15,11 @@ class SplitListService: BaseViewModel {
     private override init() { }
     
     func getListOfSplits(token: String) -> Future<[MyCollection], Error> {
-//        Future { promise in
-            self.splitsAPI.getListOfSplits(token: token)
-//        }
+        self.splitsAPI.getListOfSplits(token: token)
+    }
+    
+    func getSplitDetails(id: String, token: String) -> Future<Split, Error> {
+        self.splitsAPI.getSplitDetails(id: id, token: token)
     }
 }
 

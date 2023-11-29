@@ -10,36 +10,51 @@ import Combine
 import SwiftyJSON
 
 class SplitListAPI {
-    
     func getListOfSplits(token: String) -> Future<[MyCollection], Error> {
         Future { promise in
-            guard let url = URL(string: "https://731c-86-124-16-55.ngrok-free.app/UserSplit/ListOfSplits") else {
-                return promise(.failure(NSError(domain: "", code: -1, userInfo: nil)))
-            }
-
-            var urlRequest = URLRequest(url: url)
-            urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+            let urlComponents = URLComponents(string: "https://e65e-86-124-16-55.ngrok-free.app/UserSplit/ListOfSplits")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
             urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
+            
             urlRequest.httpMethod = "GET"
-
+            
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
                     do {
-                        var arrayToReturn = [MyCollection]()
-                        let json = try JSON(data: data!)
-                        let collections = json["response"]
-                        for(_, item) in collections {
-                            let collection = MyCollection(splitId: item["splitId"].stringValue,
-                                                          name: item["name"].stringValue,
-                                                          description: item["description"].stringValue,
-                                                          workoutsNb: item["workoutsNo"].intValue)
-                            arrayToReturn.append(collection)
-                        }
-                        promise(.success(arrayToReturn))
+                        let posts = try JSONDecoder().decode([MyCollection].self, from: data!)
+                        promise(.success(posts))
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            dataTask.resume()
+        }
+    }
+    
+    func getSplitDetails(id: String, token: String) -> Future<Split, Error> {
+        Future { promise in
+            var urlComponents = URLComponents(string: "https://e65e-86-124-16-55.ngrok-free.app/UserSplit/GetSplit")
+            
+            urlComponents?.queryItems = [
+                URLQueryItem(name: "id", value: "\(id)")
+            ]
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            
+            urlRequest.httpMethod = "GET"
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let post = try JSONDecoder().decode(Split.self, from: data!)
+                        promise(.success(post))
                     } catch {
                         promise(.failure(error))
                     }
@@ -49,3 +64,4 @@ class SplitListAPI {
         }
     }
 }
+

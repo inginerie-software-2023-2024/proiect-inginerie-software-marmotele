@@ -7,10 +7,16 @@
 
 import Foundation
 
-struct Split {
-    var userId = UUID()
-    let splitName: String
-    let description: String
-    let splitId = UUID()
+struct Split: Decodable, Hashable {
+    let idsplit: String
+    let rating: Int
+    let iduser: String
     let workouts: [Workout]
+    let description: String
+    let splitName: String
+}
+
+struct Workout: Hashable, Decodable {
+    let workoutId: String
+    let workoutName: String
 }

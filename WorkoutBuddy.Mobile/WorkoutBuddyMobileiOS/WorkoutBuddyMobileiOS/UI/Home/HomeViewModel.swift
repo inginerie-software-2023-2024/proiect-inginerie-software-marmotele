@@ -21,7 +21,6 @@ enum SplitsState {
 
 class HomeViewModel: BaseViewModel {
    @Published var errorMessage: String = ""
-   @Published var myCollection: [MyCollection] = []
     @Published var splitsState = SplitsState.loading
    
    var userService = UserService.shared

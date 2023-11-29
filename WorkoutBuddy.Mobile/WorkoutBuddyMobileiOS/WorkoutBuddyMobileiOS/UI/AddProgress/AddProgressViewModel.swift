@@ -15,7 +15,7 @@ enum WorkoutType {
 }
 
 class AddProgressViewModel: BaseViewModel {
-    @Published var workoutId: UUID
+    @Published var workoutId: String
     @Published var workoutName: String
     @Published var selectedDate = Date()
     @Published var nbOfSets: String = ""
@@ -29,7 +29,7 @@ class AddProgressViewModel: BaseViewModel {
     
     let workoutType = CurrentValueSubject<WorkoutType, Never>(.calistenics)
     
-    init(workoutId: UUID, workoutName: String) {
+    init(workoutId: String, workoutName: String) {
         self.workoutId = workoutId
         self.workoutName = workoutName
         super.init()

@@ -12,50 +12,61 @@ struct SplitDetailsScreen: View {
     @EnvironmentObject private var navigation: Navigation
     
     var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack(alignment: .leading, spacing: 0) {
-                HStack(spacing: 0) {
-                    Button {
-                        navigation.pop(animated: true)
-                    } label: {
-                        Image(systemName: "chevron.backward")
-                            .resizable()
-                            .frame(width: 14, height: 12)
-                            .foregroundColor(Color.white)
-                            .padding(.trailing, 12)
-                    }
-                    
-                    Text(viewModel.split.splitName)
-                        .font(Font.system(size: 24))
-                        .foregroundColor(Color.white)
-                    
-                    Spacer()
-                }.padding(.vertical, 16)
-                    .padding(.horizontal, 20)
+        switch viewModel.splitDetailsState {
+        case .failure(let error):
+            Text("\(error.localizedDescription)")
+        case .loading:
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                ProgressView().foregroundColor(.white)
+            }
+        case .value(let splitDetails):
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
                 
-                Text(viewModel.split.description)
-                    .font(Font.system(size: 16))
-                    .foregroundColor(Color.white)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 12)
-                
-                Rectangle()
-                    .frame(height: 1)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(CustomColors.myNude)
-                
-                ScrollView(showsIndicators: false) {
-                    ForEach(viewModel.split.workouts, id: \.self) { workout in
-                        WorkoutCardView(title: workout.workoutName) {
-                            let vm = AddProgressViewModel(workoutId: workout.workoutId, workoutName: workout.workoutName)
-                            navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack(spacing: 0) {
+                        Button {
+                            navigation.pop(animated: true)
+                        } label: {
+                            Image(systemName: "chevron.backward")
+                                .resizable()
+                                .frame(width: 14, height: 12)
+                                .foregroundColor(Color.white)
+                                .padding(.trailing, 12)
                         }
-                    }
-                }.padding(.vertical, 20)
-                    .padding(.horizontal, 20)
+                        
+                        Text(splitDetails.splitName)
+                            .font(Font.system(size: 24))
+                            .foregroundColor(Color.white)
+                        
+                        Spacer()
+                    }.padding(.vertical, 16)
+                        .padding(.horizontal, 20)
+                    
+                    Text(splitDetails.description)
+                        .font(Font.system(size: 16))
+                        .foregroundColor(Color.white)
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 12)
+                    
+                    Rectangle()
+                        .frame(height: 1)
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(CustomColors.myNude)
+                    
+                    ScrollView(showsIndicators: false) {
+                        ForEach(splitDetails.workouts, id: \.self) { workout in
+                            WorkoutCardView(title: workout.workoutName) {
+                                let vm = AddProgressViewModel(workoutId: workout.workoutId, workoutName: workout.workoutName)
+                                navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
+                            }
+                        }
+                    }.padding(.vertical, 20)
+                        .padding(.horizontal, 20)
+                }
             }
         }
     }
@@ -85,6 +96,6 @@ struct WorkoutCardView: View {
                     .cornerRadius(6)
             }
         }.padding(.all, 16)
-            .border(CustomColors.myGreen, width: 1)
+            .border(CustomColors.myNude, width: 1)
     }
 }

@@ -18,7 +18,7 @@ struct HomeScreen: View {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
-                ProgressView()
+                ProgressView().foregroundColor(.white)
             }
         case .value(let splits):
             ZStack {
@@ -92,7 +92,7 @@ struct HomeScreen: View {
                 HStack {
                     Text(collection.name)
                         .bold()
-                        .foregroundColor(.white)
+                        .foregroundColor(CustomColors.myDarkGray)
                         .font(Font.system(size: 20))
                     Spacer()
                 }
@@ -121,7 +121,7 @@ struct HomeScreen: View {
                         
                         Spacer()
                         
-                        Text("\(collection.workoutsNb)")
+                        Text("\(collection.workoutsNo)")
                             .foregroundColor(Color.white)
                             .font(Font.system(size: 14))
                     }.padding(.bottom, 16)
@@ -136,14 +136,14 @@ struct HomeScreen: View {
                                 .font(Font.system(size: 16))
                                 .padding(.horizontal, 12)
                                 .padding(.vertical, 8)
-                                .background(CustomColors.myGreen)
+                                .background(CustomColors.myNude)
                                 .cornerRadius(14)
                         }
                         Spacer()
                     }
                 }
                 .padding(.all, 12)
-                .border(CustomColors.myGreen, width: 2)
+                .border(CustomColors.myNude, width: 2)
                 .cornerRadius(4)
             }
             .frame(maxWidth: .infinity)

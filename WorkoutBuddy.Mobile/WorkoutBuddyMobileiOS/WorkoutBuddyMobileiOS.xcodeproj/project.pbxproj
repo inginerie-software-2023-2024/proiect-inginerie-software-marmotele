@@ -19,7 +19,6 @@
 		9B2C82002B167C6400719BE3 /* SplitListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C81FF2B167C6400719BE3 /* SplitListService.swift */; };
 		9B2C82032B167E8F00719BE3 /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = 9B2C82022B167E8F00719BE3 /* netfox */; };
 		9B7B5B182AE3170C00F4E9E1 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B172AE3170C00F4E9E1 /* Split.swift */; };
-		9B7B5B1A2AE317A300F4E9E1 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B192AE317A300F4E9E1 /* Workout.swift */; };
 		9B7B5B1D2AE3228400F4E9E1 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */; };
 		9B7B5B212AE323A800F4E9E1 /* AddProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */; };
 		9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC22AE2F5E100123048 /* RootView.swift */; };
@@ -65,7 +64,6 @@
 		9B2C81FD2B167BE000719BE3 /* SplitListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitListAPI.swift; sourceTree = "<group>"; };
 		9B2C81FF2B167C6400719BE3 /* SplitListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitListService.swift; sourceTree = "<group>"; };
 		9B7B5B172AE3170C00F4E9E1 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
-		9B7B5B192AE317A300F4E9E1 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgress.swift; sourceTree = "<group>"; };
 		9BCFEEBF2AE2F5E100123048 /* WorkoutBuddyMobileiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutBuddyMobileiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,7 +197,6 @@
 			children = (
 				9BCFEEDC2AE2F7F200123048 /* MyCollection.swift */,
 				9B7B5B172AE3170C00F4E9E1 /* Split.swift */,
-				9B7B5B192AE317A300F4E9E1 /* Workout.swift */,
 				9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */,
 				9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */,
 				9B2C81E92B15E67C00719BE3 /* User.swift */,
@@ -372,7 +369,6 @@
 				9B2C81FC2B1670AE00719BE3 /* View+Ext.swift in Sources */,
 				9BCFEEEF2AE2F90300123048 /* AddProgressScreen.swift in Sources */,
 				9BCFEEEA2AE2F8BD00123048 /* SplitDetailsViewModel.swift in Sources */,
-				9B7B5B1A2AE317A300F4E9E1 /* Workout.swift in Sources */,
 				9BCFEED92AE2F77A00123048 /* StartViewModel.swift in Sources */,
 				9B2C81F62B16103900719BE3 /* LaunchscreenRepresentable.swift in Sources */,
 				9BCFEEE72AE2F88800123048 /* HomeViewModel.swift in Sources */,

@@ -14,7 +14,8 @@ struct AddProgressScreen: View {
     
     var body: some View {
         ZStack {
-            CustomColors.background.ignoresSafeArea(.all)
+            LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading, spacing: 0) {
                 HStack(spacing: 0) {
@@ -30,7 +31,7 @@ struct AddProgressScreen: View {
                     
                     Text("Add new progress")
                         .font(.system(size: 24))
-                        .foregroundColor(CustomColors.button)
+                        .foregroundColor(.white)
                     
                     Spacer()
                 }
@@ -71,9 +72,9 @@ struct AddProgressScreen: View {
                     Text("Save progress")
                         .frame(height: 40)
                         .frame(maxWidth: .infinity)
-                        .background(CustomColors.button)
+                        .background(CustomColors.myNude)
                         .cornerRadius(4)
-                        .foregroundColor(CustomColors.background)
+                        .foregroundColor(.black)
                         .padding(.bottom, 20)
                 }
             }.padding(.horizontal, 20)
@@ -90,7 +91,7 @@ struct CardioForm: View {
     var body: some View {
         Text(workoutName)
             .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.button)
+            .foregroundColor(CustomColors.myNude)
             .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
@@ -143,7 +144,7 @@ struct WeightLiftingForm: View {
     var body: some View {
         Text(workoutName)
             .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.button)
+            .foregroundColor(CustomColors.myNude)
             .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
@@ -208,7 +209,7 @@ struct CalistenicsForm: View {
     var body: some View {
         Text(workoutName)
             .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.button)
+            .foregroundColor(CustomColors.myNude)
             .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
