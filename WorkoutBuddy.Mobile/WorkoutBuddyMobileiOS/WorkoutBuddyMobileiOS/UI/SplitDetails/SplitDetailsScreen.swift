@@ -60,7 +60,11 @@ struct SplitDetailsScreen: View {
                     ScrollView(showsIndicators: false) {
                         ForEach(splitDetails.workouts, id: \.self) { workout in
                             WorkoutCardView(title: workout.workoutName) {
-                                let vm = AddProgressViewModel(workoutId: workout.workoutId, workoutName: workout.workoutName)
+//                                let vm = SeeProgressViewModel(workout: workout, splitId: viewModel.splitId)
+//                                navigation.push(SeeProgressScreen(viewModel: vm).asDestination(), animated: true)
+                                let vm = AddProgressViewModel(workout: workout,
+                                                              splitId: viewModel.splitId,
+                                                              userId: splitDetails.iduser)
                                 navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
                             }
                         }

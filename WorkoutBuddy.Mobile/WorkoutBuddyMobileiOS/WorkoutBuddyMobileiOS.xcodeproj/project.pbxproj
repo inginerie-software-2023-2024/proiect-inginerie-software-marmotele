@@ -18,8 +18,11 @@
 		9B2C81FE2B167BE000719BE3 /* SplitListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C81FD2B167BE000719BE3 /* SplitListAPI.swift */; };
 		9B2C82002B167C6400719BE3 /* SplitListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C81FF2B167C6400719BE3 /* SplitListService.swift */; };
 		9B2C82032B167E8F00719BE3 /* netfox in Frameworks */ = {isa = PBXBuildFile; productRef = 9B2C82022B167E8F00719BE3 /* netfox */; };
+		9B2C82052B18EF1D00719BE3 /* AddProgressAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C82042B18EF1D00719BE3 /* AddProgressAPI.swift */; };
+		9B2C82072B18EFCC00719BE3 /* AddProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C82062B18EFCC00719BE3 /* AddProgressService.swift */; };
+		9B2C820A2B18FCB200719BE3 /* SeeProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C82092B18FCB200719BE3 /* SeeProgressViewModel.swift */; };
+		9B2C820C2B18FCF800719BE3 /* SeeProgressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C820B2B18FCF800719BE3 /* SeeProgressScreen.swift */; };
 		9B7B5B182AE3170C00F4E9E1 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B172AE3170C00F4E9E1 /* Split.swift */; };
-		9B7B5B1D2AE3228400F4E9E1 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */; };
 		9B7B5B212AE323A800F4E9E1 /* AddProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */; };
 		9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC22AE2F5E100123048 /* RootView.swift */; };
 		9BCFEEC72AE2F5E600123048 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC62AE2F5E600123048 /* Assets.xcassets */; };
@@ -63,8 +66,11 @@
 		9B2C81FB2B1670AE00719BE3 /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		9B2C81FD2B167BE000719BE3 /* SplitListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitListAPI.swift; sourceTree = "<group>"; };
 		9B2C81FF2B167C6400719BE3 /* SplitListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitListService.swift; sourceTree = "<group>"; };
+		9B2C82042B18EF1D00719BE3 /* AddProgressAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgressAPI.swift; sourceTree = "<group>"; };
+		9B2C82062B18EFCC00719BE3 /* AddProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgressService.swift; sourceTree = "<group>"; };
+		9B2C82092B18FCB200719BE3 /* SeeProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeProgressViewModel.swift; sourceTree = "<group>"; };
+		9B2C820B2B18FCF800719BE3 /* SeeProgressScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeProgressScreen.swift; sourceTree = "<group>"; };
 		9B7B5B172AE3170C00F4E9E1 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
-		9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgress.swift; sourceTree = "<group>"; };
 		9BCFEEBF2AE2F5E100123048 /* WorkoutBuddyMobileiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutBuddyMobileiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BCFEEC22AE2F5E100123048 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -118,6 +124,7 @@
 			children = (
 				9B2C81E42B15E5C100719BE3 /* UserAPI.swift */,
 				9B2C81FD2B167BE000719BE3 /* SplitListAPI.swift */,
+				9B2C82042B18EF1D00719BE3 /* AddProgressAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -138,6 +145,15 @@
 				9B2C81F72B16105000719BE3 /* LaunchScreen.storyboard */,
 			);
 			path = Splashscreen;
+			sourceTree = "<group>";
+		};
+		9B2C82082B18FC9400719BE3 /* SeeProgress */ = {
+			isa = PBXGroup;
+			children = (
+				9B2C82092B18FCB200719BE3 /* SeeProgressViewModel.swift */,
+				9B2C820B2B18FCF800719BE3 /* SeeProgressScreen.swift */,
+			);
+			path = SeeProgress;
 			sourceTree = "<group>";
 		};
 		9BCFEEB62AE2F5E100123048 = {
@@ -188,6 +204,7 @@
 				9BCFEED12AE2F6D100123048 /* UserService.swift */,
 				9BCFEED32AE2F6E400123048 /* UserDefaultsService.swift */,
 				9B2C81FF2B167C6400719BE3 /* SplitListService.swift */,
+				9B2C82062B18EFCC00719BE3 /* AddProgressService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -198,7 +215,6 @@
 				9BCFEEDC2AE2F7F200123048 /* MyCollection.swift */,
 				9B7B5B172AE3170C00F4E9E1 /* Split.swift */,
 				9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */,
-				9B7B5B1C2AE3228400F4E9E1 /* Exercise.swift */,
 				9B2C81E92B15E67C00719BE3 /* User.swift */,
 			);
 			path = Model;
@@ -213,6 +229,7 @@
 				9BCFEEDE2AE2F7FC00123048 /* Login */,
 				9BCFEEE32AE2F85000123048 /* Home */,
 				9BCFEEE82AE2F89900123048 /* SplitDetails */,
+				9B2C82082B18FC9400719BE3 /* SeeProgress */,
 				9BCFEEED2AE2F8F000123048 /* AddProgress */,
 			);
 			path = UI;
@@ -383,14 +400,17 @@
 				9BCFEEFA2AE2F9BE00123048 /* SceneDelegate.swift in Sources */,
 				9BCFEEE52AE2F87100123048 /* HomeScreen.swift in Sources */,
 				9BCFEEEC2AE2F8D600123048 /* SplitDetailsScreen.swift in Sources */,
+				9B2C820A2B18FCB200719BE3 /* SeeProgressViewModel.swift in Sources */,
 				9B7B5B182AE3170C00F4E9E1 /* Split.swift in Sources */,
 				9B2C81FE2B167BE000719BE3 /* SplitListAPI.swift in Sources */,
 				9BCFEEF42AE2F96700123048 /* Navigation.swift in Sources */,
 				9B2C81EF2B160A5300719BE3 /* OnBoardingScreen.swift in Sources */,
-				9B7B5B1D2AE3228400F4E9E1 /* Exercise.swift in Sources */,
 				9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */,
+				9B2C82072B18EFCC00719BE3 /* AddProgressService.swift in Sources */,
 				9BCFEF102AE3007000123048 /* CustomColors.swift in Sources */,
+				9B2C82052B18EF1D00719BE3 /* AddProgressAPI.swift in Sources */,
 				9B2C82002B167C6400719BE3 /* SplitListService.swift in Sources */,
+				9B2C820C2B18FCF800719BE3 /* SeeProgressScreen.swift in Sources */,
 				9BCFEEF82AE2F9A200123048 /* AppDelegate.swift in Sources */,
 				9BCFEED22AE2F6D100123048 /* UserService.swift in Sources */,
 				9B2C81E52B15E5C100719BE3 /* UserAPI.swift in Sources */,

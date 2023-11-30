@@ -9,7 +9,7 @@ import Foundation
 
 struct Split: Decodable, Hashable {
     let idsplit: String
-    let rating: Int
+    let rating: Int?
     let iduser: String
     let workouts: [Workout]
     let description: String
@@ -17,6 +17,6 @@ struct Split: Decodable, Hashable {
 }
 
 struct Workout: Hashable, Decodable {
-    let workoutId: String
     let workoutName: String
+    let workoutId: String
 }

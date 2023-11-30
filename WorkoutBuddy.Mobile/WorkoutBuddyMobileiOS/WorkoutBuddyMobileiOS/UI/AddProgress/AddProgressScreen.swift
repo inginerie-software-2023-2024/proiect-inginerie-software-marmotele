@@ -46,20 +46,20 @@ struct AddProgressScreen: View {
                 switch viewModel.workoutType.value {
                 case .weightLifting:
                     WeightLiftingForm(nbOfExercises: 3,
-                                      workoutName: viewModel.workoutName,
+                                      workoutName: viewModel.workout.workoutName,
                                       nbOfSets: $viewModel.nbOfSets,
                                       nbOfReps: $viewModel.nbOfReps,
                                       weight: $viewModel.weight)
                     
                 case .calistenics:
                     CalistenicsForm(nbOfExercises: 3,
-                                    workoutName: viewModel.workoutName,
+                                    workoutName: viewModel.workout.workoutName,
                                     nbOfSets: $viewModel.nbOfSets,
                                     nbOfReps: $viewModel.nbOfReps)
                     
                 case .cardio:
                     CardioForm(nbOfExercises: 3,
-                               workoutName: viewModel.workoutName,
+                               workoutName: viewModel.workout.workoutName,
                                distance: $viewModel.distance,
                                duration: $viewModel.duration)
                 }
@@ -67,7 +67,7 @@ struct AddProgressScreen: View {
                 Spacer()
                 
                 Button {
-                    //todo: api call
+                    viewModel.addProgress()
                 } label: {
                     Text("Save progress")
                         .frame(height: 40)
@@ -76,6 +76,14 @@ struct AddProgressScreen: View {
                         .cornerRadius(4)
                         .foregroundColor(.black)
                         .padding(.bottom, 20)
+                }.onReceive(viewModel.addProgressCompletion) { addProgressCompletion in
+                    switch addProgressCompletion {
+                    case .failure(let error):
+                        viewModel.errorMessage = error.localizedDescription
+                        print("Login failed: \(error)")
+                    case .addProgress:
+                        navigation.pop(animated: true)
+                    }
                 }
             }.padding(.horizontal, 20)
         }
@@ -109,7 +117,7 @@ struct CardioForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $distance)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
@@ -122,7 +130,7 @@ struct CardioForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $duration)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
@@ -162,7 +170,7 @@ struct WeightLiftingForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $nbOfSets)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
@@ -175,7 +183,7 @@ struct WeightLiftingForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $nbOfReps)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
@@ -188,7 +196,7 @@ struct WeightLiftingForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $weight)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
@@ -227,7 +235,7 @@ struct CalistenicsForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $nbOfSets)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
@@ -240,7 +248,7 @@ struct CalistenicsForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $nbOfReps)
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)

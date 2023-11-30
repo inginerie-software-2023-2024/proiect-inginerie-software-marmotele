@@ -7,10 +7,25 @@
 
 import Foundation
 
-struct AddProgress {
-    var splitId = UUID()
+struct AddProgress: Codable {
+    let splitId: String
+    let date: Date
+    let exercises: [Exercise]?
     let userId: String
     let workoutId: String
-    let date: Date
-    let Exercises: [Exercise]?
+}
+
+struct Exercise: Codable, Hashable {
+    let setsNo: Int?
+    let exerciseId: String
+    let exerciseName: String
+    let exerciseType: Int?
+    let sets: [SetExercise]?
+}
+
+struct SetExercise: Codable, Hashable {
+    let reps: Int?
+    let weight: Double?
+    let duration: Int?
+    let distance: Double?
 }
