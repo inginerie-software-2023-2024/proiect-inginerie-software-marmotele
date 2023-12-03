@@ -10,6 +10,7 @@ import SwiftUI
 struct SplitDetailsScreen: View {
     @StateObject var viewModel: SplitDetailsViewModel
     @EnvironmentObject private var navigation: Navigation
+    @State private var showModal = false
     
     var body: some View {
         switch viewModel.splitDetailsState {
@@ -17,13 +18,13 @@ struct SplitDetailsScreen: View {
             Text("\(error.localizedDescription)")
         case .loading:
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
                 ProgressView().foregroundColor(.white)
             }
         case .value(let splitDetails):
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack(alignment: .leading, spacing: 0) {
@@ -33,7 +34,7 @@ struct SplitDetailsScreen: View {
                         } label: {
                             Image(systemName: "chevron.backward")
                                 .resizable()
-                                .frame(width: 14, height: 12)
+                                .frame(width: 10, height: 10)
                                 .foregroundColor(Color.white)
                                 .padding(.trailing, 12)
                         }
@@ -48,24 +49,27 @@ struct SplitDetailsScreen: View {
                     
                     Text(splitDetails.description)
                         .font(Font.system(size: 16))
-                        .foregroundColor(Color.white)
+                        .foregroundColor(CustomColors.buttonDark)
                         .padding(.horizontal, 20)
                         .padding(.bottom, 12)
                     
                     Rectangle()
                         .frame(height: 1)
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(CustomColors.myNude)
+                        .foregroundColor(CustomColors.button)
                     
                     ScrollView(showsIndicators: false) {
                         ForEach(splitDetails.workouts, id: \.self) { workout in
                             WorkoutCardView(title: workout.workoutName) {
-//                                let vm = SeeProgressViewModel(workout: workout, splitId: viewModel.splitId)
-//                                navigation.push(SeeProgressScreen(viewModel: vm).asDestination(), animated: true)
-                                let vm = AddProgressViewModel(workout: workout,
+                                self.showModal.toggle()
+                                let vm = SeeProgressViewModel(workout: workout,
                                                               splitId: viewModel.splitId,
                                                               userId: splitDetails.iduser)
-                                navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
+                                navigation.presentModal(SeeProgressScreen(showModal: $showModal,
+                                                                          viewModel: vm).asDestination(),
+                                                        animated: true) {
+                                } controllerConfig: { _ in
+                                }
                             }
                         }
                     }.padding(.vertical, 20)
@@ -84,22 +88,19 @@ struct WorkoutCardView: View {
         HStack(spacing: 0) {
             Text(title)
                 .font(Font.system(size: 20))
-                .foregroundColor(Color.white)
+                .foregroundColor(CustomColors.button)
             
             Spacer()
             
             Button {
                 addProgressHandler()
             } label: {
-                Text("+ Add progress")
-                    .font(Font.system(size: 16))
-                    .foregroundColor(CustomColors.myDarkGray)
-                    .padding(.vertical, 8)
-                    .padding(.horizontal, 16)
-                    .background(CustomColors.myNude)
-                    .cornerRadius(6)
+                Image(systemName: "chevron.down")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(CustomColors.button)
             }
         }.padding(.all, 16)
-            .border(CustomColors.myNude, width: 1)
+            .border(CustomColors.buttonDark, width: 1)
     }
 }

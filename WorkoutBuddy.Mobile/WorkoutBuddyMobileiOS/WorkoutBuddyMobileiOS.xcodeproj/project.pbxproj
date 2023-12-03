@@ -147,15 +147,6 @@
 			path = Splashscreen;
 			sourceTree = "<group>";
 		};
-		9B2C82082B18FC9400719BE3 /* SeeProgress */ = {
-			isa = PBXGroup;
-			children = (
-				9B2C82092B18FCB200719BE3 /* SeeProgressViewModel.swift */,
-				9B2C820B2B18FCF800719BE3 /* SeeProgressScreen.swift */,
-			);
-			path = SeeProgress;
-			sourceTree = "<group>";
-		};
 		9BCFEEB62AE2F5E100123048 = {
 			isa = PBXGroup;
 			children = (
@@ -229,7 +220,6 @@
 				9BCFEEDE2AE2F7FC00123048 /* Login */,
 				9BCFEEE32AE2F85000123048 /* Home */,
 				9BCFEEE82AE2F89900123048 /* SplitDetails */,
-				9B2C82082B18FC9400719BE3 /* SeeProgress */,
 				9BCFEEED2AE2F8F000123048 /* AddProgress */,
 			);
 			path = UI;
@@ -267,6 +257,8 @@
 			children = (
 				9BCFEEE92AE2F8BD00123048 /* SplitDetailsViewModel.swift */,
 				9BCFEEEB2AE2F8D600123048 /* SplitDetailsScreen.swift */,
+				9B2C820B2B18FCF800719BE3 /* SeeProgressScreen.swift */,
+				9B2C82092B18FCB200719BE3 /* SeeProgressViewModel.swift */,
 			);
 			path = SplitDetails;
 			sourceTree = "<group>";

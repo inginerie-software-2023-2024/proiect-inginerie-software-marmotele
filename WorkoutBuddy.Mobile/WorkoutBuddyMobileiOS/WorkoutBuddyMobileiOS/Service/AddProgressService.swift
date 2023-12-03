@@ -19,7 +19,7 @@ class AddProgressService: BaseViewModel {
     }
     
     func addProgress(splitId: String,
-                     date: Date,
+                     date: String,
                      exercises: [Exercise],
                      userId: String,
                      workoutId: String,

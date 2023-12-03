@@ -12,7 +12,7 @@ import SwiftyJSON
 class SplitListAPI {
     func getListOfSplits(token: String) -> Future<[MyCollection], Error> {
         Future { promise in
-            let urlComponents = URLComponents(string: "https://127e-86-124-16-55.ngrok-free.app/UserSplit/ListOfSplits")
+            let urlComponents = URLComponents(string: "https://bd13-86-124-16-55.ngrok-free.app/UserSplit/ListOfSplits")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
@@ -37,7 +37,7 @@ class SplitListAPI {
     
     func getSplitDetails(id: String, token: String) -> Future<Split, Error> {
         Future { promise in
-            var urlComponents = URLComponents(string: "https://127e-86-124-16-55.ngrok-free.app/UserSplit/GetSplit")
+            var urlComponents = URLComponents(string: "https://bd13-86-124-16-55.ngrok-free.app/UserSplit/GetSplit")
             
             urlComponents?.queryItems = [
                 URLQueryItem(name: "id", value: "\(id)")

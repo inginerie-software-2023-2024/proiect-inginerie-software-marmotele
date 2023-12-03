@@ -16,13 +16,14 @@ struct HomeScreen: View {
             Text("\(error.localizedDescription)")
         case .loading:
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
+                
                 ProgressView().foregroundColor(.white)
             }
         case .value(let splits):
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
                 
                 VStack(alignment: .leading, spacing: 0) {
@@ -36,14 +37,10 @@ struct HomeScreen: View {
                         Button {
                             viewModel.logOut()
                         } label: {
-                            Text("Log out")
-                                .font(Font.system(size: 16))
-                                .foregroundColor(.black)
-                                .frame(height: 20)
-                                .padding(.all, 12)
-                                .background(CustomColors.myNude)
-                                .cornerRadius(6)
-                            
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
+                                .resizable()
+                                .frame(width: 28, height: 28)
+                                .foregroundColor(CustomColors.buttonDark)
                         }
                     }.padding(.top, 16)
                         .padding(.bottom, 12)
@@ -52,7 +49,7 @@ struct HomeScreen: View {
                     Rectangle()
                         .frame(height: 1)
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(CustomColors.myNude)
+                        .foregroundColor(CustomColors.button)
                     
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 12) {
@@ -92,24 +89,24 @@ struct HomeScreen: View {
                 HStack {
                     Text(collection.name)
                         .bold()
-                        .foregroundColor(CustomColors.myDarkGray)
+                        .foregroundColor(CustomColors.backgroundDark)
                         .font(Font.system(size: 20))
                     Spacer()
                 }
                 .padding(.all, 12)
-                .background(CustomColors.myNude)
+                .background(CustomColors.buttonDark)
                 
                 VStack(alignment: .leading, spacing: 0) {
                     HStack(spacing: 0) {
                         Text("Description:")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(.white)
                             .bold()
                             .font(Font.system(size: 14))
                         
                         Spacer()
                         
                         Text(collection.description)
-                            .foregroundColor(Color.white)
+                            .foregroundColor(CustomColors.button)
                             .font(Font.system(size: 14))
                     }.padding(.bottom, 16)
                     
@@ -122,7 +119,7 @@ struct HomeScreen: View {
                         Spacer()
                         
                         Text("\(collection.workoutsNo)")
-                            .foregroundColor(Color.white)
+                            .foregroundColor(CustomColors.button)
                             .font(Font.system(size: 14))
                     }.padding(.bottom, 16)
                     
@@ -131,19 +128,15 @@ struct HomeScreen: View {
                         Button {
                             viewDetailsHandler()
                         } label: {
-                            Text("View details")
-                                .foregroundColor(Color.white)
+                            Text("See details")
+                                .underline()
+                                .foregroundColor(CustomColors.buttonDark)
                                 .font(Font.system(size: 16))
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                                .background(CustomColors.myNude)
-                                .cornerRadius(14)
                         }
-                        Spacer()
                     }
                 }
                 .padding(.all, 12)
-                .border(CustomColors.myNude, width: 2)
+                .border(CustomColors.buttonDark, width: 2)
                 .cornerRadius(4)
             }
             .frame(maxWidth: .infinity)

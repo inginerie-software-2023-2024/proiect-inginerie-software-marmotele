@@ -9,7 +9,7 @@ import Foundation
 
 struct AddProgress: Codable {
     let splitId: String
-    let date: Date
+    let date: String
     let exercises: [Exercise]?
     let userId: String
     let workoutId: String
@@ -24,6 +24,29 @@ struct Exercise: Codable, Hashable {
 }
 
 struct SetExercise: Codable, Hashable {
+    let weight: Double?
+    let reps: Int?
+    let distance: Double?
+    let duration: Int?
+}
+
+struct AddProgressBody: Codable {
+    let splitId: String
+    let userId: String
+    let workoutId: String
+    let date: Date
+    let exercises: [ExerciseBody]?
+}
+
+struct ExerciseBody: Codable, Hashable {
+    let exerciseId: String
+    let exerciseName: String
+    let setsNo: Int?
+    let exerciseType: Int?
+    let sets: [SetExerciseBody]?
+}
+
+struct SetExerciseBody: Codable, Hashable {
     let reps: Int?
     let weight: Double?
     let duration: Int?

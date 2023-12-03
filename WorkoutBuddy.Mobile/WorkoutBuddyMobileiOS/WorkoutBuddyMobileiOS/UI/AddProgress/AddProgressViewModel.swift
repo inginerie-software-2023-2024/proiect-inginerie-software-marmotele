@@ -31,6 +31,7 @@ class AddProgressViewModel: BaseViewModel {
     @Published var user: User?
     @Published var errorMessage: String = ""
     @Published var userId: String
+    @Published var exercise: Exercise
     var progress: AddProgress?
     
     let addProgressCompletion = PassthroughSubject<AddProgressCompletion, Never>()
@@ -39,24 +40,25 @@ class AddProgressViewModel: BaseViewModel {
     
     let workoutType = CurrentValueSubject<WorkoutType, Never>(.calistenics)
     
-    init(workout: Workout, splitId: String, userId: String) {
+    init(workout: Workout, splitId: String, userId: String, exercise: Exercise) {
         self.workout = workout
         self.splitId = splitId
         self.userId = userId
+        self.exercise = exercise
     }
     
     func addProgress() {
         guard let user = userService.user.value else { return }
         addProgressService.addProgress(splitId: splitId,
-                                       date: selectedDate,
+                                       date: selectedDate.description,
                                        exercises: [Exercise(setsNo: Int(nbOfSets),
-                                                            exerciseId: splitId,
-                                                            exerciseName: workout.workoutName,
-                                                            exerciseType: 0,
-                                                            sets: [SetExercise(reps: Int(nbOfReps),
-                                                                               weight: Double(weight),
-                                                                               duration: Int(duration),
-                                                                               distance: Double(distance))])],
+                                                            exerciseId: exercise.exerciseId,
+                                                            exerciseName: exercise.exerciseName,
+                                                            exerciseType: exercise.exerciseType,
+                                                            sets: [SetExercise(weight: Double(weight), 
+                                                                               reps: Int(nbOfReps),
+                                                                               distance: Double(distance), 
+                                                                               duration: Int(duration))])],
                                        userId: userId,
                                        workoutId: workout.workoutId,
                                        token: user.token)
@@ -74,53 +76,5 @@ class AddProgressViewModel: BaseViewModel {
                 self.addProgressCompletion.send(.addProgress)
             }
             .store(in: &bag)
-    }
-    
-    func initializeProgress() {
-//        if let user = self.user {
-//            self.progress = AddProgress(userId: user.token,
-//                                        workoutId: workout.workoutId,
-//                                        date: selectedDate,
-//                                        Exercises: [
-//                                            Exercise(exerciseName: workout.workoutName,
-//                                                     nbSets: Int(nbOfSets),
-//                                                     exerciseType: 1,
-//                                                     sets:
-//                                                        [SetExercise(reps: Int(nbOfReps),
-//                                                             weight: Double(weight),
-//                                                             duration: Int(duration),
-//                                                             distance: Double(distance)),
-//                                                         SetExercise(reps: Int(nbOfReps),
-//                                                              weight: Double(weight),
-//                                                              duration: Int(duration),
-//                                                              distance: Double(distance))]
-//                                                    ),
-//                                            Exercise(exerciseName: workout.workoutName,
-//                                                 nbSets: Int(nbOfSets),
-//                                                 exerciseType: 2,
-//                                                 sets:
-//                                                    [SetExercise(reps: Int(nbOfReps),
-//                                                         weight: Double(weight),
-//                                                         duration: Int(duration),
-//                                                         distance: Double(distance)),
-//                                                     SetExercise(reps: Int(nbOfReps),
-//                                                          weight: Double(weight),
-//                                                          duration: Int(duration),
-//                                                         distance: Double(distance)),
-//                                                     SetExercise(reps: Int(nbOfReps),
-//                                                          weight: Double(weight),
-//                                                          duration: Int(duration),
-//                                                          distance: Double(distance))]
-//                                                ),
-//                                            Exercise(exerciseName: workout.workoutName,
-//                                                 nbSets: Int(nbOfSets),
-//                                                 exerciseType: 3,
-//                                                 sets:
-//                                                    [SetExercise(reps: Int(nbOfReps),
-//                                                         weight: Double(weight),
-//                                                         duration: Int(duration),
-//                                                         distance: Double(distance))]
-//                                                )])
-//        }
     }
 }

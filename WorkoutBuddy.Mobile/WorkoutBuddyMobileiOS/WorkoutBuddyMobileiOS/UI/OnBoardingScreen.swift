@@ -13,19 +13,19 @@ struct OnBoardingScreen: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading, spacing: 0) {
                 Group {
                     Text("Workout")
                         .font(.system(size: 28))
-                        .foregroundColor(CustomColors.myNude)
+                        .foregroundColor(CustomColors.button)
                         
                     + Text("Buddy")
                         .bold()
                         .font(.system(size: 28))
-                        .foregroundColor(CustomColors.myNude)
+                        .foregroundColor(CustomColors.buttonDark)
                 }.multilineTextAlignment(.leading)
                 .padding(.bottom, 16)
                     .padding(.horizontal, 24)
@@ -61,24 +61,9 @@ struct OnBoardingScreen: View {
                                 .bold()
                                 .font(.system(size:14))
                                 .padding(.all, 12)
-                                .foregroundColor(.black)
+                                .foregroundColor(CustomColors.backgroundDark)
                                 .frame(maxWidth: .infinity)
-                                .background(CustomColors.myNude)
-                                .padding(.horizontal, 24)
-                            
-                        }.padding(.bottom, 14)
-                        
-                        Button {
-                            viewModel.userDefaultsService.setOnboarding(onboardingIsOver: true)
-                            navigation.replaceNavigationStack([HomeScreen().asDestination()], animated: true)
-                        } label: {
-                            Text("Continue as Guest")
-                                .bold()
-                                .font(.system(size:14))
-                                .padding(.all, 12)
-                                .foregroundColor(Color.black)
-                                .frame(maxWidth: .infinity)
-                                .background(Color.white)
+                                .background(CustomColors.buttonDark)
                                 .padding(.horizontal, 24)
                                 .padding(.bottom, 24)
                         }.padding(.bottom, 16)

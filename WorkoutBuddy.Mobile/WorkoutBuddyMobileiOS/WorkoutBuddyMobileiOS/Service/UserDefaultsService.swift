@@ -9,6 +9,7 @@ import Foundation
 
 enum UserDefaultsKeys {
     static let hasOnboardingCompleted = "onboardingIsOver"
+    static let token = "token"
 }
 
 class UserDefaultsService {
@@ -18,6 +19,10 @@ class UserDefaultsService {
     
     private init() {
         defaults = UserDefaults.standard
+    }
+    
+    func userLoggedIn(token: Bool) {
+        defaults.set(token, forKey: UserDefaultsKeys.token)
     }
     
     func setOnboarding(onboardingIsOver: Bool) {

@@ -20,3 +20,12 @@ extension View {
         }
     }
 }
+
+extension String {
+    func convertStringToDate(fromString dateAsString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MMM-dd HH:mm:ss"
+        let date = dateFormatter.date(from: dateAsString)
+        return date
+    }
+}

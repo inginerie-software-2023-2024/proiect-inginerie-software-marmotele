@@ -16,7 +16,7 @@ struct LoginScreen: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 0) {
@@ -32,48 +32,47 @@ struct LoginScreen: View {
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Email address")
                             .font(.system(size: 14))
-                            .foregroundColor(CustomColors.myNude)
-                            .padding(.bottom, 16)
+                            .foregroundColor(CustomColors.button)
+                            .padding(.bottom, 8)
                         HStack {
                             Image(systemName: "person")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 14)
-                                .foregroundColor(CustomColors.myNude)
+                                .foregroundColor(.white)
                             
                             TextField("", text: $viewModel.email)
-                                .foregroundColor(CustomColors.myNude)
+                                .foregroundColor(CustomColors.button)
                                 .font(.system(size: 12))
                                 .placeholder(when: viewModel.email.isEmpty) {
                                     Text("Enter your email")
-                                        .foregroundColor(CustomColors.myNude)
+                                        .foregroundColor(CustomColors.buttonDark)
                                         .font(.system(size: 12))
                                 }
                             
                             Spacer()
                         }.padding(.all, 12)
                             .focused($isEmailFocused)
-                            .border(isEmailFocused ? CustomColors.myNude : .white, width: 2)
+                            .border(isEmailFocused ? CustomColors.button : .white, width: 2)
                             .cornerRadius(4)
                     }.padding(.bottom, 28)
                     
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Password")
                             .font(.system(size: 14))
-                            .foregroundColor(CustomColors.myNude)
+                            .foregroundColor(CustomColors.button)
                             .padding(.bottom, 8)
                         HStack {
                             Image(systemName: "lock")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 14)
-                                .foregroundColor(CustomColors.myNude)
+                                .foregroundColor(.white)
                             
-                            SecureTextFieldWithReveal(text: $viewModel.password,
-                                                      color: CustomColors.myNude)
+                            SecureTextFieldWithReveal(text: $viewModel.password)
                         }.padding(.all, 12)
                             .focused($isPasswordFocused)
-                            .border(isPasswordFocused ? CustomColors.myNude : .white , width: 2)
+                            .border(isPasswordFocused ? CustomColors.button : .white , width: 2)
                             .cornerRadius(4)
                     }.padding(.bottom, 28)
                     
@@ -83,9 +82,9 @@ struct LoginScreen: View {
                         Text("Sign in")
                             .frame(height: 40)
                             .frame(maxWidth: .infinity)
-                            .background(CustomColors.myNude)
+                            .background(CustomColors.button)
                             .cornerRadius(4)
-                            .foregroundColor(CustomColors.background)
+                            .foregroundColor(CustomColors.backgroundDark)
                         
                     }.onReceive(viewModel.loginCompletion) { loginCompletion in
                         switch loginCompletion {
@@ -104,7 +103,7 @@ struct LoginScreen: View {
                             .padding(.vertical, 8)
                     }
                 }.padding(.all, 36)
-                    .border(.white, width: 2)
+                    .border(CustomColors.buttonDark, width: 2)
                     .cornerRadius(4)
                     
             }
@@ -118,33 +117,32 @@ struct SecureTextFieldWithReveal: View {
     @FocusState private var focus2: Bool
     @State private var showPassword: Bool = false
     @Binding var text: String
-    @State var color: Color
     
     var body: some View {
         ZStack(alignment: .trailing) {
             TextField("", text: $text)
-                .foregroundColor(CustomColors.myNude)
+                .foregroundColor(CustomColors.button)
                 .font(.system(size: 12))
                 .textContentType(.password)
                 .focused($focus1)
                 .opacity(showPassword ? 1 : 0)
                 .placeholder(when: text.isEmpty) {
                     Text("Enter your password")
-                        .foregroundColor(CustomColors.myNude)
+                        .foregroundColor(CustomColors.buttonDark)
                         .font(.system(size: 12))
                 }
             SecureField("", text: $text)
                 .textContentType(.password)
                 .focused($focus2)
                 .opacity(showPassword ? 0 : 1)
-                .foregroundColor(CustomColors.myNude)
+                .foregroundColor(CustomColors.button)
             Button(action: {
                 showPassword.toggle()
                 if showPassword { focus1 = true } else { focus2 = true }
             }) {
                 Image(systemName: self.showPassword ? "eye.slash" : "eye")
                     .frame(height: 12)
-                    .foregroundColor(color)
+                    .foregroundColor(.white)
             }
         }
     }

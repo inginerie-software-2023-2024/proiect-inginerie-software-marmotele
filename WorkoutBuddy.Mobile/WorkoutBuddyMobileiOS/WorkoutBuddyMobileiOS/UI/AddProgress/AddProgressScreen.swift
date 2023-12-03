@@ -14,7 +14,7 @@ struct AddProgressScreen: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [CustomColors.myDarkGray, .black]), startPoint: .top, endPoint: .bottom)
+            LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
             VStack(alignment: .leading, spacing: 0) {
@@ -24,18 +24,18 @@ struct AddProgressScreen: View {
                     } label: {
                         Image(systemName: "chevron.backward")
                             .resizable()
-                            .frame(width: 14, height: 12)
+                            .frame(width: 10, height: 10)
                             .foregroundColor(Color.white)
                             .padding(.trailing, 12)
                     }
                     
                     Text("Add new progress")
-                        .font(.system(size: 24))
-                        .foregroundColor(.white)
+                        .font(Font.system(size: 24))
+                        .foregroundColor(Color.white)
                     
                     Spacer()
-                }
-                    .padding(.vertical, 20)
+                }.padding(.vertical, 16)
+                    .padding(.horizontal, 20)
                 
                 DatePicker(selection: $viewModel.selectedDate, in: Date.now..., displayedComponents: .date) {
                     Label("Select a date", systemImage: "calendar")
@@ -72,14 +72,15 @@ struct AddProgressScreen: View {
                     Text("Save progress")
                         .frame(height: 40)
                         .frame(maxWidth: .infinity)
-                        .background(CustomColors.myNude)
+                        .background(CustomColors.button)
                         .cornerRadius(4)
-                        .foregroundColor(.black)
+                        .foregroundColor(CustomColors.backgroundDark)
                         .padding(.bottom, 20)
                 }.onReceive(viewModel.addProgressCompletion) { addProgressCompletion in
                     switch addProgressCompletion {
                     case .failure(let error):
                         viewModel.errorMessage = error.localizedDescription
+                        navigation.pop(animated: true)
                         print("Login failed: \(error)")
                     case .addProgress:
                         navigation.pop(animated: true)
@@ -99,7 +100,7 @@ struct CardioForm: View {
     var body: some View {
         Text(workoutName)
             .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.myNude)
+            .foregroundColor(CustomColors.button)
             .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
@@ -117,7 +118,7 @@ struct CardioForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $distance)
-                            .foregroundColor(.black)
+                            .foregroundColor(CustomColors.backgroundDark)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
@@ -130,7 +131,7 @@ struct CardioForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $duration)
-                            .foregroundColor(.black)
+                            .foregroundColor(CustomColors.backgroundDark)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
@@ -152,7 +153,7 @@ struct WeightLiftingForm: View {
     var body: some View {
         Text(workoutName)
             .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.myNude)
+            .foregroundColor(CustomColors.button)
             .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
@@ -217,7 +218,7 @@ struct CalistenicsForm: View {
     var body: some View {
         Text(workoutName)
             .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.myNude)
+            .foregroundColor(CustomColors.button)
             .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
@@ -248,7 +249,7 @@ struct CalistenicsForm: View {
                             .foregroundColor(.white)
                         
                         TextField("", text: $nbOfReps)
-                            .foregroundColor(.black)
+                            .foregroundColor(CustomColors.backgroundDark)
                             .textFieldStyle(.plain)
                             .padding(.vertical, 8)
                             .frame(maxWidth: .infinity)
