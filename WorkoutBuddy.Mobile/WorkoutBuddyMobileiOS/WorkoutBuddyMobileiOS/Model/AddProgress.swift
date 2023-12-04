@@ -31,24 +31,24 @@ struct SetExercise: Codable, Hashable {
 }
 
 struct AddProgressBody: Codable {
-    let splitId: String
-    let userId: String
-    let workoutId: String
-    let date: Date
-    let exercises: [ExerciseBody]?
+    let SplitId: String
+    let UserId: String
+    let WorkoutId: String
+    let Date: String
+    let Exercises: [ExerciseBody]?
 }
 
 struct ExerciseBody: Codable, Hashable {
-    let exerciseId: String
-    let exerciseName: String
-    let setsNo: Int?
-    let exerciseType: Int?
-    let sets: [SetExerciseBody]?
+    let ExerciseId: String
+    let ExerciseName: String
+    let SetsNo: Int?
+    let ExerciseType: Int?
+    let Sets: [SetExerciseBody]?
 }
 
 struct SetExerciseBody: Codable, Hashable {
-    let reps: Int?
-    let weight: Double?
-    let duration: Int?
-    let distance: Double?
+    let Reps: Int?
+    let Weight: Double?
+    let Duration: Int?
+    let Distance: Double?
 }

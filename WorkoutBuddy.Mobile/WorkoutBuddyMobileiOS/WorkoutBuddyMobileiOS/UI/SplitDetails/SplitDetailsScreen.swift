@@ -88,7 +88,7 @@ struct WorkoutCardView: View {
         HStack(spacing: 0) {
             Text(title)
                 .font(Font.system(size: 20))
-                .foregroundColor(CustomColors.button)
+                .foregroundColor(.white)
             
             Spacer()
             
@@ -97,7 +97,7 @@ struct WorkoutCardView: View {
             } label: {
                 Image(systemName: "chevron.down")
                     .resizable()
-                    .frame(width: 20, height: 20)
+                    .frame(width: 12, height: 12)
                     .foregroundColor(CustomColors.button)
             }
         }.padding(.all, 16)
