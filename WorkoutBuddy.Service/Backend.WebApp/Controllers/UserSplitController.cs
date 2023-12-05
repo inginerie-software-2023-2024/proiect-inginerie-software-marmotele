@@ -4,7 +4,8 @@ using Backend.WebApp.Code.Base;
 using Backend.WebApp.Code.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using System.Web.Helpers;
 
 namespace Backend.WebApp.Controllers
 {
@@ -44,7 +45,7 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpPost("AddProgress")]
-        public IActionResult AddProgress([FromQuery] string body)
+        public IActionResult AddProgress([FromQuery] String Exercises, [FromBody] UserWorkoutModel model)
         {
             var jsonSettings = new JsonSerializerSettings();
             jsonSettings.DateFormatString = "yyyy-MM-dd hh:mm:ss";
