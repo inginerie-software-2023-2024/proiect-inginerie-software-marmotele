@@ -12,6 +12,6 @@ namespace Backend.BusinessLogic.Implementation.UserSplitColection.Models
         public Guid UserId { get; set; }
         public Guid WorkoutId { get; set; }
         public DateTime Date { get; set; }
-        public List<UserExerciseModel>? Exercises { get; set; }
+        public List<UserExerciseModel>? Exercises { get; set; } = new List<UserExerciseModel>();
     }
 }

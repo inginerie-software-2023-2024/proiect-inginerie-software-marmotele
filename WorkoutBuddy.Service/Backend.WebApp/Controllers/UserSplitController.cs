@@ -4,7 +4,8 @@ using Backend.WebApp.Code.Base;
 using Backend.WebApp.Code.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using System.Web.Helpers;
 
 namespace Backend.WebApp.Controllers
 {
@@ -26,7 +27,7 @@ namespace Backend.WebApp.Controllers
             var idUser = CurrentUser.Id;
             var model = service.GetListOfSplits(idUser);
             return Ok(model);
-           
+
         }
 
         [HttpGet("GetSplit")]
@@ -44,12 +45,12 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpPost("AddProgress")]
-        public IActionResult AddProgress([FromQuery] string body)
+        public IActionResult AddProgress([FromQuery] string Exercises, [FromForm] UserWorkoutModel model)
         {
-            var jsonSettings = new JsonSerializerSettings();
-            jsonSettings.DateFormatString = "yyyy-MM-dd hh:mm:ss";
-            UserWorkoutModel model = JsonConvert.DeserializeObject<UserWorkoutModel>(body, jsonSettings);
+            
+            var ex = JsonConvert.DeserializeObject<List<UserExerciseModel>>(Exercises);
             model.UserId = CurrentUser.Id;
+            model.Exercises = ex;
             var splitId = service.AddProgress(model, 3);
             var splitModel = service.GetUserSplit(splitId, CurrentUser.Id);
 
@@ -63,8 +64,11 @@ namespace Backend.WebApp.Controllers
             return Ok(model);
         }
 
+
+
+
         [HttpPost("GetDates")]
-        public IActionResult GetDates([FromBody]DatesModel model)
+        public IActionResult GetDates([FromBody] DatesModel model)
         {
             var dates = service.GetDates(model.Index, Guid.Parse(model.WorkoutId), CurrentUser.Id, Int32.Parse(Configuration["NoOfDates"]));
             return Ok(dates);
@@ -84,7 +88,7 @@ namespace Backend.WebApp.Controllers
         {
             var model = service.GetProgress(id, CurrentUser.Id, index, Int32.Parse(Configuration["NoOfDates"]));
             var x = service.ComputeNoOfPages(id, CurrentUser.Id, Int32.Parse(Configuration["NoOfDates"]));
-            
+
             return Ok(model);
         }
 
@@ -93,7 +97,7 @@ namespace Backend.WebApp.Controllers
         {
             service.RemoveSplit(id, CurrentUser.Id);
             return Ok();
-           // return RedirectToAction("Index");
+            // return RedirectToAction("Index");
         }
     }
 }
