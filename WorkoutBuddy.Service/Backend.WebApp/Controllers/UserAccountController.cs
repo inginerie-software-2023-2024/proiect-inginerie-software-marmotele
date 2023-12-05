@@ -66,6 +66,7 @@ namespace Backend.WebApp.Controllers
                 token = new JwtSecurityTokenHandler().WriteToken(token),
                 expiration = token.ValidTo,
                 username = user.Username,
+                UserId = user.Id,
                 Roles = user.Roles
             });
         }

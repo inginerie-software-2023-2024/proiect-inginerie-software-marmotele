@@ -1,6 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\WorkoutBuddy.Service",
+    "\\WorkoutBuddy.Service\\Backend.BusinessLogic",
+    "\\WorkoutBuddy.Service\\Backend.BusinessLogic\\Implementation",
+    "\\WorkoutBuddy.Service\\Backend.BusinessLogic\\Implementation\\UserSplitColection",
+    "\\WorkoutBuddy.Service\\Backend.WebApp",
+    "\\WorkoutBuddy.Service\\Backend.WebApp\\Code",
+    "\\WorkoutBuddy.Service\\Backend.WebApp\\Code\\Base",
+    "\\WorkoutBuddy.Service\\Backend.WebApp\\Code\\ExtensionMethods",
+    "\\WorkoutBuddy.Service\\Backend.WebApp\\Controllers"
   ],
+  "SelectedNode": "\\WorkoutBuddy.Service\\Backend.WebApp\\Code\\ExtensionMethods\\ServiceCollectionExtensionMethods.cs",
   "PreviewInSolutionExplorer": false
 }

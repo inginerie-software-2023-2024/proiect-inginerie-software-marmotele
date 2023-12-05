@@ -1,15 +1,15 @@
 ﻿using Backend.BusinessLogic.Implementation.UserSplitColection;
 using Backend.BusinessLogic.Implementation.UserSplitColection.Models;
 using Backend.WebApp.Code.Base;
-using Microsoft.AspNetCore.Authorization;
+using Backend.WebApp.Code.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-
+using System.Text.Json;
 
 namespace Backend.WebApp.Controllers
 {
     [Authorize]
+    [Route("[controller]")]
     public class UserSplitController : BaseController
     {
         private readonly UserSplitService service;
@@ -20,6 +20,7 @@ namespace Backend.WebApp.Controllers
             Configuration = configuration;
         }
 
+        [HttpGet("ListOfSplits")]
         public IActionResult Index()
         {
             var idUser = CurrentUser.Id;
@@ -28,44 +29,48 @@ namespace Backend.WebApp.Controllers
            
         }
 
+        [HttpGet("GetSplit")]
         public IActionResult ViewUserSplit(Guid id)
         {
             var model = service.GetUserSplit(id, CurrentUser.Id);
             return Ok(model);
         }
 
-        [HttpGet]
+        [HttpGet("AddProgress")]
         public IActionResult AddProgress(Guid id)
         {
             var model = service.PopulateUserWorkoutModel(id);
             return Ok(model);
         }
 
-        [HttpPost]
-        public IActionResult AddProgress(UserWorkoutModel model)
+        [HttpPost("AddProgress")]
+        public IActionResult AddProgress([FromQuery] string body)
         {
+            var jsonSettings = new JsonSerializerSettings();
+            jsonSettings.DateFormatString = "yyyy-MM-dd hh:mm:ss";
+            UserWorkoutModel model = JsonConvert.DeserializeObject<UserWorkoutModel>(body, jsonSettings);
             model.UserId = CurrentUser.Id;
-            var splitId = service.AddProgress(model, Int32.Parse(Configuration["NoOfPoints"]));
+            var splitId = service.AddProgress(model, 3);
             var splitModel = service.GetUserSplit(splitId, CurrentUser.Id);
 
             return Ok(splitModel);
         }
 
-        [HttpGet]
+        [HttpGet("WorkoutHistory")]
         public IActionResult WorkoutHistory(Guid id)
         {
             var model = service.GetHistory(id, CurrentUser.Id);
             return Ok(model);
         }
 
-        [HttpPost]
+        [HttpPost("GetDates")]
         public IActionResult GetDates([FromBody]DatesModel model)
         {
             var dates = service.GetDates(model.Index, Guid.Parse(model.WorkoutId), CurrentUser.Id, Int32.Parse(Configuration["NoOfDates"]));
             return Ok(dates);
         }
 
-        [HttpGet]
+        [HttpGet("GetHistory")]
         public IActionResult GetHistory(HistoryRequestModel model)
         {
             var workoutId = Guid.Parse(model.WorkoutId);
@@ -74,7 +79,7 @@ namespace Backend.WebApp.Controllers
             return Ok(workout);
         }
 
-        [HttpGet]
+        [HttpGet("GetExercisesProgress")]
         public IActionResult ExercisesProgress(Guid id, int index)
         {
             var model = service.GetProgress(id, CurrentUser.Id, index, Int32.Parse(Configuration["NoOfDates"]));
@@ -83,7 +88,7 @@ namespace Backend.WebApp.Controllers
             return Ok(model);
         }
 
-        [HttpPost]
+        [HttpPost("RemoveUserSplit")]
         public IActionResult RemoveUserSplit(Guid id)
         {
             service.RemoveSplit(id, CurrentUser.Id);
