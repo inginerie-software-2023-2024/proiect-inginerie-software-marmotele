@@ -16,18 +16,18 @@ struct AddProgress: Codable {
 }
 
 struct Exercise: Codable, Hashable {
-    let setsNo: Int?
-    let exerciseId: String
-    let exerciseName: String
-    let exerciseType: Int?
-    let sets: [SetExercise]?
+    var setsNo: Int?
+    var exerciseId: String
+    var exerciseName: String
+    var exerciseType: Int?
+    var sets: [SetExercise]?
 }
 
 struct SetExercise: Codable, Hashable {
-    let weight: Double?
-    let reps: Int?
-    let distance: Double?
-    let duration: Int?
+    var weight: Double?
+    var reps: Int?
+    var distance: Double?
+    var duration: Int?
 }
 
 struct AddProgressBody: Codable {

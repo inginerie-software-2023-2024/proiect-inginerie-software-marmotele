@@ -10,6 +10,8 @@ import SwiftUI
 
 struct AddProgressScreen: View {
     @StateObject var viewModel: AddProgressViewModel
+    @State private var showingAlert = false
+    @State var setsNo: String = ""
     @EnvironmentObject private var navigation: Navigation
     
     var body: some View {
@@ -43,25 +45,75 @@ struct AddProgressScreen: View {
                         .font(Font.system(size: 16))
                 }.padding(.bottom, 20)
                 
-                switch viewModel.workoutType.value {
-                case .weightLifting:
-                    WeightLiftingForm(nbOfExercises: 3,
-                                      workoutName: viewModel.workout.workoutName,
-                                      nbOfSets: $viewModel.nbOfSets,
-                                      nbOfReps: $viewModel.nbOfReps,
-                                      weight: $viewModel.weight)
+                ForEach(0..<viewModel.exercises.count, id: \.self) { index in
+                    Text(viewModel.exercises[index].exerciseName)
+                        .font(Font.system(size: 24))
+                        .foregroundColor(CustomColors.button)
+                        .padding(.bottom, 16)
                     
-                case .calistenics:
-                    CalistenicsForm(nbOfExercises: 3,
-                                    workoutName: viewModel.workout.workoutName,
-                                    nbOfSets: $viewModel.nbOfSets,
-                                    nbOfReps: $viewModel.nbOfReps)
-                    
-                case .cardio:
-                    CardioForm(nbOfExercises: 3,
-                               workoutName: viewModel.workout.workoutName,
-                               distance: $viewModel.distance,
-                               duration: $viewModel.duration)
+                    ScrollView(showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text("Number of sets:")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            TextField("", text: $setsNo)
+                                .onChange(of: setsNo) { newValue in
+                                    if let indexSets = viewModel.progressNew.firstIndex(where: { $0.exerciseId == viewModel.exercises[index].exerciseId }) {
+                                        viewModel.progressNew[indexSets].setsNo = Int(newValue)
+                                    }
+                                    let _ = print(setsNo)
+                                }
+                                .foregroundColor(.black)
+                                .textFieldStyle(.plain)
+                                .padding(.vertical, 8)
+                                .frame(maxWidth: .infinity)
+                                .background(.white).cornerRadius(10)
+                                .padding(.bottom, 12)
+                            
+                            Button {
+                               if let indexSets = viewModel.progressNew.firstIndex(where: { $0.exerciseId == viewModel.exercises[index].exerciseId }) {
+                                   switch viewModel.exercises[index].exerciseType {
+                                   case 1:
+                                       let modal = CardioForm(exercise: viewModel.exercises[index],
+                                                         index: viewModel.progressNew[indexSets].setsNo,
+                                                         progressNew: $viewModel.progressNew).asDestination()
+                                       navigation.presentModal(modal,
+                                                              animated: true,
+                                                              completion: nil,
+                                                              controllerConfig: nil)
+                                   case 2:
+                                      let modal = WeightLiftingForm(exercise: viewModel.exercises[index],
+                                                               index: viewModel.progressNew[indexSets].setsNo,
+                                                               progressNew: $viewModel.progressNew).asDestination()
+                                       navigation.presentModal(modal,
+                                                              animated: true,
+                                                              completion: nil,
+                                                              controllerConfig: nil)
+                                   case 3:
+                                      let modal = CalistenicsForm(exercise: viewModel.exercises[index],
+                                                             index: viewModel.progressNew[indexSets].setsNo,
+                                                             progressNew: $viewModel.progressNew).asDestination()
+                                       navigation.presentModal(modal,
+                                                              animated: true,
+                                                              completion: nil,
+                                                              controllerConfig: nil)
+                                   default:
+                                       break
+                                   }
+                               }
+                            } label: {
+                               Text("Add new progress")
+                                    .frame(height: 32)
+                                    .frame(maxWidth: .infinity)
+                                    .background(CustomColors.buttonDark)
+                                    .cornerRadius(4)
+                                    .foregroundColor(CustomColors.backgroundDark)
+                                    .padding(.bottom, 20)
+                            }
+
+                        }
+                    }
                 }
                 
                 Spacer()
@@ -80,184 +132,235 @@ struct AddProgressScreen: View {
                     switch addProgressCompletion {
                     case .failure(let error):
                         viewModel.errorMessage = error.localizedDescription
-                        navigation.pop(animated: true)
+                        self.showingAlert = true
                         print("Login failed: \(error)")
                     case .addProgress:
                         navigation.pop(animated: true)
                     }
                 }
             }.padding(.horizontal, 20)
+        }.alert(isPresented: $showingAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text("There was an error, please try again"),
+                dismissButton: .default(Text("Retry")) {
+                    self.showingAlert = false
+                }
+            )
         }
     }
 }
 
 struct CardioForm: View {
-    var nbOfExercises: Int
-    var workoutName: String
-    @Binding var distance: String
-    @Binding var duration: String
+    var exercise: Exercise
+    var index: Int?
+    @Binding var progressNew: [Exercise]
+    @State var distances: [String]
+    @State var durations: [String]
+    
+    init(exercise: Exercise, index: Int?, progressNew: Binding<[Exercise]>) {
+          self.exercise = exercise
+          self.index = index
+          self._progressNew = progressNew
+          self.distances = Array(repeating: "", count: index ?? 0)
+          self.durations = Array(repeating: "", count: index ?? 0)
+      }
     
     var body: some View {
-        Text(workoutName)
-            .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.button)
-            .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 0) {
-                ForEach(0..<nbOfExercises) { exercise in
-                    Text("Exercise \(exercise+1):")
-                        .underline()
-                        .font(Font.system(size: 20))
-                        .foregroundColor(.white)
-                        .padding(.bottom, 16)
-                    
+            if let index = index {
+                ForEach(0..<index, id: \.self) { setIndex in
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Distance:")
-                            .font(.system(size: 16))
+                        Text("Set \(setIndex + 1):")
+                            .underline()
+                            .font(Font.system(size: 20))
                             .foregroundColor(.white)
+                            .padding(.bottom, 16)
                         
-                        TextField("", text: $distance)
-                            .foregroundColor(CustomColors.backgroundDark)
-                            .textFieldStyle(.plain)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .background(.white).cornerRadius(10)
-                    }.padding(.bottom, 12)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Duration:")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Distance:")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            TextField("", text: $distances[setIndex])
+                              .onChange(of: distances[setIndex]) { newValue in
+                                  if setIndex < distances.count {
+                                      distances[setIndex] = newValue
+                                      if let index = progressNew.firstIndex(where: { $0.exerciseId == exercise.exerciseId }) {
+                                          progressNew[index].sets?[setIndex].reps = Int(newValue)
+                                      }
+                                  }
+                              }
+                                .foregroundColor(CustomColors.backgroundDark)
+                                .textFieldStyle(.plain)
+                                .padding(.vertical, 8)
+                                .frame(maxWidth: .infinity)
+                                .background(.white).cornerRadius(10)
+                        }.padding(.bottom, 12)
                         
-                        TextField("", text: $duration)
-                            .foregroundColor(CustomColors.backgroundDark)
-                            .textFieldStyle(.plain)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .background(.white).cornerRadius(10)
-                    }.padding(.bottom, 20)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Duration:")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            TextField("", text: $durations[setIndex])
+                              .onChange(of: durations[setIndex]) { newValue in
+                                  if setIndex < durations.count {
+                                      durations[setIndex] = newValue
+                                      if let index = progressNew.firstIndex(where: { $0.exerciseId == exercise.exerciseId }) {
+                                          progressNew[index].sets?[setIndex].reps = Int(newValue)
+                                      }
+                                  }
+                              }
+                                .foregroundColor(CustomColors.backgroundDark)
+                                .textFieldStyle(.plain)
+                                .padding(.vertical, 8)
+                                .frame(maxWidth: .infinity)
+                                .background(.white).cornerRadius(10)
+                        }.padding(.bottom, 20)
+                    }
                 }
             }
-        }
+        }.padding(.all, 20)
+            .background(CustomColors.backgroundDark)
+            .cornerRadius(20)
+            .padding(.horizontal, 20)
     }
 }
 
 struct WeightLiftingForm: View {
-    var nbOfExercises: Int
-    var workoutName: String
-    @Binding var nbOfSets: String
-    @Binding var nbOfReps: String
-    @Binding var weight: String
+    var exercise: Exercise
+    var index: Int?
+    @Binding var progressNew: [Exercise]
+    @State var nbOfReps: [String]
+    @State var weight: [String]
+    
+    init(exercise: Exercise, index: Int?, progressNew: Binding<[Exercise]>) {
+           self.exercise = exercise
+           self.index = index
+           self._progressNew = progressNew
+           self.nbOfReps = Array(repeating: "", count: index ?? 0)
+           self.weight = Array(repeating: "", count: index ?? 0)
+       }
     
     var body: some View {
-        Text(workoutName)
-            .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.button)
-            .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 0) {
-                ForEach(0..<nbOfExercises) { exercise in
-                    Text("Exercise \(exercise+1):")
-                        .underline()
-                        .font(Font.system(size: 20))
-                        .foregroundColor(.white)
-                        .padding(.bottom, 16)
-                    
+            if let index = index {
+                ForEach(0..<index, id: \.self) { setIndex in
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Number of sets:")
-                            .font(.system(size: 16))
+                        Text("Set \(setIndex + 1):")
+                            .underline()
+                            .font(Font.system(size: 20))
                             .foregroundColor(.white)
+                            .padding(.bottom, 16)
                         
-                        TextField("", text: $nbOfSets)
-                            .foregroundColor(.black)
-                            .textFieldStyle(.plain)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .background(.white).cornerRadius(10)
-                    }.padding(.bottom, 12)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Number of reps:")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Number of reps:")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            TextField("", text: $nbOfReps[setIndex])
+                              .onChange(of: nbOfReps[setIndex]) { newValue in
+                                  if setIndex < nbOfReps.count {
+                                      nbOfReps[setIndex] = newValue
+                                      if let index = progressNew.firstIndex(where: { $0.exerciseId == exercise.exerciseId }) {
+                                          progressNew[index].sets?[setIndex].reps = Int(newValue)
+                                      }
+                                  }
+                              }
+                                .foregroundColor(.black)
+                                .textFieldStyle(.plain)
+                                .padding(.vertical, 8)
+                                .frame(maxWidth: .infinity)
+                                .background(.white).cornerRadius(10)
+                        }.padding(.bottom, 12)
                         
-                        TextField("", text: $nbOfReps)
-                            .foregroundColor(.black)
-                            .textFieldStyle(.plain)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .background(.white).cornerRadius(10)
-                    }.padding(.bottom, 12)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Weight:")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
-                        
-                        TextField("", text: $weight)
-                            .foregroundColor(.black)
-                            .textFieldStyle(.plain)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .background(.white).cornerRadius(10)
-                    }.padding(.bottom, 20)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Weight:")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            TextField("", text: $weight[setIndex])
+                              .onChange(of: weight[setIndex]) { newValue in
+                                  if setIndex < weight.count {
+                                      weight[setIndex] = newValue
+                                      if let index = progressNew.firstIndex(where: { $0.exerciseId == exercise.exerciseId }) {
+                                          progressNew[index].sets?[setIndex].reps = Int(newValue)
+                                      }
+                                  }
+                              }
+                                .foregroundColor(.black)
+                                .textFieldStyle(.plain)
+                                .padding(.vertical, 8)
+                                .frame(maxWidth: .infinity)
+                                .background(.white).cornerRadius(10)
+                        }.padding(.bottom, 20)
+                    }
                 }
             }
-        }
+        }.padding(.all, 20)
+        .background(CustomColors.backgroundDark)
+            .cornerRadius(20)
+            .padding(.horizontal, 20)
     }
 }
 
+
 struct CalistenicsForm: View {
-    var nbOfExercises: Int
-    var workoutName: String
-    @Binding var nbOfSets: String
-    @Binding var nbOfReps: String
+    var exercise: Exercise
+    var index: Int?
+    @Binding var progressNew: [Exercise]
+    @State var nbOfReps: [String]
+    
+    init(exercise: Exercise, index: Int?, progressNew: Binding<[Exercise]>) {
+          self.exercise = exercise
+          self.index = index
+          self._progressNew = progressNew
+          self.nbOfReps = Array(repeating: "", count: index ?? 0)
+      }
     
     var body: some View {
-        Text(workoutName)
-            .font(Font.system(size: 24))
-            .foregroundColor(CustomColors.button)
-            .padding(.bottom, 16)
         
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 0) {
-                ForEach(0..<nbOfExercises) { exercise in
-                    Text("Exercise \(exercise+1):")
-                        .underline()
-                        .font(Font.system(size: 20))
-                        .foregroundColor(.white)
-                        .padding(.bottom, 16)
-                    
+            if let index = index {
+                ForEach(0..<index, id: \.self) { setIndex in
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Number of sets:")
-                            .font(.system(size: 16))
+                        Text("Set \(setIndex + 1):")
+                            .underline()
+                            .font(Font.system(size: 20))
                             .foregroundColor(.white)
+                            .padding(.bottom, 16)
                         
-                        TextField("", text: $nbOfSets)
-                            .foregroundColor(.black)
-                            .textFieldStyle(.plain)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .background(.white).cornerRadius(10)
-                    }.padding(.bottom, 12)
-                    
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Number of reps:")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
-                        
-                        TextField("", text: $nbOfReps)
-                            .foregroundColor(CustomColors.backgroundDark)
-                            .textFieldStyle(.plain)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .background(.white).cornerRadius(10)
-                    }.padding(.bottom, 20)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Number of reps:")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            TextField("", text: $nbOfReps[setIndex])
+                              .onChange(of: nbOfReps[setIndex]) { newValue in
+                                  if setIndex < nbOfReps.count {
+                                      nbOfReps[setIndex] = newValue
+                                      if let index = progressNew.firstIndex(where: { $0.exerciseId == exercise.exerciseId }) {
+                                          progressNew[index].sets?[setIndex].reps = Int(newValue)
+                                      }
+                                  }
+                              }
+                                .foregroundColor(.black)
+                                .textFieldStyle(.plain)
+                                .padding(.vertical, 8)
+                                .frame(maxWidth: .infinity)
+                                .background(.white).cornerRadius(10)
+                        }.padding(.bottom, 12)
+                    }
                 }
             }
-        }
+        }.padding(.all, 20)
+            .background(CustomColors.backgroundDark)
+            .cornerRadius(20)
+            .padding(.horizontal, 20)
     }
 }
+
 

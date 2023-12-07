@@ -12,7 +12,7 @@ import SwiftyJSON
 class AddProgressAPI {
     func getProgress(id: String, token: String) -> Future<AddProgress, Error> {
         Future { promise in
-            var urlComponents = URLComponents(string: "https://139e-86-124-16-55.ngrok-free.app/UserSplit/AddProgress")
+            var urlComponents = URLComponents(string: "https://0602-82-208-174-16.ngrok-free.app/UserSplit/AddProgress")
             
             urlComponents?.queryItems = [
                 URLQueryItem(name: "id", value: "\(id)")
@@ -46,56 +46,53 @@ class AddProgressAPI {
                      workoutId: String,
                      token: String) -> Future<AddProgress, Error> {
         Future { promise in
-            var urlComponents = URLComponents(string: "https://139e-86-124-16-55.ngrok-free.app/UserSplit/AddProgress")
+            let url = URL(string: "https://0602-82-208-174-16.ngrok-free.app/UserSplit/AddProgress")
 
-            // Create the body object
-            let sets = [SetExerciseBody(Reps: 3, Weight: 3, Duration: 3, Distance: 3)]
-            let ex = [ExerciseBody(ExerciseId: "28b5ddd1-8f32-43fe-accc-1898475e3abc",
-                                   ExerciseName: "Dip", SetsNo: 3, ExerciseType: 3, Sets: sets)]
+            let ex = exercises.map { exercise in
+                ExerciseBody(ExerciseId: exercise.exerciseId,
+                             ExerciseName: exercise.exerciseName,
+                             SetsNo: exercise.setsNo,
+                             ExerciseType: exercise.exerciseType,
+                             Sets: exercise.sets?.map { set in
+                                SetExerciseBody(Reps: set.reps, Weight: set.weight, Duration: set.duration, Distance: set.distance)
+                             })
+            }
             let body = AddProgressBody(SplitId: splitId,
                                        UserId: userId,
                                        WorkoutId: workoutId,
                                        Date: date,
                                        Exercises: ex)
-            
+
             do {
-                // Serialize the body object into a JSON string
                 let bodyData = try JSONEncoder().encode(body)
-                let bodyString = String(data: bodyData, encoding: .utf8)
-                
-                // Add the JSON string as a single query parameter
-                urlComponents?.queryItems = [URLQueryItem(name: "body", value: bodyString)]
+
+                var urlRequest = URLRequest(url: url!)
+                urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+                urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+                urlRequest.httpMethod = "POST"
+                urlRequest.httpBody = bodyData
+
+                let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                    if let error = error {
+                        promise(.failure(error))
+                    } else {
+                        do {
+                            let progress = try JSONDecoder().decode(AddProgress.self, from: data!)
+                            promise(.success(progress))
+                        } catch {
+                            promise(.failure(error))
+                        }
+                    }
+                }
+                dataTask.resume()
             } catch {
                 // Handle error
             }
-            
-            guard let url = urlComponents?.url else {
-                // Handle error
-                return
-            }
-            
-            var urlRequest = URLRequest(url: url)
-            urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
-            urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-            
-            urlRequest.httpMethod = "POST"
-            
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-                if let error = error {
-                    promise(.failure(error))
-                } else {
-                    do {
-                        let progress = try JSONDecoder().decode(AddProgress.self, from: data!)
-                        promise(.success(progress))
-                    } catch {
-                        promise(.failure(error))
-                    }
-                }
-            }
-            dataTask.resume()
         }
     }
+
     
 //    func addProgress(splitId: String,
 //                     date: String,

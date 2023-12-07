@@ -37,16 +37,15 @@ struct SeeProgressScreen: View {
                                     let vm = AddProgressViewModel(workout: viewModel.workout,
                                                                   splitId: viewModel.splitId,
                                                                   userId: viewModel.userId,
-                                                                  exercise: exercise)
+                                                                  exercises: exercises)
                                     navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
                                 } label: {
                                     AddProgressView(name: exercise.exerciseName,
-                                                    nbSets: exercise.setsNo,
-                                                    sets: exercise.sets) {
+                                                    nbSets: exercise.setsNo) {
                                         let vm = AddProgressViewModel(workout: viewModel.workout,
                                                                       splitId: viewModel.splitId,
                                                                       userId: viewModel.userId,
-                                                                      exercise: exercise)
+                                                                      exercises: exercises)
                                         navigation.dismissModal(animated: true) {
                                         }
                                         navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
@@ -78,7 +77,6 @@ struct SeeProgressScreen: View {
 struct AddProgressView: View {
     let name: String
     let nbSets: Int?
-    let sets: [SetExercise]?
     
     let handler: ()->()
     var body: some View {
@@ -102,54 +100,6 @@ struct AddProgressView: View {
                     Text("+")
                         .font(.system(size: 24))
                         .foregroundColor(CustomColors.buttonDark)
-                }
-            }
-            
-            if let sets = sets {
-                ForEach(sets, id:\.self) { set in
-                    if let distance = set.distance, let duration = set.duration {
-                        HStack(spacing: 0) {
-                            Text("Distance: \(distance)")
-                                .font(.system(size: 14))
-                                .foregroundColor(CustomColors.buttonDark)
-                            
-                            Spacer()
-                            
-                            Text("Duration: \(duration)")
-                                .font(.system(size: 14))
-                                .foregroundColor(CustomColors.buttonDark)
-                        }
-                    } else if let weight = set.weight, let nbSets = nbSets, let reps = set.reps {
-                        VStack(spacing: 8) {
-                            HStack(spacing: 0) {
-                                Text("Nb of sets: \(nbSets)")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(CustomColors.buttonDark)
-                                
-                                Spacer()
-                                
-                                Text("Nb of reps: \(reps)")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(CustomColors.buttonDark)
-                            }
-                            
-                            Text("Weight: \(weight)")
-                                .font(.system(size: 14))
-                                .foregroundColor(CustomColors.buttonDark)
-                        }
-                    } else if let nbSets = nbSets, let reps = set.reps {
-                        HStack(spacing: 0) {
-                            Text("Nb of sets: \(nbSets)")
-                                .font(.system(size: 14))
-                                .foregroundColor(CustomColors.buttonDark)
-                            
-                            Spacer()
-                            
-                            Text("Nb of reps: \(reps)")
-                                .font(.system(size: 14))
-                                .foregroundColor(CustomColors.buttonDark)
-                        }
-                    }
                 }
             }
         }
