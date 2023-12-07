@@ -23,7 +23,7 @@ class AddProgressService: BaseViewModel {
                      exercises: [Exercise],
                      userId: String,
                      workoutId: String,
-                     token: String) -> Future<AddProgress, Error> {
+                     token: String) -> Future<AddProgressBody, Error> {
         self.addProgressAPI.addProgress(splitId: splitId,
                                         date: date,
                                         exercises: exercises,

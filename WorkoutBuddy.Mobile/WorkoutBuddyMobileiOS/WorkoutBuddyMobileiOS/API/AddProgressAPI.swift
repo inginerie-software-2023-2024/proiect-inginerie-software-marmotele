@@ -44,9 +44,8 @@ class AddProgressAPI {
                      exercises: [Exercise],
                      userId: String,
                      workoutId: String,
-                     token: String) -> Future<AddProgress, Error> {
+                     token: String) -> Future<AddProgressBody, Error> {
         Future { promise in
-            let url = URL(string: "https://0602-82-208-174-16.ngrok-free.app/UserSplit/AddProgress")
 
             let ex = exercises.map { exercise in
                 ExerciseBody(ExerciseId: exercise.exerciseId,
@@ -60,35 +59,43 @@ class AddProgressAPI {
             let body = AddProgressBody(SplitId: splitId,
                                        UserId: userId,
                                        WorkoutId: workoutId,
-                                       Date: date,
-                                       Exercises: ex)
-
+                                       Date: nil,
+                                       Exercises: nil)
+            
             do {
-                let bodyData = try JSONEncoder().encode(body)
-
-                var urlRequest = URLRequest(url: url!)
-                urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-                urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
-                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-
-                urlRequest.httpMethod = "POST"
-                urlRequest.httpBody = bodyData
-
-                let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-                    if let error = error {
-                        promise(.failure(error))
-                    } else {
-                        do {
-                            let progress = try JSONDecoder().decode(AddProgress.self, from: data!)
-                            promise(.success(progress))
-                        } catch {
+                let exEncoded = try JSONEncoder().encode(ex)
+                let json = String(data: exEncoded, encoding: String.Encoding.utf8)
+                let url = URL(string: "https://0602-82-208-174-16.ngrok-free.app/UserSplit/AddProgress?Exercises=\(json)")
+                
+                do {
+                    let bodyData = try JSONEncoder().encode(body)
+                    
+                    var urlRequest = URLRequest(url: url!)
+                    urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+                    urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
+                    urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                    
+                    urlRequest.httpMethod = "POST"
+                    urlRequest.httpBody = bodyData
+                    
+                    let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                        if let error = error {
                             promise(.failure(error))
+                        } else {
+                            do {
+                                let progress = try JSONDecoder().decode(AddProgressBody.self, from: data!)
+                                promise(.success(progress))
+                            } catch {
+                                promise(.failure(error))
+                            }
                         }
                     }
+                    dataTask.resume()
+                } catch {
+                    promise(.failure(error))
                 }
-                dataTask.resume()
             } catch {
-                // Handle error
+                promise(.failure(error))
             }
         }
     }

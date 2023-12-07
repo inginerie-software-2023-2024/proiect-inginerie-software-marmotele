@@ -34,7 +34,7 @@ struct AddProgressBody: Codable {
     let SplitId: String
     let UserId: String
     let WorkoutId: String
-    let Date: String
+    let Date: String?
     let Exercises: [ExerciseBody]?
 }
 
