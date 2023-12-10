@@ -17,8 +17,8 @@ struct AddProgress: Codable {
 
 struct Exercise: Codable, Hashable {
     var setsNo: Int?
-    var exerciseId: String
-    var exerciseName: String
+    let exerciseId: String
+    let exerciseName: String
     var exerciseType: Int?
     var sets: [SetExercise]?
 }

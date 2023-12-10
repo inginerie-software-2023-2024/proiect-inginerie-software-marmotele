@@ -34,21 +34,20 @@ struct SeeProgressScreen: View {
                                 Button {
                                     navigation.dismissModal(animated: true) {
                                     }
-                                    let vm = AddProgressViewModel(workout: viewModel.workout,
-                                                                  splitId: viewModel.splitId,
-                                                                  userId: viewModel.userId,
-                                                                  exercises: exercises)
-                                    navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
+//                                    let vm = AddProgressViewModel(workout: viewModel.workout,
+//                                                                  splitId: viewModel.splitId,
+//                                                                  userId: viewModel.userId,
+//                                                                  exercises: exercises)
+//                                    navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
+                                    let vm = SplitHistoryViewModel(workout: viewModel.workout)
+                                    navigation.push(SplitHistoryScreen(viewModel: vm).asDestination(), animated: true)
                                 } label: {
                                     AddProgressView(name: exercise.exerciseName,
                                                     nbSets: exercise.setsNo) {
-                                        let vm = AddProgressViewModel(workout: viewModel.workout,
-                                                                      splitId: viewModel.splitId,
-                                                                      userId: viewModel.userId,
-                                                                      exercises: exercises)
+                                        let vm = SplitHistoryViewModel(workout: viewModel.workout)
                                         navigation.dismissModal(animated: true) {
                                         }
-                                        navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
+                                        navigation.push(SplitHistoryScreen(viewModel: vm).asDestination(), animated: true)
                                     }
                                 }
                             }

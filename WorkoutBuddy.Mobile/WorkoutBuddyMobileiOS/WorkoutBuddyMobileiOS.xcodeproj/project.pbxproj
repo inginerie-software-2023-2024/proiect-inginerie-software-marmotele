@@ -22,6 +22,11 @@
 		9B2C82072B18EFCC00719BE3 /* AddProgressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C82062B18EFCC00719BE3 /* AddProgressService.swift */; };
 		9B2C820A2B18FCB200719BE3 /* SeeProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C82092B18FCB200719BE3 /* SeeProgressViewModel.swift */; };
 		9B2C820C2B18FCF800719BE3 /* SeeProgressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2C820B2B18FCF800719BE3 /* SeeProgressScreen.swift */; };
+		9B7B511F2B2653D300D3A622 /* SplitHistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B511E2B2653D300D3A622 /* SplitHistoryScreen.swift */; };
+		9B7B51212B2653FC00D3A622 /* SplitHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B51202B2653FC00D3A622 /* SplitHistoryViewModel.swift */; };
+		9B7B51232B2654BF00D3A622 /* SplitHistoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B51222B2654BF00D3A622 /* SplitHistoryAPI.swift */; };
+		9B7B51252B26553A00D3A622 /* SplitHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B51242B26553A00D3A622 /* SplitHistoryService.swift */; };
+		9B7B51272B2655CC00D3A622 /* SplitHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B51262B2655CC00D3A622 /* SplitHistory.swift */; };
 		9B7B5B182AE3170C00F4E9E1 /* Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B172AE3170C00F4E9E1 /* Split.swift */; };
 		9B7B5B212AE323A800F4E9E1 /* AddProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */; };
 		9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCFEEC22AE2F5E100123048 /* RootView.swift */; };
@@ -70,6 +75,11 @@
 		9B2C82062B18EFCC00719BE3 /* AddProgressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgressService.swift; sourceTree = "<group>"; };
 		9B2C82092B18FCB200719BE3 /* SeeProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeProgressViewModel.swift; sourceTree = "<group>"; };
 		9B2C820B2B18FCF800719BE3 /* SeeProgressScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeProgressScreen.swift; sourceTree = "<group>"; };
+		9B7B511E2B2653D300D3A622 /* SplitHistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistoryScreen.swift; sourceTree = "<group>"; };
+		9B7B51202B2653FC00D3A622 /* SplitHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistoryViewModel.swift; sourceTree = "<group>"; };
+		9B7B51222B2654BF00D3A622 /* SplitHistoryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistoryAPI.swift; sourceTree = "<group>"; };
+		9B7B51242B26553A00D3A622 /* SplitHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistoryService.swift; sourceTree = "<group>"; };
+		9B7B51262B2655CC00D3A622 /* SplitHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistory.swift; sourceTree = "<group>"; };
 		9B7B5B172AE3170C00F4E9E1 /* Split.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Split.swift; sourceTree = "<group>"; };
 		9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProgress.swift; sourceTree = "<group>"; };
 		9BCFEEBF2AE2F5E100123048 /* WorkoutBuddyMobileiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutBuddyMobileiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +135,7 @@
 				9B2C81E42B15E5C100719BE3 /* UserAPI.swift */,
 				9B2C81FD2B167BE000719BE3 /* SplitListAPI.swift */,
 				9B2C82042B18EF1D00719BE3 /* AddProgressAPI.swift */,
+				9B7B51222B2654BF00D3A622 /* SplitHistoryAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -145,6 +156,23 @@
 				9B2C81F72B16105000719BE3 /* LaunchScreen.storyboard */,
 			);
 			path = Splashscreen;
+			sourceTree = "<group>";
+		};
+		9B7B511D2B2653B200D3A622 /* SplitHistory */ = {
+			isa = PBXGroup;
+			children = (
+				9B7B511E2B2653D300D3A622 /* SplitHistoryScreen.swift */,
+				9B7B51202B2653FC00D3A622 /* SplitHistoryViewModel.swift */,
+			);
+			path = SplitHistory;
+			sourceTree = "<group>";
+		};
+		9B7B51282B265EC500D3A622 /* Trash */ = {
+			isa = PBXGroup;
+			children = (
+				9BCFEEED2AE2F8F000123048 /* AddProgress */,
+			);
+			path = Trash;
 			sourceTree = "<group>";
 		};
 		9BCFEEB62AE2F5E100123048 = {
@@ -196,6 +224,7 @@
 				9BCFEED32AE2F6E400123048 /* UserDefaultsService.swift */,
 				9B2C81FF2B167C6400719BE3 /* SplitListService.swift */,
 				9B2C82062B18EFCC00719BE3 /* AddProgressService.swift */,
+				9B7B51242B26553A00D3A622 /* SplitHistoryService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -205,8 +234,9 @@
 			children = (
 				9BCFEEDC2AE2F7F200123048 /* MyCollection.swift */,
 				9B7B5B172AE3170C00F4E9E1 /* Split.swift */,
-				9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */,
 				9B2C81E92B15E67C00719BE3 /* User.swift */,
+				9B7B5B202AE323A800F4E9E1 /* AddProgress.swift */,
+				9B7B51262B2655CC00D3A622 /* SplitHistory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -220,7 +250,7 @@
 				9BCFEEDE2AE2F7FC00123048 /* Login */,
 				9BCFEEE32AE2F85000123048 /* Home */,
 				9BCFEEE82AE2F89900123048 /* SplitDetails */,
-				9BCFEEED2AE2F8F000123048 /* AddProgress */,
+				9B7B511D2B2653B200D3A622 /* SplitHistory */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -275,6 +305,7 @@
 		9BCFEEF22AE2F94E00123048 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9B7B51282B265EC500D3A622 /* Trash */,
 				9BCFEEC62AE2F5E600123048 /* Assets.xcassets */,
 				9BCFEEF32AE2F96700123048 /* Navigation.swift */,
 				9BCFEEF52AE2F98600123048 /* BaseViewModel.swift */,
@@ -376,20 +407,25 @@
 				9B2C81ED2B160A4300719BE3 /* OnBoardingViewModel.swift in Sources */,
 				9B2C81EA2B15E67C00719BE3 /* User.swift in Sources */,
 				9B2C81FC2B1670AE00719BE3 /* View+Ext.swift in Sources */,
+				9B7B51272B2655CC00D3A622 /* SplitHistory.swift in Sources */,
 				9BCFEEEF2AE2F90300123048 /* AddProgressScreen.swift in Sources */,
+				9B7B51232B2654BF00D3A622 /* SplitHistoryAPI.swift in Sources */,
 				9BCFEEEA2AE2F8BD00123048 /* SplitDetailsViewModel.swift in Sources */,
 				9BCFEED92AE2F77A00123048 /* StartViewModel.swift in Sources */,
 				9B2C81F62B16103900719BE3 /* LaunchscreenRepresentable.swift in Sources */,
 				9BCFEEE72AE2F88800123048 /* HomeViewModel.swift in Sources */,
 				9BCFEED42AE2F6E400123048 /* UserDefaultsService.swift in Sources */,
 				9BCFEEF62AE2F98600123048 /* BaseViewModel.swift in Sources */,
+				9B7B51212B2653FC00D3A622 /* SplitHistoryViewModel.swift in Sources */,
 				9BCFEEF12AE2F92000123048 /* AddProgressViewModel.swift in Sources */,
 				9BCFEEE22AE2F83900123048 /* LoginScreen.swift in Sources */,
 				9BCFEEDD2AE2F7F200123048 /* MyCollection.swift in Sources */,
+				9B7B511F2B2653D300D3A622 /* SplitHistoryScreen.swift in Sources */,
 				9B7B5B212AE323A800F4E9E1 /* AddProgress.swift in Sources */,
 				9BCFEEDB2AE2F7D900123048 /* StartScreen.swift in Sources */,
 				9BCFEEE02AE2F80F00123048 /* LoginViewModel.swift in Sources */,
 				9BCFEEFA2AE2F9BE00123048 /* SceneDelegate.swift in Sources */,
+				9B7B51252B26553A00D3A622 /* SplitHistoryService.swift in Sources */,
 				9BCFEEE52AE2F87100123048 /* HomeScreen.swift in Sources */,
 				9BCFEEEC2AE2F8D600123048 /* SplitDetailsScreen.swift in Sources */,
 				9B2C820A2B18FCB200719BE3 /* SeeProgressViewModel.swift in Sources */,

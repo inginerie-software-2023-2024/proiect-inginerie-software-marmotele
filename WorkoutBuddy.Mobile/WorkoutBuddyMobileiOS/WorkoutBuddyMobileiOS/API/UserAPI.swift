@@ -12,7 +12,7 @@ import SwiftyJSON
 class UserAPI {
     func login(email: String, password: String) -> Future<User, Error> {
         Future { promise in
-            let urlComponents = URLComponents(string: "https://0602-82-208-174-16.ngrok-free.app/UserAccount/login")
+            let urlComponents = URLComponents(string: "https://4bd5-86-124-16-55.ngrok-free.app/UserAccount/login")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             urlRequest.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")

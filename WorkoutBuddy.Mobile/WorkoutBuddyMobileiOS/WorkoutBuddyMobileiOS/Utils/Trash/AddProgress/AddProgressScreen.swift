@@ -313,6 +313,7 @@ struct CalistenicsForm: View {
     var index: Int?
     @Binding var progressNew: [Exercise]
     @State var nbOfReps: [String]
+    @State var reps: String = ""
     
     init(exercise: Exercise, index: Int?, progressNew: Binding<[Exercise]>) {
           self.exercise = exercise
@@ -339,14 +340,15 @@ struct CalistenicsForm: View {
                                 .foregroundColor(.white)
                             
                             TextField("", text: $nbOfReps[setIndex])
-                              .onChange(of: nbOfReps[setIndex]) { newValue in
-                                  if setIndex < nbOfReps.count {
-                                      nbOfReps[setIndex] = newValue
-                                      if let index = progressNew.firstIndex(where: { $0.exerciseId == exercise.exerciseId }) {
-                                          progressNew[index].sets?[setIndex].reps = Int(newValue)
-                                      }
-                                  }
-                              }
+                                .onChange(of: nbOfReps[setIndex]) { newValue in
+                                    if setIndex < nbOfReps.count {
+                                        nbOfReps[setIndex] = newValue
+                                        if let index = progressNew.firstIndex(where: { $0.exerciseId == exercise.exerciseId }) {
+                                            progressNew[index].sets?[setIndex].reps = Int(newValue)
+                                            print(progressNew)
+                                        }
+                                    }
+                                }
                                 .foregroundColor(.black)
                                 .textFieldStyle(.plain)
                                 .padding(.vertical, 8)
