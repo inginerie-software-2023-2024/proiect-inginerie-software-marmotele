@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import FirebaseAuth
-import Firebase
 
 struct RootView: View {
     

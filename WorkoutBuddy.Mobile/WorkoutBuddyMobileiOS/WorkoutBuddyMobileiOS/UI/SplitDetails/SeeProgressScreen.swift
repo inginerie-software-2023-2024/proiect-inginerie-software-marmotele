@@ -29,32 +29,32 @@ struct SeeProgressScreen: View {
                             .padding(.bottom, 8)
                     
                     ScrollView(showsIndicators: false) {
-                        if let exercises = progressDetails.exercises {
-                            ForEach(exercises, id: \.self) { exercise in
-                                Button {
-                                    navigation.dismissModal(animated: true) {
-                                    }
-//                                    let vm = AddProgressViewModel(workout: viewModel.workout,
-//                                                                  splitId: viewModel.splitId,
-//                                                                  userId: viewModel.userId,
-//                                                                  exercises: exercises)
-//                                    navigation.push(AddProgressScreen(viewModel: vm).asDestination(), animated: true)
-                                    let vm = SplitHistoryViewModel(workout: viewModel.workout)
-                                    navigation.push(SplitHistoryScreen(viewModel: vm).asDestination(), animated: true)
-                                } label: {
+                        VStack(spacing: 0) {
+                            if let exercises = progressDetails.exercises {
+                                ForEach(exercises, id: \.self) { exercise in
                                     AddProgressView(name: exercise.exerciseName,
-                                                    nbSets: exercise.setsNo) {
-                                        let vm = SplitHistoryViewModel(workout: viewModel.workout)
-                                        navigation.dismissModal(animated: true) {
-                                        }
-                                        navigation.push(SplitHistoryScreen(viewModel: vm).asDestination(), animated: true)
-                                    }
+                                                    nbSets: exercise.setsNo)
                                 }
+                            } else {
+                                Text("At the moment you haven't any progress for this workout.")
+                                    .font(Font.system(size: 20))
+                                    .foregroundColor(CustomColors.buttonDark)
                             }
-                        } else {
-                            Text("At the moment you haven't any progress for this workout.")
-                                .font(Font.system(size: 20))
-                                .foregroundColor(CustomColors.buttonDark)
+                            
+                            Spacer()
+                            
+                            Button {
+                                navigation.dismissModal(animated: true, completion: nil)
+                                let vm = SplitHistoryViewModel(workout: viewModel.workout)
+                                navigation.push(SplitHistoryScreen(viewModel: vm).asDestination(), animated: true)
+                            } label: {
+                                Text("See workout history >")
+                                    .font(Font.system(size: 16))
+                                    .foregroundColor(.white)
+                                    .padding(.all, 12)
+                                    .background(CustomColors.buttonDark)
+                                    .padding(.vertical, 12)
+                            }
                         }
                     }.padding(.vertical, 20)
                         .padding(.horizontal, 20)
@@ -77,7 +77,6 @@ struct AddProgressView: View {
     let name: String
     let nbSets: Int?
     
-    let handler: ()->()
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -92,14 +91,6 @@ struct AddProgressView: View {
                     .foregroundColor(CustomColors.buttonDark)
                 
                 Spacer()
-                
-                Button {
-                    handler()
-                } label: {
-                    Text("+")
-                        .font(.system(size: 24))
-                        .foregroundColor(CustomColors.buttonDark)
-                }
             }
         }
     }

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Firebase
 
 struct StartScreen: View {
     @ObservedObject var viewModel = StartViewModel()

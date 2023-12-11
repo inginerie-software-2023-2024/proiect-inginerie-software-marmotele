@@ -45,12 +45,10 @@ struct SplitDetailsScreen: View {
                         
                         Spacer()
                     }.padding(.vertical, 16)
-                        .padding(.horizontal, 20)
                     
                     Text(splitDetails.description)
                         .font(Font.system(size: 16))
                         .foregroundColor(CustomColors.buttonDark)
-                        .padding(.horizontal, 20)
                         .padding(.bottom, 12)
                     
                     Rectangle()
@@ -67,14 +65,13 @@ struct SplitDetailsScreen: View {
                                                               userId: splitDetails.iduser)
                                 navigation.presentModal(SeeProgressScreen(showModal: $showModal,
                                                                           viewModel: vm).asDestination(),
-                                                        animated: true) {
-                                } controllerConfig: { _ in
-                                }
+                                                        animated: true,
+                                                        completion: nil,
+                                                        controllerConfig: nil)
                             }
                         }
                     }.padding(.vertical, 20)
-                        .padding(.horizontal, 20)
-                }
+                }.padding(.horizontal, 20)
             }
         }
     }
@@ -97,7 +94,7 @@ struct WorkoutCardView: View {
             } label: {
                 Image(systemName: "chevron.down")
                     .resizable()
-                    .frame(width: 12, height: 12)
+                    .frame(width: 12, height: 8)
                     .foregroundColor(CustomColors.button)
             }
         }.padding(.all, 16)

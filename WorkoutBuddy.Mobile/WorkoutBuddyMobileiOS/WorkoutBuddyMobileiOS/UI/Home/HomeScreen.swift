@@ -44,7 +44,6 @@ struct HomeScreen: View {
                         }
                     }.padding(.top, 16)
                         .padding(.bottom, 12)
-                        .padding(.horizontal, 20)
                     
                     Rectangle()
                         .frame(height: 1)
@@ -65,9 +64,9 @@ struct HomeScreen: View {
                                 }
                             }
                         }
-                    }.padding(.horizontal, 20)
-                        .padding(.vertical, 16)
-                }.onReceive(viewModel.eventSubject) { eventSubject in
+                    }.padding(.vertical, 16)
+                }.padding(.horizontal, 20)
+                .onReceive(viewModel.eventSubject) { eventSubject in
                     switch eventSubject {
                     case .logout:
                         navigation.replaceNavigationStack([LoginScreen().asDestination()], animated: true)
