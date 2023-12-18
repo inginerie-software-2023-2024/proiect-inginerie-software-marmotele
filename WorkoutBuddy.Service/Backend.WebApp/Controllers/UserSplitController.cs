@@ -64,9 +64,6 @@ namespace Backend.WebApp.Controllers
             return Ok(model);
         }
 
-
-
-
         [HttpPost("GetDates")]
         public IActionResult GetDates([FromBody] DatesModel model)
         {
@@ -87,7 +84,6 @@ namespace Backend.WebApp.Controllers
         public IActionResult ExercisesProgress(Guid id, int index)
         {
             var model = service.GetProgress(id, CurrentUser.Id, index, Int32.Parse(Configuration["NoOfDates"]));
-            var x = service.ComputeNoOfPages(id, CurrentUser.Id, Int32.Parse(Configuration["NoOfDates"]));
 
             return Ok(model);
         }
@@ -97,7 +93,6 @@ namespace Backend.WebApp.Controllers
         {
             service.RemoveSplit(id, CurrentUser.Id);
             return Ok();
-            // return RedirectToAction("Index");
         }
     }
 }
