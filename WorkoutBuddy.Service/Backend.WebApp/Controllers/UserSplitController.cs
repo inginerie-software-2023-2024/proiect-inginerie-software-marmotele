@@ -45,11 +45,11 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpPost("AddProgress")]
-        public IActionResult AddProgress([FromQuery] string Exercises, [FromForm] UserWorkoutModel model)
+        public IActionResult AddProgress([FromQuery] string Exercises, [FromBody] UserWorkoutModel model)
         {
-            
             var ex = JsonConvert.DeserializeObject<List<UserExerciseModel>>(Exercises);
             model.UserId = CurrentUser.Id;
+            model.Date = DateTime.UtcNow;
             model.Exercises = ex;
             var splitId = service.AddProgress(model, 3);
             var splitModel = service.GetUserSplit(splitId, CurrentUser.Id);

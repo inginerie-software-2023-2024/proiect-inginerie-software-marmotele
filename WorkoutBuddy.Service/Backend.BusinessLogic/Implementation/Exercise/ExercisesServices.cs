@@ -28,16 +28,27 @@ namespace Backend.BusinessLogic.Exercises
             return exercisesNo / pageSize + 1;
         }*/
 
-        public async Task<List<ExerciseAsListItemModel>> GetExercises()
+        public async Task<List<ExerciseAsListItemModel>> GetExercises(IEnumerable<int>? MuscleGroup, string? Search)
         {
             var exercisesList = new List<ExerciseAsListItemModel>();
             var listOfExercises = await UnitOfWork.Exercises
                 .Get()
+                .Include(e => e.Idgroups)
                 .Where(e => e.IsPending != true)
                 .OrderBy(e => e.Name)
                 /*.Skip(pageSize * index)
                 .Take(pageSize)*/
                 .ToListAsync();
+
+            if(MuscleGroup is not null && MuscleGroup.Count() > 0)
+            {
+                listOfExercises = listOfExercises.Where(e => e.Idgroups.Any(id => MuscleGroup.Contains(id.Idgroup))).ToList();
+            }
+
+            if(!string.IsNullOrEmpty(Search))
+            {
+                listOfExercises = listOfExercises.Where(e => e.Name.Contains(Search)).ToList();
+            }
 
             if (listOfExercises == null)
             {

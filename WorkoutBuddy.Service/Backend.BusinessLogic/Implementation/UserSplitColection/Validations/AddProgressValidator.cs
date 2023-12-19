@@ -26,12 +26,12 @@ namespace Backend.BusinessLogic.Implementation.UserSplitColection
         }
 
         
-        private bool CheckDate(DateTime date)
+        private bool CheckDate(DateTime? date)
         {
-            var res = (DateTime.UtcNow - date).TotalDays;
+            var res = (DateTime.UtcNow - date)?.TotalDays;
             return res < 7;
         }
-        private bool SameDay(UserWorkoutModel model, DateTime date)
+        private bool SameDay(UserWorkoutModel model, DateTime? date)
         {
             
             var userWorkouts = uow.UserWorkouts.Get()
@@ -40,7 +40,7 @@ namespace Backend.BusinessLogic.Implementation.UserSplitColection
             var todaysWorkouts = new List<Guid>();
             foreach(var workout in userWorkouts)
             {
-                if ((date - workout.Date).Days == 0)
+                if ((date - workout.Date)?.Days == 0)
                     todaysWorkouts.Add(workout.Idworkout);
             }
             return !todaysWorkouts.Contains(model.WorkoutId);

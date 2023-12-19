@@ -12,6 +12,6 @@ namespace Backend.BusinessLogic.Implementation.UserSplitColection.Models
         public string ExerciseName { get; set; }
         public int? SetsNo { get; set; }
         public int? ExerciseType { get; set; }
-        public List<SetModel> Sets { get; set; }
+        public List<SetModel>? Sets { get; set; }
     }
 }

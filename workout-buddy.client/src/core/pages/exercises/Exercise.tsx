@@ -17,11 +17,13 @@ import axios from "axios";
 interface IExerciseProps {
   exercise: any;
   deleteHandler: (id: number) => void;
+  isStale?: boolean;
 }
 
 export default function Exercise({
   exercise,
   deleteHandler: deleteExercises,
+  isStale,
 }: IExerciseProps) {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
@@ -45,13 +47,16 @@ export default function Exercise({
     let res = window.confirm("Are you sure you want to delete this exercise?");
     if (res) {
       try {
-        await axios.post(`https://localhost:7132/Exercises/delete`, {
-          data: exerciseId,
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: AuthHeader(),
-          },
-        });
+        await axios.post(
+          `https://localhost:7132/Exercises/delete`,
+          exerciseId,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: AuthHeader(),
+            },
+          }
+        );
         deleteExercises(exerciseId);
       } catch (err) {}
     }
@@ -74,6 +79,7 @@ export default function Exercise({
           display="flex"
           flexDirection="column"
           justifyContent="space-between"
+          opacity={isStale ? "0.3" : "1"}
         >
           <Box
             rounded={"lg"}
