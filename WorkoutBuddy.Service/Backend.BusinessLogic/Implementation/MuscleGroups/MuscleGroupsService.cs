@@ -1,14 +1,8 @@
 ﻿using Backend.BusinessLogic.Base;
 using Backend.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using Backend.Entities.Enums;
 
-namespace Backend.BusinessLogic.Implementation.MuscleGroups
+namespace Backend.BusinessLogic.Implementation.MuscleGroupsService
 {
     public class MuscleGroupsService : BaseService
     {
@@ -18,7 +12,8 @@ namespace Backend.BusinessLogic.Implementation.MuscleGroups
 
         public async Task<IEnumerable<MuscleGroup>> GetMuscleGroupsAsync()
         {
-            return await UnitOfWork.MuscleGroups.Get().ToListAsync();
+            var muscleGroups = Enum.GetValues<MuscleGroups>().Select((m, i) => new MuscleGroup { Idgroup = i, Name = m.ToString() }).ToList();
+            return muscleGroups;
         }
     }
 }

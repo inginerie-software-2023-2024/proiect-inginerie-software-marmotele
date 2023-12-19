@@ -1,4 +1,4 @@
-﻿using Backend.BusinessLogic.Implementation.MuscleGroups;
+﻿using Backend.BusinessLogic.Implementation.MuscleGroupsService;
 using Backend.WebApp.Code.Base;
 using Microsoft.AspNetCore.Mvc;
 
