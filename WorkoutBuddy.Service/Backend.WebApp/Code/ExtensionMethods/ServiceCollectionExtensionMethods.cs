@@ -13,6 +13,7 @@ using Backend.BusinessLogic.Images;
 using Backend.BusinessLogic.Splits;
 using WorkoutBuddy.BusinessLogic.AdminDashboard;
 using Backend.BusinessLogic.Implementation.UserSplitColection;
+using Backend.BusinessLogic.Implementation.MuscleGroups;
 
 namespace Backend.WebApp.Code.ExtensionMethods
 {
@@ -35,6 +36,7 @@ namespace Backend.WebApp.Code.ExtensionMethods
             services.AddScoped<SplitService>();
             services.AddScoped<AdminService>();
             services.AddScoped<UserSplitService>();
+            services.AddScoped<MuscleGroupsService>();
             return services;
         }
 

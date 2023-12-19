@@ -86,6 +86,54 @@ namespace Backend.BusinessLogic.Account
             };
         }
 
+        public void AddWeight(AddWeightModel model, Guid currentUserId)
+        {
+            ExecuteInTransaction(uow =>
+            {
+                var validationRes = AddWeightValidator.Validate(model);
+                if (!validationRes.IsValid)
+                {
+                    var throwModel = GetWeightHistory(currentUserId);
+                    validationRes.ThenThrow(throwModel);
+                }
+
+
+                var user = uow.Users.Get().FirstOrDefault(u => u.Iduser == model.UserId);
+                var weight = Mapper.Map<AddWeightModel, UserWeightHistory>(model);
+                weight.IduserNavigation = user;
+                uow.UserWeightHistorys.Insert(weight);
+                uow.SaveChanges();
+            });
+        }
+
+        public AddWeightModel GetWeightHistory(Guid userId)
+        {
+            var user = UnitOfWork.Users.Get()
+                .Include(u => u.UserWeightHistories)
+                .FirstOrDefault(u => u.Iduser == userId);
+
+            var model = new AddWeightModel()
+            {
+                History = new List<WeightHistoryModel>()
+            };
+
+            if (user == null)
+            {
+                return model;
+            }
+
+            var historyRecords = user.UserWeightHistories.Take(10).ToList();
+            foreach (var history in historyRecords)
+            {
+                model.History.Add(new WeightHistoryModel()
+                {
+                    Date = history.WeighingDate,
+                    Weight = history.Weight
+                });
+            }
+            return model;
+        }
+
         public void RegisterNewUser(RegisterModel model)
         {
             ExecuteInTransaction(uow =>
@@ -206,9 +254,9 @@ namespace Backend.BusinessLogic.Account
             });
         }
 
-        public bool ChangePassword(PasswordChangeModel model, Guid currentUserId)
+        public string ChangePassword(PasswordChangeModel model, Guid currentUserId)
         {
-            var isValid = true;
+            var errorMessage = "";
 
             ExecuteInTransaction(uow =>
             {
@@ -219,11 +267,11 @@ namespace Backend.BusinessLogic.Account
 
                 if (!PasswordRegexTest(model.OldPassword))
                 {
-                    isValid = false;
+                    errorMessage = "The current password is not correct";
                 }
                 else if (!PasswordRegexTest(model.NewPassword) || !oldPasswordHash.SequenceEqual(user.Password))
                 {
-                    isValid = false;
+                    errorMessage = "The new password should have at least one uppercase, one lowercase, one special and one number character";
                 }
                 else
                 {
@@ -235,7 +283,7 @@ namespace Backend.BusinessLogic.Account
                 }
 
             });
-            return isValid;
+            return errorMessage;
         }
 
         private bool PasswordRegexTest(string password)

@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Web.WebPages;
 
 namespace Backend.WebApp.Controllers
 {
@@ -123,8 +124,13 @@ namespace Backend.WebApp.Controllers
         public IActionResult ChangePassword([FromBody] PasswordChangeModel model)
         {
 
-            _service.ChangePassword(model, CurrentUser.Id);
-            return Ok();
+            var res = _service.ChangePassword(model, CurrentUser.Id);
+            if(res.IsEmpty())
+            {
+                return Ok();
+            }
+
+            return BadRequest(new { ErrorMessage = res });
         }
 
         private JwtSecurityToken LogIn(CurrentUserDto user)
@@ -149,6 +155,23 @@ namespace Backend.WebApp.Controllers
         public async Task<IActionResult> GetCurrentWeight()
         {
             return Ok(await _service.GetCurrentWeight(CurrentUser.Id));
+        }
+
+        [Authorize]
+        [HttpGet("GetWeightHistory")]
+        public IActionResult AddWeight()
+        {
+            var model = _service.GetWeightHistory(CurrentUser.Id);
+            model.UserId = CurrentUser.Id;
+            return Ok(model);
+        }
+
+        [HttpPost("AddToWeightHistory")]
+        public IActionResult AddWeight(AddWeightModel model)
+        {
+            model.UserId = CurrentUser.Id;
+            _service.AddWeight(model, CurrentUser.Id);
+            return Ok();
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
