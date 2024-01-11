@@ -2,7 +2,7 @@
 
 # Deployment details : 
 
-docker build -t myapp .
+docker build -t myapp . 
 docker run -d -p 8082:80 -e ASPNETCORE_ENVIRONMENT=Development --name succesulgarantat myapp
 
 Inside mssql container:
