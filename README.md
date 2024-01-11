@@ -7,6 +7,8 @@ docker-compose up -d
 Inside mssql container:
 
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'Follyestepisica@12' -Q 'CREATE DATABASE InginerieDB'
+
+
 dotnet /opt/sqlpackage/sqlpackage.dll /tsn:localhost /tu:SA /tp:'Follyestepisica@12' /A:Import /tdn:InginerieDB /sf:/opt/downloads/df.bacpac
 
 
