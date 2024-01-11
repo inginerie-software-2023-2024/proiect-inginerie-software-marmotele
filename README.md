@@ -2,14 +2,14 @@
 
 # Deployment details : 
 
-docker build -t myapp . 
-docker run -d -p 8082:80 -e ASPNETCORE_ENVIRONMENT=Development --name succesulgarantat myapp
+docker build -t myapp .  \n
+docker run -d -p 8082:80 -e ASPNETCORE_ENVIRONMENT=Development --name succesulgarantat myapp \n
 
 Inside mssql container:
 
-/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'Follyestepisica@12' -Q 'CREATE DATABASE InginerieDB'
-cd /opt/downloads
-# dotnet /opt/sqlpackage/sqlpackage.dll /tsn:localhost /tu:SA /tp:'Follyestepisica@12' /A:Import /tdn:InginerieDB /sf:df.bacpac
+/opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'Follyestepisica@12' -Q 'CREATE DATABASE InginerieDB' \n
+cd /opt/downloads \n
+dotnet /opt/sqlpackage/sqlpackage.dll /tsn:localhost /tu:SA /tp:'Follyestepisica@12' /A:Import /tdn:InginerieDB /sf:df.bacpac \n
 
 
 
