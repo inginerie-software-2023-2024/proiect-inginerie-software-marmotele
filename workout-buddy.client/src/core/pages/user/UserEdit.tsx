@@ -27,7 +27,7 @@ const EditUserPage = () => {
         const getUserData = async () => {
             try {
                 const { data } = await axios.get(
-                    'https://localhost:7132/UserAccount/profilePage',
+                    'http://localhost:8082/UserAccount/profilePage',
                     {
                         headers: {
                             Authorization: AuthHeader(),
@@ -47,7 +47,7 @@ const EditUserPage = () => {
         setLoading(true);
         try {
             await axios.post(
-                'https://localhost:7132/UserAccount/editProfile',
+                'http://localhost:8082/UserAccount/editProfile',
                 {
                     username: user.username,
                     name: user.name,

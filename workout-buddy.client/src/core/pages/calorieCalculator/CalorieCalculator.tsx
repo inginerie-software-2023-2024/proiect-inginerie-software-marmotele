@@ -73,7 +73,7 @@ const CaloriesCalculator = () => {
             const getWeight = async () => {
                 const {data} = await axios({
                     method: 'get',
-                    url: 'https://localhost:7132/UserAccount/getCurrentWeight',
+                    url: 'http://localhost:8082/UserAccount/getCurrentWeight',
                     headers: {
                         Authorization: AuthHeader(),
                     },

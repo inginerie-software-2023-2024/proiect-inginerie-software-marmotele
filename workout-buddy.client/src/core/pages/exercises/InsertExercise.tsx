@@ -60,7 +60,7 @@ export default function InsertExercise() {
     const getExercise = async () => {
       const { data } = await axios({
         method: "get",
-        url: `https://localhost:7132/Exercises/getExerciseForInsert?id=${
+        url: `http://localhost:8082/Exercises/getExerciseForInsert?id=${
           id ?? "00000000-0000-0000-0000-000000000000"
         }`,
         headers: {
@@ -102,7 +102,7 @@ export default function InsertExercise() {
     try {
       await axios({
         method: "post",
-        url: `https://localhost:7132/Exercises/insertExercise${querryString}`,
+        url: `http://localhost:8082/Exercises/insertExercise${querryString}`,
         data: formData,
         headers: {
           Authorization: AuthHeader(),

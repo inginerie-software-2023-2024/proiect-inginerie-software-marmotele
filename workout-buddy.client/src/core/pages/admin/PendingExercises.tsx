@@ -20,7 +20,7 @@ function PendingExercises() {
         const getExercises = async () => {
             try {
                 const result = await axios.get(
-                    'https://localhost:7132/Admin/getPendingExercises',
+                    'http://localhost:8082/Admin/getPendingExercises',
                     {
                         headers: {
                             Authorization: AuthHeader(),
