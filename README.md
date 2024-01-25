@@ -29,15 +29,15 @@ Many individuals struggle to maintain a consistent and organized approach to the
 | **Feature/Functionality**          | **Description**                                                                                         | **Status**                  |
 |------------------------------------|---------------------------------------------------------------------------------------------------------|-----------------------------|
 | User-Friendly Interface            | Intuitive design for easy navigation and a pleasant user experience.                                      | Delivered on 25th November           |
-| Customizable Workouts              | Empower users to create personalized workout routines.                                                   | Planned for Delivery        |
+| Customizable Workouts              | Empower users to create personalized workout routines.                                                   | Delivered on 3rd January        |
 | Exercise Management               | CRUD functionality for managing individual exercises.                                                  | Delivered on 25th November              |
 | User Accounts                      | Secure user authentication and personalized accounts.                                                   | Delivered on 25th November           |
-| Workout Tracking                   | Automatic tracking of completed workouts with visualizations.                                            | Planned for Delivery        |
+| Workout Tracking                   | Automatic tracking of completed workouts with visualizations.                                            | Delivered on 3rd January        |
 | Secured Endpoints                  | Implementation of secure endpoints for data protection.                                                 | Delivered on 25th November           |
-| Cross-Platform Accessibility       | Availability on web (C# using ASP.NET and Chakra UI) and iOS mobile platforms.                            | Planned for Delivery              |
+| Cross-Platform Accessibility       | Availability on web (C# using ASP.NET and Chakra UI) and iOS mobile platforms.                            | Delivered on 8th December              |
 | Database Integration               | Integration with a reliable and scalable database for data storage.                                      | Delivered on 25th November        |
 | Calorie Calculator                 | A service that is capable of calculating the intake calories need by a person based on some parameters   | Delivered on 25th November         |
-| Product deployment                 | Making sure the application is deployed so that it can be used world-wide both on mobile and web          | Planned for Delivery             |
+| Product deployment                 | Making sure the application is deployed so that it can be used world-wide both on mobile and web          | Delivered on 13th December             |
 
 # Product Roadmap:
 
