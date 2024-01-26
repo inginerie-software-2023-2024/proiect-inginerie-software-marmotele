@@ -15,7 +15,13 @@ struct SplitDetailsScreen: View {
     var body: some View {
         switch viewModel.splitDetailsState {
         case .failure(let error):
-            Text("\(error.localizedDescription)")
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                Text("\(error.localizedDescription)")
+                    .font(.system(size: 20))
+                    .foregroundColor(.white)
+            }
         case .loading:
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
