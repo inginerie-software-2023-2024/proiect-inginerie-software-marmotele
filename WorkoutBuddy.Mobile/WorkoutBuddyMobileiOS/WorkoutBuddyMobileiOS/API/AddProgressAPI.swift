@@ -12,7 +12,7 @@ import SwiftyJSON
 class AddProgressAPI {
     func getProgress(id: String, token: String) -> Future<AddProgress, Error> {
         Future { promise in
-            var urlComponents = URLComponents(string: "https://2a49-82-208-174-16.ngrok-free.app/UserSplit/AddProgress")
+            var urlComponents = URLComponents(string: "https://714a-2a02-2f0a-4103-2b00-c415-7e01-2c23-3a69.ngrok-free.app/UserSplit/AddProgress")
             
             urlComponents?.queryItems = [
                 URLQueryItem(name: "id", value: "\(id)")
@@ -65,7 +65,7 @@ class AddProgressAPI {
             do {
                 let exEncoded = try JSONEncoder().encode(ex)
                 let json = String(data: exEncoded, encoding: String.Encoding.utf8)
-                let url = URL(string: "https://4bd5-86-124-16-55.ngrok-free.app/UserSplit/AddProgress?Exercises=\(String(describing: json))")
+                let url = URL(string: "https://714a-2a02-2f0a-4103-2b00-c415-7e01-2c23-3a69.ngrok-free.app/UserSplit/AddProgress?Exercises=\(String(describing: json))")
                 
                 do {
                     let bodyData = try JSONEncoder().encode(body)
