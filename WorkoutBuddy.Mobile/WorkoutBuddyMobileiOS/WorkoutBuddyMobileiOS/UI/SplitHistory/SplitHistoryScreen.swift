@@ -19,7 +19,7 @@ struct SplitHistoryScreen: View {
                 LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
                 Text("\(error.localizedDescription)")
-                    .font(.system(size: 20))
+                    .font(.system(size: 24))
                     .foregroundColor(.white)
             }
         case .loading:
