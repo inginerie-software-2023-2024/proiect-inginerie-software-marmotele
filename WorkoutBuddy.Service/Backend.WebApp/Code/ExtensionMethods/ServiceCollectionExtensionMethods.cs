@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Backend.Common.DTOs;
-using System;
-using System.Linq;
 using Backend.WebApp.Code.Base;
-using Backend.BusinessLogic;
 using Backend.BusinessLogic.Base;
 using System.Security.Claims;
 using Backend.BusinessLogic.Account;
@@ -13,6 +10,7 @@ using Backend.BusinessLogic.Images;
 using Backend.BusinessLogic.Splits;
 using WorkoutBuddy.BusinessLogic.AdminDashboard;
 using Backend.BusinessLogic.Implementation.UserSplitColection;
+using Backend.BusinessLogic.Implementation.MuscleGroupsService;
 
 namespace Backend.WebApp.Code.ExtensionMethods
 {
@@ -35,6 +33,7 @@ namespace Backend.WebApp.Code.ExtensionMethods
             services.AddScoped<SplitService>();
             services.AddScoped<AdminService>();
             services.AddScoped<UserSplitService>();
+            services.AddScoped<MuscleGroupsService>();
             return services;
         }
 

@@ -8,7 +8,6 @@ import ExercisesLayout from "../core/pages/exercises/ExerciseLayout";
 import ExercisesList from "../core/pages/exercises/ExercisesList";
 import InsertExercise from "../core/pages/exercises/InsertExercise";
 import ViewExercise from "../core/pages/exercises/ViewExercise";
-import SplitsList from "../core/pages/splits/SplitsList";
 import InsertSplit from "../core/pages/splits/InsertSpit";
 import ViewSplit from "../core/pages/splits/ViewSplit";
 import CalorieCalculator from "../core/pages/calorieCalculator/CalorieCalculator";
@@ -19,6 +18,7 @@ import UserSplitsList from "../core/pages/myCollection/UserSplitsList";
 import ViewUserSplit from "../core/pages/myCollection/ViewUserSplit";
 import AddProgress from "../core/pages/myCollection/AddProgress";
 import ViewExerciseProgress from "../core/pages/myCollection/ViewExerciseProgress";
+import SplitsList from "../core/pages/splits/SplitsList";
 
 export default function configRouter(opts?: string) {
   return createBrowserRouter([
@@ -105,9 +105,7 @@ export default function configRouter(opts?: string) {
         },
         {
           path: "calorie-calculator",
-          element: (
-              <CalorieCalculator />
-          )
+          element: <CalorieCalculator />,
         },
         {
           path: "my-collection",
@@ -154,27 +152,27 @@ export default function configRouter(opts?: string) {
         {
           path: "user-edit",
           element: (
-              <PrivateRoute>
+            <PrivateRoute>
               <UserEdit />
-              </PrivateRoute>
-          )
+            </PrivateRoute>
+          ),
         },
         {
           path: "pending-exercises",
           element: (
-              <PrivateRoute>
+            <PrivateRoute>
               <PendingExercises />
-              </PrivateRoute>
-          )
+            </PrivateRoute>
+          ),
         },
         {
           path: "users-list",
           element: (
-              <PrivateRoute>
-                <UsersList />
-              </PrivateRoute>
-          )
-        }
+            <PrivateRoute>
+              <UsersList />
+            </PrivateRoute>
+          ),
+        },
       ],
     },
     {

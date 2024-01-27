@@ -61,7 +61,7 @@ const ViewSplit = () => {
         const getSplit = async (id: string) => {
             const {data} = await axios({
                 method: "get",
-                url: `https://localhost:7132/Split/viewSplit?id=${id}`,
+                url: `http://localhost:8082/Split/viewSplit?id=${id}`,
                 headers: {
                     Authorization: AuthHeader(),
                 },
@@ -83,7 +83,7 @@ const ViewSplit = () => {
 
         await axios({
             method: "post",
-            url: `https://localhost:7132/Comment/add`,
+            url: `http://localhost:8082/Comment/add`,
             data: newComment,
             headers: {
                 Authorization: AuthHeader(),

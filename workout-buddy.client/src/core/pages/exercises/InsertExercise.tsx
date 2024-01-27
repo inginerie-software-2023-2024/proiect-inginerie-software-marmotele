@@ -8,6 +8,7 @@ import {
   Stack,
   useColorModeValue,
   Textarea,
+  Text,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -52,6 +53,7 @@ export default function InsertExercise() {
   const colors = useColors();
   const navigate = useNavigate();
   const [exercise, setExercise] = useState(exerciseInitialState);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -60,7 +62,7 @@ export default function InsertExercise() {
     const getExercise = async () => {
       const { data } = await axios({
         method: "get",
-        url: `https://localhost:7132/Exercises/getExerciseForInsert?id=${
+        url: `http://localhost:8082/Exercises/getExerciseForInsert?id=${
           id ?? "00000000-0000-0000-0000-000000000000"
         }`,
         headers: {
@@ -78,7 +80,9 @@ export default function InsertExercise() {
 
     let formData = new FormData();
 
-    let querryString = `?selectedType.value=${exercise.selectedType.value}&selectedType.label=${exercise.selectedType.label}`;
+    let querryString = `?selectedType.value=${
+      exercise.selectedType?.value || ""
+    }&selectedType.label=${exercise.selectedType?.label || ""}`;
 
     formData.append("exerciseId", exercise.exerciseId);
     formData.append("name", exercise.name);
@@ -101,7 +105,7 @@ export default function InsertExercise() {
     try {
       await axios({
         method: "post",
-        url: `https://localhost:7132/Exercises/insertExercise${querryString}`,
+        url: `http://localhost:8082/Exercises/insertExercise${querryString}`,
         data: formData,
         headers: {
           Authorization: AuthHeader(),
@@ -109,14 +113,19 @@ export default function InsertExercise() {
         },
       });
       navigate("/exercises");
-    } catch (err) {
-      console.log("treat errs");
+    } catch (err: any) {
+      const { data } = err.response;
+      setError(data.title);
     }
   };
 
+  useEffect(() => {
+    setError(null);
+  }, [exercise]);
+
   return (
     <Flex
-        mt={20}
+      mt={20}
       align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
@@ -134,6 +143,7 @@ export default function InsertExercise() {
         <Heading lineHeight={1.1} mb={2} fontSize={{ base: "2xl", sm: "3xl" }}>
           Insert Exercise
         </Heading>
+        {error && <Text color="red.600">{error}</Text>}
         <FormControl isRequired>
           <FormLabel>Name</FormLabel>
           <Input

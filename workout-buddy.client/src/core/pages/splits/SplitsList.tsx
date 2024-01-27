@@ -15,31 +15,31 @@ const SplitsList = () => {
   const [splits, setSplits] = useState([]);
   const [exercises, setExercises] = useState([]);
 
-  useEffect(() => {
-    const getSplits = async () => {
-      const { data } = await axios({
-        method: "get",
-        url: "https://localhost:7132/Split/getSplits",
-        headers: {
-          Authorization: AuthHeader(),
-        },
-      });
-      setSplits(data);
-    };
-    getSplits();
-  }, []);
+    useEffect(() => {
+        const getSplits = async () => {
+            const {data} = await axios({
+                method: "get",
+                url: "http://localhost:8082/Split/getSplits",
+                headers: {
+                    Authorization: AuthHeader(),
+                },
+            });
+            setSplits(data);
+        };
+        getSplits();
+    }, []);
 
-  useEffect(() => {
-    const getExercises = async () => {
-      const { data } = await axios.get("https://localhost:7132/Exercises/get", {
-        headers: {
-          Authorization: AuthHeader(),
-        },
-      });
-      setExercises(data);
-    };
-    getExercises();
-  }, []);
+    useEffect(() => {
+        const getExercises = async () => {
+            const { data } = await axios.get("http://localhost:8082/Exercises/get", {
+                headers: {
+                    Authorization: AuthHeader(),
+                },
+            });
+            setExercises(data);
+        };
+        getExercises();
+    }, []);
 
   const addHandler = () => {
     navigate("/splits/insert-split");
