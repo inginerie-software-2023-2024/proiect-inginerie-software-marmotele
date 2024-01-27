@@ -65,4 +65,3 @@ const SplitsList = () => {
     </GridItem>
   );
 }
-export default SplitsList;
