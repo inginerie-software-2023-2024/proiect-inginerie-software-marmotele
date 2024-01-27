@@ -75,6 +75,7 @@ export default function Register() {
                 <FormControl id="firstName" isRequired>
                   <FormLabel>Name</FormLabel>
                   <Input
+                    data-testid="register-name"
                     type="text"
                     value={registerModel.name}
                     onChange={(e) =>
@@ -90,6 +91,7 @@ export default function Register() {
                 <FormControl id="lastName" isRequired>
                   <FormLabel>Username</FormLabel>
                   <Input
+                    data-testid="register-username"
                     type="text"
                     value={registerModel.username}
                     onChange={(e) =>
@@ -105,6 +107,7 @@ export default function Register() {
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
+                data-testid="register-email"
                 type="email"
                 value={registerModel.email}
                 onChange={(e) =>
@@ -116,6 +119,7 @@ export default function Register() {
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
+                  data-testid="register-password"
                   type={showPassword ? "text" : "password"}
                   value={registerModel.passwordString}
                   onChange={(e) =>
@@ -140,6 +144,7 @@ export default function Register() {
             <FormControl id="birthdate" isRequired>
               <FormLabel>Birth Date</FormLabel>
               <Input
+                data-testid="register-birthdate"
                 type="datetime-local"
                 value={registerModel.birthDay}
                 onChange={(e) =>
@@ -153,6 +158,7 @@ export default function Register() {
             <FormControl id="weight" isRequired>
               <FormLabel>Weight</FormLabel>
               <Input
+                data-testid="register-weight"
                 type="number"
                 value={registerModel.weight}
                 onChange={(e) =>

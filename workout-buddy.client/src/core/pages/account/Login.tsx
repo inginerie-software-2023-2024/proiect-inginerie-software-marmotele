@@ -64,6 +64,7 @@ export default function Login() {
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
               <Input
+                data-testid="email-login-input"
                 type="email"
                 value={loginModel.email}
                 onChange={(e) =>
@@ -74,6 +75,7 @@ export default function Login() {
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
               <Input
+                data-testid="password-login-input"
                 type="password"
                 value={loginModel.password}
                 onChange={(e) =>
@@ -87,7 +89,9 @@ export default function Login() {
                 align={"start"}
                 justify={"space-between"}
               >
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox checked={false} data-testid="remember-login-checkbox">
+                  Remember me
+                </Checkbox>
                 <Link
                   color={useColorModeValue(
                     "lightPallette.accent.main",
