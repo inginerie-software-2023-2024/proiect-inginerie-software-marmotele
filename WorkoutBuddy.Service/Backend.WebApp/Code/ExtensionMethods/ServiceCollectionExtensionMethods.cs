@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Backend.Common.DTOs;
-using System;
-using System.Linq;
 using Backend.WebApp.Code.Base;
-using Backend.BusinessLogic;
 using Backend.BusinessLogic.Base;
 using System.Security.Claims;
 using Backend.BusinessLogic.Account;

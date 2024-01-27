@@ -13,6 +13,7 @@ import {
   Text,
   useColorModeValue,
   Link,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -33,20 +34,29 @@ export default function Register() {
   const dispatcher = useDispatch();
   const [registerModel, setRegisterModel] = useState(registerModelInitialState);
   const [showPassword, setShowPassword] = useState(false);
+  const [authError, setAuthError] = useState<
+    { propertyName: string; errorMessage: string }[]
+  >([]);
 
   const submitHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const res = await axios({
-      method: "post",
-      url: "http://localhost:8082/UserAccount/register",
-      data: registerModel,
-    });
+    try {
+      const res = await axios({
+        method: "post",
+        url: "http://localhost:8082/UserAccount/register",
+        data: registerModel,
+      });
 
-    dispatcher(accountActions.register(res.data));
+      dispatcher(accountActions.register(res.data));
 
-    window.location.href = "/";
+      window.location.href = "/";
+    } catch (e: any) {
+      const { data } = e.response;
+      console.log(data);
+      setAuthError(data);
+    }
   };
 
   return (
@@ -85,6 +95,12 @@ export default function Register() {
                       })
                     }
                   />
+                  <Text color="red.500" fontSize="13px">
+                    {
+                      authError.find((err) => err.propertyName === "Name")
+                        ?.errorMessage
+                    }
+                  </Text>
                 </FormControl>
               </Box>
               <Box>
@@ -101,6 +117,12 @@ export default function Register() {
                       })
                     }
                   />
+                  <Text color="red.500" fontSize="13px">
+                    {
+                      authError.find((err) => err.propertyName === "Username")
+                        ?.errorMessage
+                    }
+                  </Text>
                 </FormControl>
               </Box>
             </HStack>
@@ -114,6 +136,12 @@ export default function Register() {
                   setRegisterModel({ ...registerModel, email: e.target.value })
                 }
               />
+              <Text color="red.500" fontSize="13px">
+                {
+                  authError.find((err) => err.propertyName === "Email")
+                    ?.errorMessage
+                }
+              </Text>
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
@@ -140,6 +168,12 @@ export default function Register() {
                   </Button>
                 </InputRightElement>
               </InputGroup>
+              <Text color="red.500" fontSize="13px">
+                {
+                  authError.find((err) => err.propertyName === "PasswordString")
+                    ?.errorMessage
+                }
+              </Text>
             </FormControl>
             <FormControl id="birthdate" isRequired>
               <FormLabel>Birth Date</FormLabel>
@@ -154,6 +188,12 @@ export default function Register() {
                   })
                 }
               ></Input>
+              <Text color="red.500" fontSize="13px">
+                {
+                  authError.find((err) => err.propertyName === "BirthDay")
+                    ?.errorMessage
+                }
+              </Text>
             </FormControl>
             <FormControl id="weight" isRequired>
               <FormLabel>Weight</FormLabel>
@@ -168,6 +208,12 @@ export default function Register() {
                   })
                 }
               ></Input>
+              <Text color="red.500" fontSize="13px">
+                {
+                  authError.find((err) => err.propertyName === "Weight")
+                    ?.errorMessage
+                }
+              </Text>
             </FormControl>
             <Stack spacing={10} pt={2}>
               <Button
