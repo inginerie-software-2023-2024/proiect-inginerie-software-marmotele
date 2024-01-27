@@ -76,7 +76,7 @@ export default function InsertSplit() {
     const getSplit = async () => {
       const { data } = await axios({
         method: "get",
-        url: `https://localhost:7132/Split/getInsertModel?id=${
+        url: `http://localhost:8082/Split/getInsertModel?id=${
           id ?? "00000000-0000-0000-0000-000000000000"
         }`,
         headers: {
@@ -124,7 +124,7 @@ export default function InsertSplit() {
     try {
       await axios({
         method: "post",
-        url: `https://localhost:7132/Split/insertSplit${querryString}`,
+        url: `http://localhost:8082/Split/insertSplit${querryString}`,
         data: formData,
           headers: {
             Authorization: AuthHeader(),

@@ -19,7 +19,7 @@ export const ExerciseCard = ({
     async function approveHandler() {
         setTriggerRemove(!triggerRemove);
         await axios.post(
-            `https://localhost:7132/Exercises/approve`,
+            `http://localhost:8082/Exercises/approve`,
             exercise.exerciseId,
             {
                 headers: {
@@ -33,7 +33,7 @@ export const ExerciseCard = ({
     async function deleteHandler() {
         setTriggerRemove(!triggerRemove);
         await axios.post(
-            `https://localhost:7132/Exercises/reject`,
+            `http://localhost:8082/Exercises/reject`,
             exercise.exerciseId,
             {
                 headers: {
@@ -51,7 +51,7 @@ export const ExerciseCard = ({
                     <CardHeader
                         as="img"
                         height="140"
-                        src={`https://localhost:7132/Image/getImageById?id=${exercise.idImage}`}
+                        src={`http://localhost:8082/Image/getImageById?id=${exercise.idImage}`}
                         alt={exercise.name}
                     />
                     <CardBody>

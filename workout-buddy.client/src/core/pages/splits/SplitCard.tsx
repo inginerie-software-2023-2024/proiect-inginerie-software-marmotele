@@ -42,7 +42,7 @@ export default function SplitCard({ split }: ISplitCardProps) {
   //     try {
   //       await axios({
   //         method: "post",
-  //         url: `https://localhost:7132/Splits/delete`,
+  //         url: `http://localhost:8082/Splits/delete`,
   //         data: id,
   //         //   headers: {
   //         //     "Content-Type": "application/json",
