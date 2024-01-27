@@ -51,7 +51,7 @@ const SplitsWrapper = () => {
   return (
     <Wrapper>
       <Suspense fallback={<LoadingSplitsList />}>
-        <SplitsList  />
+        <SplitsList splits={splits} />
       </Suspense>
       <GridItem display="flex" flexDirection="column">
         <Button

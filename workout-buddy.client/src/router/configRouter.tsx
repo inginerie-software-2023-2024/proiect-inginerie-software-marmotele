@@ -18,7 +18,9 @@ import UserSplitsList from "../core/pages/myCollection/UserSplitsList";
 import ViewUserSplit from "../core/pages/myCollection/ViewUserSplit";
 import AddProgress from "../core/pages/myCollection/AddProgress";
 import ViewExerciseProgress from "../core/pages/myCollection/ViewExerciseProgress";
-import SplitsList from "../core/pages/splits/SplitsList";
+import { lazy } from "react";
+
+const SplitsWrapper = lazy(() => import("../core/pages/splits/SplitsWrapper"));
 
 export default function configRouter(opts?: string) {
   return createBrowserRouter([
@@ -81,7 +83,7 @@ export default function configRouter(opts?: string) {
               path: "/splits",
               element: (
                 <PrivateRoute>
-                  <SplitsList />
+                  <SplitsWrapper />
                 </PrivateRoute>
               ),
             },
