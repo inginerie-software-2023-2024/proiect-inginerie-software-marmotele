@@ -14,9 +14,7 @@ import CalorieCalculator from "../core/pages/calorieCalculator/CalorieCalculator
 import UserEdit from "../core/pages/user/UserEdit";
 import PendingExercises from "../core/pages/admin/PendingExercises";
 import UsersList from "../core/pages/admin/UsersList";
-import { lazy } from "react";
-
-const SplitsList = lazy(() => import("../core/pages/splits/SplitsWrapper"));
+import SplitsList from "../core/pages/splits/SplitsList";
 
 export default function configRouter(opts?: string) {
   return createBrowserRouter([
