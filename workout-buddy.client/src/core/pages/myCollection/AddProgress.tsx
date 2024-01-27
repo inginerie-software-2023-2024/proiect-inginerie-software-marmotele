@@ -59,7 +59,7 @@ const AddProgress = () => {
     const getExercise = async () => {
       const { data } = await axios({
         method: "get",
-        url: `https://localhost:7132/UserSplit/AddProgress?id=${id}`,
+        url: `http://localhost:8082/UserSplit/AddProgress?id=${id}`,
         headers: {
           Authorization: AuthHeader(),
         },
@@ -80,7 +80,7 @@ const AddProgress = () => {
     e.preventDefault()
     await axios({
         method: "post",
-        url: `https://localhost:7132/UserSplit/AddProgress`,
+        url: `http://localhost:8082/UserSplit/AddProgress`,
         data: progressModel,
         headers: {
           Authorization: AuthHeader(),

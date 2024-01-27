@@ -58,7 +58,7 @@ function ChangePasswordModal({ isOpen, onClose }: IChangePasswordModalProps) {
 
     const resetPassword = async () => {
       const res = await fetch(
-        "https://localhost:7132/UserAccount/changePassword",
+        "http://localhost:8082/UserAccount/changePassword",
         {
           method: "POST",
           body: JSON.stringify(form),

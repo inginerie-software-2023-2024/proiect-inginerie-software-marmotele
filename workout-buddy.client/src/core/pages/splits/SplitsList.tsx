@@ -74,22 +74,6 @@ const SplitsList = () => {
           Add new split
         </Button>
 
-        <Button
-          marginTop={"10px"}
-          colorScheme={colors.primaryScheme}
-          onClick={addHandler}
-        >
-          Search
-        </Button>
-        <SplitsSearchFilters
-          isRangeEnabled={true}
-          data={exercises.map((ex: any) => ({
-            value: ex.exerciseId,
-            label: ex.name,
-          }))}
-          inputPlaceholder="Search by name"
-          selectPlaceholder="Select exercise"
-        />
       </GridItem>
     </Wrapper>
   );

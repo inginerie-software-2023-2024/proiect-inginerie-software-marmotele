@@ -22,7 +22,7 @@ const SplitsWrapper = () => {
     const getSplits = async () => {
       const { data } = await axios({
         method: "get",
-        url: "https://localhost:7132/Split/getSplits",
+        url: "http://localhost:8082/Split/getSplits",
         headers: {
           Authorization: AuthHeader(),
         },
@@ -34,7 +34,7 @@ const SplitsWrapper = () => {
 
   useEffect(() => {
     const getExercises = async () => {
-      const { data } = await axios.get("https://localhost:7132/Exercises/get", {
+      const { data } = await axios.get("http://localhost:8082/Exercises/get", {
         headers: {
           Authorization: AuthHeader(),
         },
@@ -51,7 +51,7 @@ const SplitsWrapper = () => {
   return (
     <Wrapper>
       <Suspense fallback={<LoadingSplitsList />}>
-        <SplitsList splits={splits} />
+        <SplitsList  />
       </Suspense>
       <GridItem display="flex" flexDirection="column">
         <Button

@@ -24,7 +24,7 @@ const UserSplitsList = () => {
         const getSplits = async () => {
             const { data } = await axios({
                 method: "get",
-                url: "https://localhost:7132/UserSplit/ListOfSplits",
+                url: "http://localhost:8082/UserSplit/ListOfSplits",
                 headers: {
                     Authorization: AuthHeader(),
                 },

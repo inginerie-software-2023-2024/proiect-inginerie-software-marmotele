@@ -56,7 +56,7 @@ const ExercisesList = () => {
   useEffect(() => {
     const getMuscleGroups = async () => {
       const { data } = await axios.get(
-        "https://localhost:7132/api/MuscleGroups",
+        "http://localhost:8082/api/MuscleGroups",
         {
           headers: {
             Authorization: AuthHeader(),
@@ -84,7 +84,7 @@ const ExercisesList = () => {
 
   const handleSubmitSearch = (input: string) => {
     setLoading(true);
-    const url = new URL("https://localhost:7132/Exercises/get");
+    const url = new URL("http://localhost:8082/Exercises/get");
     for (let group of selectedGroups) {
       url.searchParams.append("muscleGroup", group.value.toString());
     }

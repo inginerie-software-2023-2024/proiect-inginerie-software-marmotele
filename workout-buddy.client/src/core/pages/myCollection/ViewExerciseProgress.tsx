@@ -42,7 +42,7 @@ const ViewExerciseProgress = () => {
       const id = getURLID(window.location.href);
       debugger;
       const { data } = await axios.get(
-        "https://localhost:7132/UserSplit/GetExercisesProgress?id=" + id,
+        "http://localhost:8082/UserSplit/GetExercisesProgress?id=" + id,
         {
           headers: {
             Authorization: AuthHeader(),
