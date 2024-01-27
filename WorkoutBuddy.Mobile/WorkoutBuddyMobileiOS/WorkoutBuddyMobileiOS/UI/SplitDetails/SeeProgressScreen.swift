@@ -15,7 +15,13 @@ struct SeeProgressScreen: View {
     var body: some View {
         switch viewModel.seeProgressState {
         case .failure(let error):
-            Text("\(error.localizedDescription)")
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                Text("\(error.localizedDescription)")
+                    .font(.system(size: 24))
+                    .foregroundColor(.white)
+            }
         case .loading:
             ProgressView()
         case .value(let progressDetails):

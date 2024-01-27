@@ -47,16 +47,13 @@ export default function Exercise({
     let res = window.confirm("Are you sure you want to delete this exercise?");
     if (res) {
       try {
-        await axios.post(
-          `https://localhost:7132/Exercises/delete`,
-          exerciseId,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: AuthHeader(),
-            },
-          }
-        );
+        await axios.post(`http://localhost:8082/Exercises/delete`, {
+          data: exerciseId,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: AuthHeader(),
+          },
+        });
         deleteExercises(exerciseId);
       } catch (err) {}
     }
@@ -94,7 +91,7 @@ export default function Exercise({
               pos: "absolute",
               top: 5,
               left: 0,
-              backgroundImage: `url(${`https://localhost:7132/Image/getImageById?id=${exercise.idImage}`})`,
+              backgroundImage: `url(${`http://localhost:8082/Image/getImageById?id=${exercise.idImage}`})`,
               filter: "blur(15px)",
               zIndex: -1,
             }}
@@ -110,7 +107,7 @@ export default function Exercise({
               height={230}
               width={282}
               objectFit={"cover"}
-              src={`https://localhost:7132/Image/getImageById?id=${exercise.idImage}`}
+              src={`http://localhost:8082/Image/getImageById?id=${exercise.idImage}`}
             />
           </Box>
           <Stack pt={10} align={"center"}>
