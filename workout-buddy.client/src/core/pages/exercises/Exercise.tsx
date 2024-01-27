@@ -17,11 +17,13 @@ import axios from "axios";
 interface IExerciseProps {
   exercise: any;
   deleteHandler: (id: number) => void;
+  isStale?: boolean;
 }
 
 export default function Exercise({
   exercise,
   deleteHandler: deleteExercises,
+  isStale,
 }: IExerciseProps) {
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState(false);
@@ -74,6 +76,7 @@ export default function Exercise({
           display="flex"
           flexDirection="column"
           justifyContent="space-between"
+          opacity={isStale ? "0.3" : "1"}
         >
           <Box
             rounded={"lg"}

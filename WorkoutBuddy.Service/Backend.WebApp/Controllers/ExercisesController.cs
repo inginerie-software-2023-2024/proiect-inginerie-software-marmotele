@@ -22,9 +22,10 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpGet("get")]
-        public async Task<IActionResult> GetExercises()
+        public async Task<IActionResult> GetExercises([FromQuery] List<int>? MuscleGroup, [FromQuery] string? Search = "")
         {
-            var exercises = await exerciseService.GetExercises();
+            var exercises = await exerciseService.GetExercises(MuscleGroup, Search);
+
             return Ok(exercises);
         }
 
@@ -45,17 +46,23 @@ namespace Backend.WebApp.Controllers
         [HttpPost("insertExercise")]
         public IActionResult InsertExercise([FromQuery] ListItemModel<string, int> selectedType, [FromQuery] List<ListItemModel<string, int>> selectedMuscleGroups, [FromForm] InsertExerciseModel model)
         {
-            model.SelectedType = selectedType;
-            model.SelectedMuscleGroups = selectedMuscleGroups;
-            if (model.ExerciseId == Guid.Empty)
+            try
             {
-                exerciseService.AddExercise(model);
-            }
-            else
+                model.SelectedType = selectedType;
+                model.SelectedMuscleGroups = selectedMuscleGroups;
+                if (model.ExerciseId == Guid.Empty)
+                {
+                    exerciseService.AddExercise(model);
+                }
+                else
+                {
+                    exerciseService.EditExercise(model);
+                }
+                return Ok();
+            } catch (Exception ex)
             {
-                exerciseService.EditExercise(model);
+                return BadRequest(ex);
             }
-            return Ok();
         }
 
         [HttpPost("delete")]
