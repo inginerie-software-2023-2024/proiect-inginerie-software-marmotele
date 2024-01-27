@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Heading, Stack, Box, GridItem } from "@chakra-ui/react";
 import SplitCard from "./SplitCard";
 import axios from "axios";
