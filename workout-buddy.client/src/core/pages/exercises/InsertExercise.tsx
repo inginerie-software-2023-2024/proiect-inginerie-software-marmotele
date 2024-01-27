@@ -88,7 +88,6 @@ export default function InsertExercise() {
       new Blob([JSON.stringify(exercise.selectedType)])
     );
     let index = 0;
-    debugger;
     for (let mg of exercise.selectedMuscleGroups) {
       formData.append("selectedMuscleGroups", new Blob([JSON.stringify(mg)]));
       querryString += `&selectedMuscleGroups[${index}].value=${mg.value}`;

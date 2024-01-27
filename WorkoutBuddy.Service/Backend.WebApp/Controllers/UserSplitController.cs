@@ -31,7 +31,7 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpGet("GetSplit")]
-        public IActionResult ViewUserSplit(Guid id)
+        public IActionResult ViewUserSplit([FromQuery]Guid id)
         {
             var model = service.GetUserSplit(id, CurrentUser.Id);
             return Ok(model);
@@ -45,16 +45,12 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpPost("AddProgress")]
-        public IActionResult AddProgress([FromQuery] string Exercises, [FromForm] UserWorkoutModel model)
+        public IActionResult AddProgress([FromBody] UserWorkoutModel model)
         {
-            
-            var ex = JsonConvert.DeserializeObject<List<UserExerciseModel>>(Exercises);
             model.UserId = CurrentUser.Id;
-            model.Exercises = ex;
-            var splitId = service.AddProgress(model, 3);
-            var splitModel = service.GetUserSplit(splitId, CurrentUser.Id);
+            service.AddProgress(model, 3);
 
-            return Ok(splitModel);
+            return Ok();
         }
 
         [HttpGet("WorkoutHistory")]

@@ -234,8 +234,8 @@ namespace Backend.BusinessLogic.Implementation.UserSplitColection
                             .Include(us => us.UserExercises)
                                 .ThenInclude(ue => ue.UserExerciseSets)
                             .Where(us => us.Idworkout == id && us.Iduser == userId)
-                            .Skip(pageIndex * weekDays)
-                            .Take(weekDays)
+                            /*.Skip(pageIndex * weekDays)
+                            .Take(weekDays)*/
                             .ToList();
 
             if (workouts == null)

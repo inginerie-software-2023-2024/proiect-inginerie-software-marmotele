@@ -15,6 +15,10 @@ import CalorieCalculator from "../core/pages/calorieCalculator/CalorieCalculator
 import UserEdit from "../core/pages/user/UserEdit";
 import PendingExercises from "../core/pages/admin/PendingExercises";
 import UsersList from "../core/pages/admin/UsersList";
+import UserSplitsList from "../core/pages/myCollection/UserSplitsList";
+import ViewUserSplit from "../core/pages/myCollection/ViewUserSplit";
+import AddProgress from "../core/pages/myCollection/AddProgress";
+import ViewExerciseProgress from "../core/pages/myCollection/ViewExerciseProgress";
 
 export default function configRouter(opts?: string) {
   return createBrowserRouter([
@@ -104,6 +108,48 @@ export default function configRouter(opts?: string) {
           element: (
               <CalorieCalculator />
           )
+        },
+        {
+          path: "my-collection",
+          element: (
+            <PrivateRoute>
+              <ExercisesLayout />
+            </PrivateRoute>
+          ),
+          children: [
+            {
+              path: "/my-collection",
+              element: (
+                <PrivateRoute>
+                  <UserSplitsList />
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: "/my-collection/view-split/:id",
+              element: (
+                <PrivateRoute>
+                  <ViewUserSplit />
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: "/my-collection/view-exercise-progress/:id",
+              element: (
+                <PrivateRoute>
+                  <ViewExerciseProgress />
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: "/my-collection/add-progress/:id",
+              element: (
+                <PrivateRoute>
+                  <AddProgress />
+                </PrivateRoute>
+              ),
+            },
+          ],
         },
         {
           path: "user-edit",

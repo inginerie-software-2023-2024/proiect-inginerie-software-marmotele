@@ -30,6 +30,7 @@ const Links = [
     {text: "Splits", path: "/splits"},
     {text: "Exercises", path: "/exercises"},
     {text: "Calorie Calculator", path: "/calorie-calculator"},
+    {text: "My collection", path: "/my-collection"},
 ];
 
 interface INavLinkProps {
