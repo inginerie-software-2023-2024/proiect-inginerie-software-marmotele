@@ -29,7 +29,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  ChartOptions,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { themeColors } from "../../../../theme/colors";

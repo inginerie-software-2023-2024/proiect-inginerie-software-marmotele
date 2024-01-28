@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { accountActions } from "../../../../store/reducers/account";
 import AuthHeader from "../../../../utils/authorizationHeaders";
 import { useState } from "react";
@@ -19,7 +18,6 @@ function UserProfile(props: any) {
   const [isEditting, setIsEditting] = useState(false);
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSubmit = async (e: any) => {

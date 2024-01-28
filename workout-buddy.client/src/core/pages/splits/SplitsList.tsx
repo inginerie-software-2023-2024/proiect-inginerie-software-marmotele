@@ -13,13 +13,13 @@ const SplitsList = (props: any) => {
           }}
         >
           <Heading>Splits</Heading>
-        </Box>
 
-        <Stack>
-          {props.splits?.map((split: any) => {
-            return <SplitCard key={split.splitId} split={split}></SplitCard>;
-          })}
-        </Stack>
+          <Stack>
+            {props.splits?.map((split: any) => {
+              return <SplitCard key={split.splitId} split={split}></SplitCard>;
+            })}
+          </Stack>
+        </Box>
       </GridItem>
     </Wrapper>
   );

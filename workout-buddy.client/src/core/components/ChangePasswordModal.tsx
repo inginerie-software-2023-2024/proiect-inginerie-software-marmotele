@@ -11,11 +11,8 @@ import {
   FormLabel,
   Input,
   Text,
-  InputRightAddon,
-  Icon,
   InputRightElement,
   InputGroup,
-  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import React, { useState } from "react";

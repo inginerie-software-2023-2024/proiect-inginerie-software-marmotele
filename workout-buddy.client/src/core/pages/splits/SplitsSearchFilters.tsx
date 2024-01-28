@@ -26,8 +26,6 @@ interface ISplitsSearchFiltersProps {
 const SplitsSearchFilters = (props: ISplitsSearchFiltersProps) => {
   const colors = useColors();
 
-  console.log(props.data);
-
   return (
     <Box
       color={"gray.800"}

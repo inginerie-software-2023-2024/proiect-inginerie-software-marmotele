@@ -8,13 +8,6 @@ import {
   Text,
   Link,
   useDisclosure,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalCloseButton,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
 } from "@chakra-ui/react";
 import React from "react";
 import ChangePasswordModal from "./ChangePasswordModal";

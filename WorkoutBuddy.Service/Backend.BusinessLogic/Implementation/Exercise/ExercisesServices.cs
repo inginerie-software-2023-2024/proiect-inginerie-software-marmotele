@@ -36,8 +36,6 @@ namespace Backend.BusinessLogic.Exercises
                 .Include(e => e.Idgroups)
                 .Where(e => e.IsPending != true)
                 .OrderBy(e => e.Name)
-                /*.Skip(pageSize * index)
-                .Take(pageSize)*/
                 .ToListAsync();
 
             if(MuscleGroup is not null && MuscleGroup.Count() > 0)

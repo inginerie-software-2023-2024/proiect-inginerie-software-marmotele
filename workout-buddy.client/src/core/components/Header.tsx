@@ -7,15 +7,9 @@ import {
   Link,
   IconButton,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
   useDisclosure,
   useColorModeValue,
   Stack,
-  Text,
   Heading,
   Grid,
   GridItem,
@@ -29,11 +23,11 @@ import useColors from "./colors";
 import MenuAuthenticatedUser from "./MenuAuthenticatedUser";
 
 const Links = [
-    {text: "Home", path: "/"},
-    {text: "Splits", path: "/splits"},
-    {text: "Exercises", path: "/exercises"},
-    {text: "Calorie Calculator", path: "/calorie-calculator"},
-    {text: "My collection", path: "/my-collection"},
+  { text: "Home", path: "/" },
+  { text: "Splits", path: "/splits" },
+  { text: "Exercises", path: "/exercises" },
+  { text: "Calorie Calculator", path: "/calorie-calculator" },
+  { text: "My collection", path: "/my-collection" },
 ];
 
 interface INavLinkProps {
