@@ -1,11 +1,4 @@
-import {useState, useEffect} from "react";
-import {
-    Button,
-    Heading,
-    Box,
-    Stack,
-    GridItem,
-} from "@chakra-ui/react";
+import { Heading, Stack, Box, GridItem } from "@chakra-ui/react";
 import SplitCard from "./SplitCard";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
@@ -62,35 +55,12 @@ const SplitsList = () => {
                         >
                             <Heading>Splits</Heading>
 
-                        </Box>
-
-                        <Stack>
-                            {splits.map((split: any) => {
-                                return <SplitCard key={split.splitId} split={split}></SplitCard>;
-                            })}
-                        </Stack>
-                    </GridItem>
-                    <GridItem display="flex" flexDirection="column">
-                        <Button
-                            marginTop={"68px"}
-                            colorScheme={colors.primaryScheme}
-                            variant="outline"
-                            onClick={addHandler}
-                        >
-                            <SmallAddIcon mr={1} h={6} />Add new split
-                        </Button>
-
-                        <Button
-                            marginTop={"10px"}
-                            colorScheme={colors.primaryScheme}
-                            onClick={addHandler}
-                        >
-                            Search
-                        </Button>
-                        <SplitsSearchFilters isRangeEnabled={true} data={exercises.map((ex: any) => ({ value: ex.exerciseId, label: ex.name }))} inputPlaceholder="Search by name" selectPlaceholder="Select exercise" />
-                    </GridItem>
-        </Wrapper>
-    );
-};
-
-export default SplitsList;
+        <Stack>
+          {props.splits?.map((split: any) => {
+            return <SplitCard key={split.splitId} split={split}></SplitCard>;
+          })}
+        </Stack>
+      </Box>
+    </GridItem>
+  );
+}

@@ -8,12 +8,13 @@ import {
   Stack,
   Link,
   Button,
+  Text,
   Heading,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { accountActions } from "../../../store/reducers/account";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useDispatch } from "react-redux";
 
 const loginModelInitialState = {
@@ -25,21 +26,25 @@ const loginModelInitialState = {
 
 export default function Login() {
   const dispatcher = useDispatch();
-
+  const [authError, setAuthError] = useState<string | null>(null);
   const [loginModel, setLoginModel] = useState(loginModelInitialState);
 
   const submitHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.preventDefault();
-    const res = await axios({
-      method: "post",
-      url: "http://localhost:8082/UserAccount/login",
-      data: loginModel,
-    });
-    dispatcher(accountActions.login(res.data));
+    try {
+      const res = await axios({
+        method: "post",
+        url: "http://localhost:8082/UserAccount/login",
+        data: loginModel,
+      });
+      dispatcher(accountActions.login(res.data));
 
-    window.location.href = "/";
+      window.location.href = "/";
+    } catch (e: any) {
+      setAuthError("Your email/password combination is not correct!");
+    }
   };
 
   return (
@@ -61,24 +66,29 @@ export default function Login() {
           borderWidth="2px"
         >
           <Stack spacing={4}>
+            {authError && <Text color="red.700">{authError}</Text>}
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
               <Input
+                data-testid="email-login-input"
                 type="email"
                 value={loginModel.email}
-                onChange={(e) =>
-                  setLoginModel({ ...loginModel, email: e.target.value })
-                }
+                onChange={(e) => {
+                  setAuthError(null);
+                  setLoginModel({ ...loginModel, email: e.target.value });
+                }}
               />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
               <Input
+                data-testid="password-login-input"
                 type="password"
                 value={loginModel.password}
-                onChange={(e) =>
-                  setLoginModel({ ...loginModel, password: e.target.value })
-                }
+                onChange={(e) => {
+                  setAuthError(null);
+                  setLoginModel({ ...loginModel, password: e.target.value });
+                }}
               />
             </FormControl>
             <Stack spacing={10}>
@@ -87,7 +97,9 @@ export default function Login() {
                 align={"start"}
                 justify={"space-between"}
               >
-                <Checkbox>Remember me</Checkbox>
+                <Checkbox checked={false} data-testid="remember-login-checkbox">
+                  Remember me
+                </Checkbox>
                 <Link
                   color={useColorModeValue(
                     "lightPallette.accent.main",
