@@ -14,19 +14,18 @@ struct SplitDetailsScreen: View {
     
     var body: some View {
         switch viewModel.splitDetailsState {
-        case .failure(let error):
-            ZStack {
-                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-                Text("\(error.localizedDescription)")
-                    .font(.system(size: 24))
-                    .foregroundColor(.white)
+        case .failure(_):
+            ModalChooseOptionView(title: "Oops",
+                                              description: "An error has occured. Please try again later!",
+                                              topButtonText: "Retry") {
+                navigation.dismissModal(animated: true, completion: nil)
+                navigation.pop(animated: true)
             }
         case .loading:
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
-                ProgressView().foregroundColor(.white)
+                LoaderView()
             }
         case .value(let splitDetails):
             ZStack {

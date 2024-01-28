@@ -14,16 +14,19 @@ struct SeeProgressScreen: View {
     
     var body: some View {
         switch viewModel.seeProgressState {
-        case .failure(let error):
+        case .failure(_):
+            ModalChooseOptionView(title: "Oops",
+                                              description: "An error has occured. Please try again later!",
+                                              topButtonText: "Retry") {
+                navigation.dismissModal(animated: true, completion: nil)
+                navigation.pop(animated: true)
+            }
+        case .loading:
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
-                Text("\(error.localizedDescription)")
-                    .font(.system(size: 24))
-                    .foregroundColor(.white)
+                LoaderView()
             }
-        case .loading:
-            ProgressView()
         case .value(let progressDetails):
             GeometryReader { proxy in
                 VStack(alignment: .leading, spacing: 0) {
@@ -57,10 +60,10 @@ struct SeeProgressScreen: View {
                                 Text("See workout history >")
                                     .font(Font.system(size: 16))
                                     .foregroundColor(.white)
-                                    .padding(.all, 12)
-                                    .background(CustomColors.buttonDark)
-                                    .padding(.vertical, 12)
-                            }
+                            }.padding(.all, 12)
+                                .background(CustomColors.buttonDark)
+                                .padding(.vertical, 12)
+                                .frame(maxWidth: .infinity)
                         }
                     }.padding(.vertical, 20)
                         .padding(.horizontal, 20)

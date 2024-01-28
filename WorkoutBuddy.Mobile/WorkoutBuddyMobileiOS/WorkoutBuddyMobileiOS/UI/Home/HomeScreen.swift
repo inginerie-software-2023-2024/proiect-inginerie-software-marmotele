@@ -12,20 +12,19 @@ struct HomeScreen: View {
     @EnvironmentObject private var navigation: Navigation
     var body: some View {
         switch viewModel.splitsState {
-        case .failure(let error):
-            ZStack {
-                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-                Text("\(error.localizedDescription)")
-                    .font(.system(size: 24))
-                    .foregroundColor(.white)
+        case .failure(_):
+            ModalChooseOptionView(title: "Oops",
+                                              description: "An error has occured. Please try again later!",
+                                              topButtonText: "Retry") {
+                navigation.dismissModal(animated: true, completion: nil)
+                navigation.replaceNavigationStack([LoginScreen().asDestination()], animated: true)
             }
         case .loading:
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
                 
-                ProgressView().foregroundColor(.white)
+                LoaderView()
             }
         case .value(let splits):
             ZStack {
@@ -75,77 +74,163 @@ struct HomeScreen: View {
                 .onReceive(viewModel.eventSubject) { eventSubject in
                     switch eventSubject {
                     case .logout:
-                        navigation.replaceNavigationStack([LoginScreen().asDestination()], animated: true)
-                    case .failure(let error):
-                        viewModel.errorMessage = error.localizedDescription
-                        print("Logout failed: \(error)")
-                    }
-                }
-            }
-        }
-    }
-    
-    struct SplitCardView: View {
-        var collection: MyCollection
-        var viewDetailsHandler: () -> ()
-        
-        var body: some View {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack {
-                    Text(collection.name)
-                        .bold()
-                        .foregroundColor(CustomColors.backgroundDark)
-                        .font(Font.system(size: 20))
-                    Spacer()
-                }
-                .padding(.all, 12)
-                .background(CustomColors.buttonDark)
-                
-                VStack(alignment: .leading, spacing: 0) {
-                    HStack(spacing: 0) {
-                        Text("Description:")
-                            .foregroundColor(.white)
-                            .bold()
-                            .font(Font.system(size: 14))
-                        
-                        Spacer()
-                        
-                        Text(collection.description)
-                            .foregroundColor(CustomColors.button)
-                            .font(Font.system(size: 14))
-                    }.padding(.bottom, 16)
-                    
-                    HStack(spacing: 0) {
-                        Text("Number of workouts:")
-                            .foregroundColor(Color.white)
-                            .bold()
-                            .font(Font.system(size: 14))
-                        
-                        Spacer()
-                        
-                        Text("\(collection.workoutsNo)")
-                            .foregroundColor(CustomColors.button)
-                            .font(Font.system(size: 14))
-                    }.padding(.bottom, 16)
-                    
-                    HStack {
-                        Spacer()
-                        Button {
-                            viewDetailsHandler()
-                        } label: {
-                            Text("See details")
-                                .underline()
-                                .foregroundColor(CustomColors.buttonDark)
-                                .font(Font.system(size: 16))
+                        let modal = ModalChooseOptionView(title: "Are you sure?",
+                                                          description: "You will be logged out from your account and in order to access the content of your app, you'll have to log in again.",
+                                                          topButtonText: "Log out",
+                                                          bottomButtonText: "Stay") {
+                            navigation.dismissModal(animated: true, completion: nil)
+                            navigation.replaceNavigationStack([LoginScreen().asDestination()], animated: true)
+                        } onBottomButtonTapped: {
+                            navigation.dismissModal(animated: true, completion: nil)
                         }
+                        
+                        navigation.presentModal(modal.asDestination(),
+                                                animated: true,
+                                                completion: nil,
+                                                controllerConfig: nil)
+                    case .failure(_):
+                        let modal = ModalChooseOptionView(title: "Oops",
+                                                          description: "An error has occured. Please try again later!",
+                                                          topButtonText: "Retry") {
+                            navigation.dismissModal(animated: true, completion: nil)
+                            navigation.replaceNavigationStack([LoginScreen().asDestination()], animated: true)
+                        }
+                        navigation.presentModal(modal.asDestination(),
+                                                animated: true,
+                                                completion: nil,
+                                                controllerConfig: nil)
                     }
                 }
-                .padding(.all, 12)
-                .border(CustomColors.buttonDark, width: 2)
-                .cornerRadius(4)
             }
-            .frame(maxWidth: .infinity)
         }
     }
 }
 
+struct SplitCardView: View {
+    var collection: MyCollection
+    var viewDetailsHandler: () -> ()
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            HStack {
+                Text(collection.name)
+                    .bold()
+                    .foregroundColor(CustomColors.backgroundDark)
+                    .font(Font.system(size: 20))
+                Spacer()
+            }
+            .padding(.all, 12)
+            .background(CustomColors.buttonDark)
+            
+            VStack(alignment: .leading, spacing: 0) {
+                HStack(spacing: 0) {
+                    Text("Description:")
+                        .foregroundColor(.white)
+                        .bold()
+                        .font(Font.system(size: 14))
+                    
+                    Spacer()
+                    
+                    Text(collection.description)
+                        .foregroundColor(CustomColors.button)
+                        .font(Font.system(size: 14))
+                }.padding(.bottom, 16)
+                
+                HStack(spacing: 0) {
+                    Text("Number of workouts:")
+                        .foregroundColor(Color.white)
+                        .bold()
+                        .font(Font.system(size: 14))
+                    
+                    Spacer()
+                    
+                    Text("\(collection.workoutsNo)")
+                        .foregroundColor(CustomColors.button)
+                        .font(Font.system(size: 14))
+                }.padding(.bottom, 16)
+                
+                HStack {
+                    Spacer()
+                    Button {
+                        viewDetailsHandler()
+                    } label: {
+                        Text("See details")
+                            .underline()
+                            .foregroundColor(CustomColors.buttonDark)
+                            .font(Font.system(size: 16))
+                    }
+                }
+            }
+            .padding(.all, 12)
+            .border(CustomColors.buttonDark, width: 2)
+            .cornerRadius(4)
+        }
+        .frame(maxWidth: .infinity)
+    }
+}
+
+struct ModalChooseOptionView: View {
+    let title: String
+    let description: String
+    let topButtonText: String
+    var bottomButtonText: String?
+    let onTopButtonTapped: () -> ()
+    var onBottomButtonTapped: (() -> ())?
+    
+    var body: some View {
+        ZStack {
+            Color.black.opacity(0.4)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            VStack(spacing: 0) {
+                
+                Text(title)
+                    .bold()
+                    .font(.system(size: 24))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 12)
+                
+                Text(description)
+                    .font(.system(size: 16))
+                    .foregroundColor(.black)
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 24)
+                
+                VStack(spacing: 12) {
+                    Button {
+                        onTopButtonTapped()
+                    } label: {
+                        Text(topButtonText)
+                            .bold()
+                            .font(.system(size: 14))
+                            .padding(.all, 12)
+                            .foregroundColor(CustomColors.background)
+                            .frame(maxWidth: .infinity)
+                            .background(CustomColors.button)
+                        
+                    }
+                    
+                    if let onBottomButtonTapped = onBottomButtonTapped,
+                        let bottomButtonText = bottomButtonText {
+                        Button {
+                            onBottomButtonTapped()
+                        } label: {
+                            Text(bottomButtonText)
+                                .bold()
+                                .font(.system(size: 14))
+                                .padding(.all, 12)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .background(CustomColors.buttonDark)
+                            
+                        }
+                    }
+                }
+            }.padding(.horizontal, 24)
+                .padding(.vertical, 36)
+                .background(Color.white.cornerRadius(8))
+                .padding(.horizontal, 24)
+        }.ignoresSafeArea()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+}

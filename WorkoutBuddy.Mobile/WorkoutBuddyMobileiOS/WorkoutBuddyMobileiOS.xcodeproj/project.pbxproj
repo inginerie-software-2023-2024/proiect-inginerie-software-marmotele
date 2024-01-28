@@ -28,6 +28,7 @@
 		9B3340342B62C0FB00F79211 /* SplitDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3340332B62C0FB00F79211 /* SplitDetailsViewModelTests.swift */; };
 		9B3340362B62C16900F79211 /* SeeProgressViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3340352B62C16900F79211 /* SeeProgressViewModelTests.swift */; };
 		9B3340382B62C22900F79211 /* SplitHistoryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3340372B62C22900F79211 /* SplitHistoryViewModelTests.swift */; };
+		9B33403A2B6663F900F79211 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3340392B6663F900F79211 /* LoaderView.swift */; };
 		9B7B511F2B2653D300D3A622 /* SplitHistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B511E2B2653D300D3A622 /* SplitHistoryScreen.swift */; };
 		9B7B51212B2653FC00D3A622 /* SplitHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B51202B2653FC00D3A622 /* SplitHistoryViewModel.swift */; };
 		9B7B51232B2654BF00D3A622 /* SplitHistoryAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7B51222B2654BF00D3A622 /* SplitHistoryAPI.swift */; };
@@ -90,6 +91,7 @@
 		9B3340332B62C0FB00F79211 /* SplitDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		9B3340352B62C16900F79211 /* SeeProgressViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeProgressViewModelTests.swift; sourceTree = "<group>"; };
 		9B3340372B62C22900F79211 /* SplitHistoryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistoryViewModelTests.swift; sourceTree = "<group>"; };
+		9B3340392B6663F900F79211 /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		9B7B511E2B2653D300D3A622 /* SplitHistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistoryScreen.swift; sourceTree = "<group>"; };
 		9B7B51202B2653FC00D3A622 /* SplitHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistoryViewModel.swift; sourceTree = "<group>"; };
 		9B7B51222B2654BF00D3A622 /* SplitHistoryAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitHistoryAPI.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				9BCFEEF52AE2F98600123048 /* BaseViewModel.swift */,
 				9BCFEF0F2AE3007000123048 /* CustomColors.swift */,
 				9B2C81FB2B1670AE00719BE3 /* View+Ext.swift */,
+				9B3340392B6663F900F79211 /* LoaderView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				9B2C81FE2B167BE000719BE3 /* SplitListAPI.swift in Sources */,
 				9BCFEEF42AE2F96700123048 /* Navigation.swift in Sources */,
 				9B2C81EF2B160A5300719BE3 /* OnBoardingScreen.swift in Sources */,
+				9B33403A2B6663F900F79211 /* LoaderView.swift in Sources */,
 				9BCFEEC32AE2F5E100123048 /* RootView.swift in Sources */,
 				9B2C82072B18EFCC00719BE3 /* AddProgressService.swift in Sources */,
 				9BCFEF102AE3007000123048 /* CustomColors.swift in Sources */,

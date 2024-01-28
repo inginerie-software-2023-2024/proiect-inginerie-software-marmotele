@@ -14,19 +14,18 @@ struct SplitHistoryScreen: View {
     
     var body: some View {
         switch viewModel.seeHistoryState {
-        case .failure(let error):
-            ZStack {
-                LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-                Text("\(error.localizedDescription)")
-                    .font(.system(size: 24))
-                    .foregroundColor(.white)
+        case .failure(_):
+            ModalChooseOptionView(title: "Oops",
+                                              description: "An error has occured. Please try again later!",
+                                              topButtonText: "Retry") {
+                navigation.dismissModal(animated: true, completion: nil)
+                navigation.pop(animated: true)
             }
         case .loading:
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
-                ProgressView().foregroundColor(.white)
+                LoaderView()
             }
         case .value(let splitHistory):
             ZStack {
@@ -57,12 +56,11 @@ struct SplitHistoryScreen: View {
                         .frame(height: 1)
                         .frame(maxWidth: .infinity)
                         .foregroundColor(CustomColors.button)
-                        .padding(.bottom, 16)
                     
                     ScrollView(showsIndicators: false) {
                         VStack(spacing: 0) {
                             if let date = splitHistory.dates.last {
-                                Text("Last update: \(date.rearrangeDate(date: date))")
+                                Text("Last update: \(date.rearrangeDate(date: date) ?? "no available data")")
                                     .foregroundColor(.white)
                                     .font(.system(size: 14))
                                     .padding(.vertical, 12)
@@ -116,17 +114,19 @@ struct SplitHistoryScreen: View {
                             }
                         }
                         
-                        Chart {
-                            ForEach(splitHistory.coefList, id: \.self) { coef in
-                                LineMark(
-                                    x: .value("Index", coef),
-                                    y: .value("Coef", coef)
-                                )
-                            }
-                        }.padding(.all, 16)
-                        .background(.white)
-                            .cornerRadius(10)
-                    }
+                        if splitHistory.coefList.count > 1 {
+                            Chart {
+                                ForEach(splitHistory.coefList, id: \.self) { coef in
+                                    LineMark(
+                                        x: .value("Index", coef),
+                                        y: .value("Coef", coef)
+                                    )
+                                }
+                            }.padding(.all, 16)
+                                .background(.white)
+                                .cornerRadius(10)
+                        }
+                    }.padding(.top, 16)
                     
                 }.padding(.horizontal, 20)
             }
@@ -139,11 +139,11 @@ struct CardioView: View {
     let duration: String
     
     var body: some View {
-        HStack(spacing: 4) {
-            Image(systemName: "arrow.right")
-                .resizable()
-                .frame(width: 10, height: 10)
-            VStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 4) {
+                Image(systemName: "arrow.right")
+                    .resizable()
+                    .frame(width: 12, height: 12)
                 Group {
                     Text("Distance: ")
                         .foregroundColor(CustomColors.backgroundDark)
@@ -151,7 +151,14 @@ struct CardioView: View {
                     + Text(distance)
                         .bold()
                         .foregroundColor(CustomColors.buttonDark)
-                } .font(.system(size: 14))
+                } .font(.system(size: 16))
+            }
+            
+            HStack(spacing: 4) {
+                Image(systemName: "arrow.right")
+                    .resizable()
+                    .foregroundColor(.white)
+                    .frame(width: 12, height: 12)
                 
                 Group {
                     Text("Duration: ")
@@ -160,9 +167,9 @@ struct CardioView: View {
                     + Text(duration)
                         .bold()
                         .foregroundColor(CustomColors.buttonDark)
-                } .font(.system(size: 14))
+                } .font(.system(size: 16))
             }
-        }
+        }.padding(.bottom, 12)
     }
 }
 
@@ -171,11 +178,11 @@ struct WeightView: View {
     let weight: String
     
     var body: some View {
-        HStack(spacing: 4) {
-            Image(systemName: "arrow.right")
-                .resizable()
-                .frame(width: 10, height: 10)
-            VStack(spacing: 12) {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack(spacing: 4) {
+                Image(systemName: "arrow.right")
+                    .resizable()
+                    .frame(width: 12, height: 12)
                 Group {
                     Text("Number of repetitions: ")
                         .foregroundColor(CustomColors.backgroundDark)
@@ -183,7 +190,14 @@ struct WeightView: View {
                     + Text(nbOfReps)
                         .bold()
                         .foregroundColor(CustomColors.buttonDark)
-                } .font(.system(size: 14))
+                } .font(.system(size: 16))
+            }
+            
+            HStack(spacing: 4) {
+                Image(systemName: "arrow.right")
+                    .resizable()
+                    .foregroundColor(.white)
+                    .frame(width: 12, height: 12)
                 
                 Group {
                     Text("Weight: ")
@@ -192,9 +206,9 @@ struct WeightView: View {
                     + Text(weight)
                         .bold()
                         .foregroundColor(CustomColors.buttonDark)
-                } .font(.system(size: 14))
+                }.font(.system(size: 16))
             }
-        }
+        }.padding(.bottom, 12)
     }
 }
 
@@ -204,17 +218,15 @@ struct CalitenicsView: View {
         HStack(spacing: 4) {
             Image(systemName: "arrow.right")
                 .resizable()
-                .frame(width: 10, height: 10)
-            VStack(spacing: 0) {
-                Group {
-                    Text("Number of repetitions: ")
-                        .foregroundColor(CustomColors.backgroundDark)
-                    
-                    + Text(reps)
-                        .bold()
-                        .foregroundColor(CustomColors.buttonDark)
-                } .font(.system(size: 14))
-            }
-        }
+                .frame(width: 12, height: 12)
+            Group {
+                Text("Number of repetitions: ")
+                    .foregroundColor(CustomColors.backgroundDark)
+                
+                + Text(reps)
+                    .bold()
+                    .foregroundColor(CustomColors.buttonDark)
+            } .font(.system(size: 16))
+        }.padding(.bottom, 12)
     }
 }

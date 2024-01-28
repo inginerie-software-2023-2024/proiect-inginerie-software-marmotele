@@ -12,7 +12,7 @@ import SwiftyJSON
 class SplitHistoryAPI {
     func getSplitHistory(id: String, token: String) -> Future<History, Error> {
         Future { promise in
-            var urlComponents = URLComponents(string: "https://714a-2a02-2f0a-4103-2b00-c415-7e01-2c23-3a69.ngrok-free.app/UserSplit/WorkoutHistory")
+            var urlComponents = URLComponents(string: "https://05c8-2a02-2f0a-4103-2b00-b93e-dbfe-d890-b4a7.ngrok-free.app/UserSplit/WorkoutHistory")
             
             urlComponents?.queryItems = [
                 URLQueryItem(name: "id", value: "\(id)")

@@ -29,14 +29,29 @@ extension String {
         return date
     }
     
-    func rearrangeDate(date: String) -> String {
+    func rearrangeDate(date: String) -> String? {
         let input = date
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-        let date = dateFormatter.date(from: input)
-        dateFormatter.dateFormat = "dd-MMM-yyyy HH:mm:ss"
-        let output = dateFormatter.string(from: date!)
-        return output
+        
+        if let date = dateFormatter.date(from: input) {
+            dateFormatter.dateFormat = "dd-MMM-yyyy HH:mm:ss"
+            let output = dateFormatter.string(from: date)
+            return output
+        } else {
+            // Handle the case when the date couldn't be parsed
+            return nil
+        }
     }
+    
+//    func rearrangeDate(date: String) -> String {
+//        let input = date
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
+//        let date = dateFormatter.date(from: input)
+//        dateFormatter.dateFormat = "dd-MMM-yyyy HH:mm:ss"
+//        let output = dateFormatter.string(from: date!)
+//        return output
+//    }
 }
 

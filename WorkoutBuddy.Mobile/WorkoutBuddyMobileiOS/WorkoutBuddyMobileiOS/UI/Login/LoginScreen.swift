@@ -19,7 +19,7 @@ struct LoginScreen: View {
             LinearGradient(gradient: Gradient(colors: [CustomColors.background, CustomColors.backgroundDark]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
                 
                 Text("Sign in to your account")
                     .bold()
@@ -28,7 +28,7 @@ struct LoginScreen: View {
                     .foregroundColor(.white)
                     .padding(.bottom, 28)
                 
-                VStack(spacing: 0) {
+                VStack(alignment: .leading, spacing: 0) {
                     VStack(alignment: .leading, spacing: 0) {
                         Text("Email address")
                             .font(.system(size: 14))
@@ -86,14 +86,6 @@ struct LoginScreen: View {
                             .cornerRadius(4)
                             .foregroundColor(CustomColors.backgroundDark)
                         
-                    }.onReceive(viewModel.loginCompletion) { loginCompletion in
-                        switch loginCompletion {
-                        case .failure(let error):
-                            viewModel.errorMessage = error.localizedDescription
-                            print("Login failed: \(error)")
-                        case .login:
-                            navigation.replaceNavigationStack([HomeScreen().asDestination()], animated: true)
-                        }
                     }
                     
                     if !viewModel.errorMessage.isEmpty {
@@ -108,6 +100,21 @@ struct LoginScreen: View {
                     
             }
             .padding(.horizontal, 20)
+        }.onReceive(viewModel.loginCompletion) { loginCompletion in
+            switch loginCompletion {
+            case .failure(_):
+                let modal = ModalChooseOptionView(title: "Oops",
+                                                  description: "An error has occured. Please try again later!",
+                                                  topButtonText: "Retry") {
+                    navigation.dismissModal(animated: true, completion: nil)
+                }
+                navigation.presentModal(modal.asDestination(),
+                                        animated: true,
+                                        completion: nil,
+                                        controllerConfig: nil)
+            case .login:
+                navigation.replaceNavigationStack([HomeScreen().asDestination()], animated: true)
+            }
         }
     }
 }
