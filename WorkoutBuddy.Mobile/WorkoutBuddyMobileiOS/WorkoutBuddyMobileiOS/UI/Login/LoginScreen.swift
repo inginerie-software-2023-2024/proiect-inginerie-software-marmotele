@@ -87,13 +87,6 @@ struct LoginScreen: View {
                             .foregroundColor(CustomColors.backgroundDark)
                         
                     }
-                    
-                    if !viewModel.errorMessage.isEmpty {
-                        Text("\(viewModel.errorMessage)")
-                            .foregroundColor(CustomColors.myError)
-                            .font(.system(size: 12))
-                            .padding(.vertical, 8)
-                    }
                 }.padding(.all, 36)
                     .border(CustomColors.buttonDark, width: 2)
                     .cornerRadius(4)

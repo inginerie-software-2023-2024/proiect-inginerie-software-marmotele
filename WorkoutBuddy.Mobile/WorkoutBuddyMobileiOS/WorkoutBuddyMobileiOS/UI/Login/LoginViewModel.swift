@@ -16,7 +16,6 @@ enum LoginCompletion {
 class LoginViewModel: BaseViewModel {
     @Published var email = ""
     @Published var password = ""
-    @Published var errorMessage = ""
     
     let loginCompletion = PassthroughSubject<LoginCompletion, Never>()
     var userService = UserService.shared
