@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -33,7 +33,7 @@ const Workout = (props: IWorkoutProps) => {
         queryString = `${queryString}[${indexOfMuscles}]=${elem.value}&`;
         indexOfMuscles++;
       }
-      const {data} = await axios({
+      const { data } = await axios({
         method: "get",
         url: `http://localhost:8082/Exercises/getExercisesByMuscleGroups${queryString}`,
         headers: {
@@ -42,9 +42,9 @@ const Workout = (props: IWorkoutProps) => {
       });
 
       setExercises(data);
-    }
-    getData()
-  }, [props.split.workouts[props.index].selectedMuscleGroups])
+    };
+    getData();
+  }, [props.split.workouts[props.index].selectedMuscleGroups]);
 
   const muscleGroupsChangeHandler = async (e: any) => {
     const workouts = props.split.workouts;
@@ -66,13 +66,11 @@ const Workout = (props: IWorkoutProps) => {
     props.setSplit({ ...props.split, workouts });
   };
 
-  const changeExercisesHandler = (
-    e: any
-  ) => {
+  const changeExercisesHandler = (e: any) => {
     const workouts = props.split.workouts;
     workouts[props.index] = {
       ...props.split.workouts[props.index],
-      exercises: e as { value: string }[],
+      exercises: e as { value: string; label: string }[],
     };
     props.setSplit({ ...props.split, workouts });
   };
@@ -85,7 +83,7 @@ const Workout = (props: IWorkoutProps) => {
     };
     props.setSplit({ ...props.split, workouts });
   };
-  console.log(props.split)
+  console.log(props.split);
 
   return (
     <Stack
@@ -109,7 +107,7 @@ const Workout = (props: IWorkoutProps) => {
       <FormControl isRequired>
         <FormLabel> Workout Name</FormLabel>
         <Input
-            color={"black"}
+          color={"black"}
           value={props.split.workouts[props.index].workoutName}
           id="workoutName"
           onChange={changeNameHandler}
@@ -121,7 +119,7 @@ const Workout = (props: IWorkoutProps) => {
       </FormControl>
 
       <FormControl color="black" isRequired>
-        <FormLabel color="white">Muscle groups</FormLabel>
+        <FormLabel>Muscle groups</FormLabel>
         <Select
           value={props.split.workouts[props.index].selectedMuscleGroups}
           id="selectedMuscleGroups"
@@ -131,7 +129,7 @@ const Workout = (props: IWorkoutProps) => {
         />
       </FormControl>
       <FormControl color="black" isRequired>
-        <FormLabel color="white">Exercises</FormLabel>
+        <FormLabel>Exercises</FormLabel>
         <Select
           value={props.split.workouts[props.index].exercises}
           id="exercises"

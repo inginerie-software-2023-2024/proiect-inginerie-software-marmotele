@@ -50,9 +50,11 @@ const SplitsWrapper = () => {
 
   return (
     <Wrapper>
-      <Suspense fallback={<LoadingSplitsList />}>
-        <SplitsList splits={splits} />
-      </Suspense>
+      <GridItem colSpan={3}>
+        <Suspense fallback={<LoadingSplitsList />}>
+          <SplitsList splits={splits} />
+        </Suspense>
+      </GridItem>
       <GridItem display="flex" flexDirection="column">
         <Button
           marginTop={"68px"}
@@ -63,25 +65,6 @@ const SplitsWrapper = () => {
           <SmallAddIcon mr={1} h={6} />
           Add new split
         </Button>
-
-        <Button
-          marginTop={"10px"}
-          colorScheme={colors.primaryScheme}
-          onClick={addHandler}
-        >
-          Search
-        </Button>
-        <SplitsSearchFilters
-          setSearchParams={setSearchParams}
-          searchParams={searchParams}
-          isRangeEnabled={true}
-          data={exercises.map((ex: any) => ({
-            value: ex.exerciseId,
-            label: ex.name,
-          }))}
-          inputPlaceholder="Search by name"
-          selectPlaceholder="Select exercise"
-        />
       </GridItem>
     </Wrapper>
   );

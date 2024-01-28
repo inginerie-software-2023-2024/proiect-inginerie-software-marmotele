@@ -89,7 +89,7 @@ const ExercisesList = () => {
       url.searchParams.append("muscleGroup", group.value.toString());
     }
     url.searchParams.append("search", input);
-
+    console.log(url);
     const getFilteredExercises = async () => {
       const { data } = await axios.get(url.toString(), {
         headers: {
@@ -150,6 +150,7 @@ const ExercisesList = () => {
               colorScheme={colors.primaryScheme}
               variant="outline"
               onClick={addHandler}
+              width={"100%"}
             >
               <SmallAddIcon mr={1} h={6} />
               Add new exercise
@@ -162,7 +163,7 @@ const ExercisesList = () => {
               handleSelectGroup={handleSelectGroup}
               isRangeEnabled={false}
               data={muscleGroups.map((ex: any) => ({
-                value: ex.idgroup,
+                value: ex.idgroup + 1,
                 label: ex.name,
               }))}
               selectPlaceholder="Select exercise type"

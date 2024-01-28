@@ -60,9 +60,10 @@ const labels = [
 ];
 
 function UserWeightProgress(props: any) {
-  const [weightHistory, setWeightHistory] = useState<any>([]);
+  const [weightHistory, setWeightHistory] = useState<any>();
   const token = AuthHeader();
 
+  console.log(weightHistory);
   const options = {
     responsive: true,
     plugins: {
@@ -95,7 +96,10 @@ function UserWeightProgress(props: any) {
         data: labels.map((label, index) => {
           const filteredWeightsByMonth = weightHistory?.history?.filter(
             (w: any) => {
-              return w.date.getMonth() === index;
+              return (
+                w.date.getMonth() === index &&
+                w.date.getDate() === new Date().getDate()
+              );
             }
           );
           return filteredWeightsByMonth?.length === 0
