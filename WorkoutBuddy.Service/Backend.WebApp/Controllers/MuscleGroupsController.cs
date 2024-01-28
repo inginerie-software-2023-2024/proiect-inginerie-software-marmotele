@@ -15,9 +15,9 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMuscleGroups()
+        public IActionResult GetMuscleGroups()
         {
-            return Ok(await _muscleGroupsService.GetMuscleGroupsAsync());
+            return Ok(_muscleGroupsService.GetMuscleGroupsSync());
         }
     }
 }

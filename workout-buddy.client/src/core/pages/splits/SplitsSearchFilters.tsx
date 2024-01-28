@@ -26,16 +26,8 @@ interface ISplitsSearchFiltersProps {
 const SplitsSearchFilters = (props: ISplitsSearchFiltersProps) => {
   const colors = useColors();
 
-  console.log(props.data);
-
   return (
-    <Box
-      color={"gray.800"}
-      padding={colors.filtersPadding}
-      bg={"white"}
-      mt={7}
-      borderRadius="4px"
-    >
+    <Box color={"gray.800"} bg={"white"} mt={7} borderRadius="4px">
       <Text fontSize="xl" mb={2}>
         Library
       </Text>

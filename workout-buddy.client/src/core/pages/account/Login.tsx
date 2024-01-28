@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { accountActions } from "../../../store/reducers/account";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useDispatch } from "react-redux";
 
 const loginModelInitialState = {

@@ -36,24 +36,6 @@ export default function SplitCard({ split }: ISplitCardProps) {
     navigate(`/splits/insert-split?id=${id}`);
   };
 
-  // const deleteHandler = async (id: string) => {
-  //   let res = confirm("Are you sure you want to delete this split?");
-  //   if (res) {
-  //     try {
-  //       await axios({
-  //         method: "post",
-  //         url: `http://localhost:8082/Splits/delete`,
-  //         data: id,
-  //         //   headers: {
-  //         //     "Content-Type": "application/json",
-  //         //     Authorization: AuthHeader(),
-  //         //   },
-  //       });
-  //       // deleteExercises(exerciseId);
-  //     } catch (err) {}
-  //   }
-  // };
-
   return (
     <Center py={6}>
       <Stack
@@ -85,7 +67,13 @@ export default function SplitCard({ split }: ISplitCardProps) {
           pt={2}
         >
           <HStack>
-            <Heading display="flex" lineHeight="30px" alignItems="center" fontSize={"2xl"} fontFamily={"body"}>
+            <Heading
+              display="flex"
+              lineHeight="30px"
+              alignItems="center"
+              fontSize={"2xl"}
+              fontFamily={"body"}
+            >
               Rating: {split.rating} <StarIcon ml={1} color="yellow" />
             </Heading>
           </HStack>
@@ -93,29 +81,25 @@ export default function SplitCard({ split }: ISplitCardProps) {
           <Text fontWeight={600} color={"gray.500"} size="sm" mb={4}>
             @{split.creatorName}
           </Text>
-          <Text
-            textAlign={"center"}
-            color={colors.descriptionText}
-            px={3}
-          >
+          <Text textAlign={"center"} color={colors.descriptionText} px={3}>
             {split.description}
           </Text>
           <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
             <Text>Workouts: </Text>
             <Flex flexWrap="wrap">
-            {split.workouts.map((w: any, index: number) => {
-              return (
-                <Badge
-                  px={2}
-                  py={1}
-                  bg={colors.badgeBg}
-                  fontWeight={"400"}
-                  key={index}
-                >
-                  {w}
-                </Badge>
-              );
-            })}
+              {split.workouts.map((w: any, index: number) => {
+                return (
+                  <Badge
+                    px={2}
+                    py={1}
+                    bg={colors.badgeBg}
+                    fontWeight={"400"}
+                    key={index}
+                  >
+                    {w}
+                  </Badge>
+                );
+              })}
             </Flex>
           </Stack>
 
@@ -174,7 +158,6 @@ export default function SplitCard({ split }: ISplitCardProps) {
                   _focus={{
                     bg: "red.500",
                   }}
-                  //   onClick={(e) => deleteHandler(exercise.exerciseId)}
                 >
                   Delete
                 </Button>

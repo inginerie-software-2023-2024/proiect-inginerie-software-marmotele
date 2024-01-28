@@ -10,7 +10,7 @@ namespace Backend.BusinessLogic.Implementation.MuscleGroupsService
         {
         }
 
-        public async Task<IEnumerable<MuscleGroup>> GetMuscleGroupsAsync()
+        public IEnumerable<MuscleGroup> GetMuscleGroupsSync()
         {
             var muscleGroups = Enum.GetValues<MuscleGroups>().Select((m, i) => new MuscleGroup { Idgroup = i, Name = m.ToString() }).ToList();
             return muscleGroups;

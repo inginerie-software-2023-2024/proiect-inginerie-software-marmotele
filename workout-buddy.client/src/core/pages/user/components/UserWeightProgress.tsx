@@ -29,7 +29,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  ChartOptions,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { themeColors } from "../../../../theme/colors";
@@ -61,9 +60,10 @@ const labels = [
 ];
 
 function UserWeightProgress(props: any) {
-  const [weightHistory, setWeightHistory] = useState<any>([]);
+  const [weightHistory, setWeightHistory] = useState<any>();
   const token = AuthHeader();
 
+  console.log(weightHistory);
   const options = {
     responsive: true,
     plugins: {
@@ -96,7 +96,10 @@ function UserWeightProgress(props: any) {
         data: labels.map((label, index) => {
           const filteredWeightsByMonth = weightHistory?.history?.filter(
             (w: any) => {
-              return w.date.getMonth() === index;
+              return (
+                w.date.getMonth() === index &&
+                w.date.getDate() === new Date().getDate()
+              );
             }
           );
           return filteredWeightsByMonth?.length === 0
@@ -117,7 +120,7 @@ function UserWeightProgress(props: any) {
   useEffect(() => {
     const getWeightHistory = async () => {
       let { data } = await axios.get(
-        "https://localhost:7132/UserAccount/GetWeightHistory",
+        "http://localhost:8082/UserAccount/GetWeightHistory",
         {
           headers: {
             "Content-Type": "application/json",
@@ -144,7 +147,7 @@ function UserWeightProgress(props: any) {
       ],
     }));
     axios.post(
-      "https://localhost:7132/UserAccount/AddToWeightHistory",
+      "http://localhost:8082/UserAccount/AddToWeightHistory",
       weightHistory,
       {
         headers: {

@@ -31,7 +31,7 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpGet("GetSplit")]
-        public IActionResult ViewUserSplit(Guid id)
+        public IActionResult ViewUserSplit([FromQuery]Guid id)
         {
             var model = service.GetUserSplit(id, CurrentUser.Id);
             return Ok(model);
@@ -45,16 +45,12 @@ namespace Backend.WebApp.Controllers
         }
 
         [HttpPost("AddProgress")]
-        public IActionResult AddProgress([FromQuery] string Exercises, [FromBody] UserWorkoutModel model)
+        public IActionResult AddProgress([FromBody] UserWorkoutModel model)
         {
-            var ex = JsonConvert.DeserializeObject<List<UserExerciseModel>>(Exercises);
             model.UserId = CurrentUser.Id;
-            model.Date = DateTime.UtcNow;
-            model.Exercises = ex;
-            var splitId = service.AddProgress(model, 3);
-            var splitModel = service.GetUserSplit(splitId, CurrentUser.Id);
+            service.AddProgress(model, 3);
 
-            return Ok(splitModel);
+            return Ok();
         }
 
         [HttpGet("WorkoutHistory")]
@@ -63,9 +59,6 @@ namespace Backend.WebApp.Controllers
             var model = service.GetHistory(id, CurrentUser.Id);
             return Ok(model);
         }
-
-
-
 
         [HttpPost("GetDates")]
         public IActionResult GetDates([FromBody] DatesModel model)
@@ -87,7 +80,6 @@ namespace Backend.WebApp.Controllers
         public IActionResult ExercisesProgress(Guid id, int index)
         {
             var model = service.GetProgress(id, CurrentUser.Id, index, Int32.Parse(Configuration["NoOfDates"]));
-            var x = service.ComputeNoOfPages(id, CurrentUser.Id, Int32.Parse(Configuration["NoOfDates"]));
 
             return Ok(model);
         }
@@ -97,7 +89,6 @@ namespace Backend.WebApp.Controllers
         {
             service.RemoveSplit(id, CurrentUser.Id);
             return Ok();
-            // return RedirectToAction("Index");
         }
     }
 }

@@ -75,7 +75,6 @@ const ViewSplit = () => {
     }, [isNewComment]);
 
     const addHandler = async (text: string, parentCommentId = null) => {
-        debugger;
         let newComment = {
             commentText: text,
             parentCommentId,
