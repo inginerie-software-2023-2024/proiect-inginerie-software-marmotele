@@ -165,8 +165,8 @@ export default function InsertExercise() {
             _placeholder={{ color: "gray.500" }}
           />
         </FormControl>
-        <FormControl color="black">
-          <FormLabel color="white">Exercise Types</FormLabel>
+        <FormControl color="black" isRequired>
+          <FormLabel >Exercise Types</FormLabel>
           <Select
             value={exercise.selectedType}
             onChange={(e) => setExercise({ ...exercise, selectedType: e! })}
@@ -174,7 +174,7 @@ export default function InsertExercise() {
           />
         </FormControl>
         <FormControl color="black" isRequired>
-          <FormLabel color="white">Muscle groups</FormLabel>
+          <FormLabel>Muscle groups</FormLabel>
           <Select
             value={exercise.selectedMuscleGroups}
             onChange={(e) => {
